@@ -42,8 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\ICPU.cs" />
+    <Compile Include="Interfaces\IOperation.cs" />
     <Compile Include="Models\CPU.cs" />
+    <Compile Include="Operations\NoOP.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

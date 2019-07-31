@@ -6,9 +6,13 @@ using System.Threading.Tasks;
 
 namespace Core.Interfaces
 {
-    interface ICPU
+    public interface ICPU
     {
         void Tick();
         int Ticks { get; }
+        void ExecuteOP(IOperation Operation);
+        int ExecutedOperations { get; }
+        void QueueOperation(IOperation Operation);
+        int QueuedOperations { get; }
     }
 }

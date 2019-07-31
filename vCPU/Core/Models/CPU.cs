@@ -12,9 +12,25 @@ namespace Core.Models
         private int m_Ticks = 0;
         public int Ticks => m_Ticks;
 
+        private int m_ExecutedOperations = 0;
+        public int ExecutedOperations => m_ExecutedOperations;
+
+        private int m_QueuedOperations = 0;
+        public int QueuedOperations => m_QueuedOperations;
+
+        public void ExecuteOP(IOperation Operation)
+        {
+            m_ExecutedOperations++;
+        }
+
         public void Tick()
         {
             m_Ticks++;
+        }
+
+        public void QueueOperation(IOperation Operation)
+        {
+            m_QueuedOperations++;
         }
     }
 }
