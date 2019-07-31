@@ -9,5 +9,7 @@ namespace Core.Interfaces
     public interface IMemory
     {
         int Size { get; }
+        void Store<T>(T Value) where T : struct;
+        T Retrieve<T>();
     }
 }
