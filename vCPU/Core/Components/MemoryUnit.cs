@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace Core.Components
 {
-    public class Memory : IMemory
+    public class MemoryUnit : IMemoryUnit
     {
         private List<Byte> m_Storage = new List<byte>();
         private int m_Size = 0;
 
         public int Size => m_Size;
 
-        public Memory()
+        public MemoryUnit()
         {
         }
 
-        public Memory(int Size)
+        public MemoryUnit(int Size)
         {
             m_Size = Size;
         }

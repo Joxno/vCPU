@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Core.Interfaces
 {
-    public interface IMemory
+    public interface IMemoryUnit
     {
         int Size { get; }
         void Store<T>(T Value) where T : struct;

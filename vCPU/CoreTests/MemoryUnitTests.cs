@@ -6,12 +6,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace CoreTests
 {
     [TestClass]
-    public class MemoryTests
+    public class MemoryUnitTests
     {
         [TestMethod]
         public void RetrieveDefaultStorageSize()
         {
-            var t_Memory = new Memory();
+            var t_Memory = new MemoryUnit();
 
             t_Memory.Size.Should().Be(0, "No size specified.");
         }
@@ -19,7 +19,7 @@ namespace CoreTests
         [TestMethod]
         public void RetrieveSpecifiedStorageSize()
         {
-            var t_Memory = new Memory(100);
+            var t_Memory = new MemoryUnit(100);
 
             t_Memory.Size.Should().Be(100, "Number of bytes specified.");
         }
@@ -27,7 +27,7 @@ namespace CoreTests
         [TestMethod]
         public void StoreAndRetrieveIntegerValue()
         {
-            var t_Memory = new Memory(4);
+            var t_Memory = new MemoryUnit(4);
 
             t_Memory.Store(10);
             var t_Value = t_Memory.Retrieve<int>();
