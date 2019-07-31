@@ -41,9 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\Memory.cs" />
     <Compile Include="Interfaces\ICPU.cs" />
+    <Compile Include="Interfaces\IMemory.cs" />
     <Compile Include="Interfaces\IOperation.cs" />
-    <Compile Include="Models\CPU.cs" />
+    <Compile Include="Components\CPU.cs" />
     <Compile Include="Operations\NoOP.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,5 +1,5 @@
 ﻿using System;
-using Core.Models;
+using Core.Components;
 using Core.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FluentAssertions;
@@ -37,6 +37,17 @@ namespace CoreTests
 
             var t_QueuedCounter = m_CPU.QueuedOperations;
             t_QueuedCounter.Should().Be(1, "We queued up a NoOp operation");
+        }
+
+        [TestMethod]
+        public void QueueAndExecuteOpCodeFromTick()
+        {
+            m_CPU.QueueOperation(new NoOP());
+            m_CPU.Tick();
+
+            m_CPU.QueuedOperations.Should().Be(0, "Tick should execute queued operation");
+            m_CPU.ExecutedOperations.Should().Be(1, "Tick should execute queued operation");
+            
         }
 
         [TestInitialize]

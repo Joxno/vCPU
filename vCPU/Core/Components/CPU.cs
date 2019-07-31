@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Models
+namespace Core.Components
 {
     public class CPU : ICPU
     {
@@ -15,8 +15,9 @@ namespace Core.Models
         private int m_ExecutedOperations = 0;
         public int ExecutedOperations => m_ExecutedOperations;
 
-        private int m_QueuedOperations = 0;
-        public int QueuedOperations => m_QueuedOperations;
+        public int QueuedOperations => m_OperationQueue.Count;
+
+        private Queue<IOperation> m_OperationQueue = new Queue<IOperation>();
 
         public void ExecuteOP(IOperation Operation)
         {
@@ -25,12 +26,22 @@ namespace Core.Models
 
         public void Tick()
         {
+            _DequeueAndExecuteOperation();
             m_Ticks++;
         }
 
         public void QueueOperation(IOperation Operation)
         {
-            m_QueuedOperations++;
+            m_OperationQueue.Enqueue(Operation);
+        }
+
+        private void _DequeueAndExecuteOperation()
+        {
+            if (m_OperationQueue.Count > 0)
+            {
+                var t_Operation = m_OperationQueue.Dequeue();
+                m_ExecutedOperations++;
+            }
         }
     }
 }
