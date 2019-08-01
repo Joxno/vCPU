@@ -1,4 +1,5 @@
-﻿using Core.Interfaces;
+﻿using Core.Exceptions;
+using Core.Interfaces;
 using Core.Models;
 using Core.Utility;
 using System;
@@ -25,6 +26,7 @@ namespace Core.Components
 
         public void Store<T>(T Value, MemoryAddress Address) where T : struct
         {
+            _HandleOutOfRange(Address);
             var t_Index = _TranslateAddressToIndex(Address);
             var t_BytesToStore = m_Converter.ConvertValueTypeToBytes<T>(Value);
             _MapAndStoreBytes(t_BytesToStore, t_Index);
@@ -32,9 +34,15 @@ namespace Core.Components
 
         public T Load<T>(MemoryAddress Address) where T : struct
         {
+            _HandleOutOfRange(Address);
             var t_Index = _TranslateAddressToIndex(Address);
             var t_RawData = _MapAndLoadBytes(t_Index, Marshal.SizeOf<T>());
             return m_Converter.ConvertBytesToValueType<T>(t_RawData);
+        }
+
+        public bool IsValid(MemoryAddress Address)
+        {
+            return _IsWithinRange(_TranslateAddressToIndex(Address));
         }
 
         private void _InitializeStorage(int Size)
@@ -62,6 +70,17 @@ namespace Core.Components
             for (int i = Index; i < t_EndIndex; i++)
                 t_Data.Add(m_Storage[i].Load<byte>());
             return t_Data.ToArray();
+        }
+
+        private bool _IsWithinRange(int Index)
+        {
+            return Index >= 0 && Index < m_Size;
+        }
+
+        private void _HandleOutOfRange(MemoryAddress Address)
+        {
+            if (!IsValid(Address))
+                throw new AddressOutOfRange(Address, 0, m_Size - 1);
         }
     }
 }

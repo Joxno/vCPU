@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Components\MemoryBank.cs" />
     <Compile Include="Components\MemoryUnit.cs" />
+    <Compile Include="Exceptions\AddressOutOfRange.cs" />
     <Compile Include="Interfaces\ICPU.cs" />
     <Compile Include="Interfaces\IMemoryBank.cs" />
     <Compile Include="Interfaces\IMemoryUnit.cs" />

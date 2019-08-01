@@ -12,5 +12,6 @@ namespace Core.Interfaces
         int Size { get; }
         void Store<T>(T Value, MemoryAddress Adress) where T : struct;
         T Load<T>(MemoryAddress Address) where T : struct;
+        bool IsValid(MemoryAddress Address);
     }
 }
