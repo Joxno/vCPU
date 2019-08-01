@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Core.Operations
 {
-    public class NoOP : IOperation
+    public class NoOp : IOperation
     {
     }
 }

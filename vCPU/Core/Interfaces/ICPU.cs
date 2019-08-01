@@ -10,9 +10,10 @@ namespace Core.Interfaces
     {
         void Tick();
         int Ticks { get; }
-        void ExecuteOP(IOperation Operation);
+        void ExecuteOperation(IOperation Operation);
         int ExecutedOperations { get; }
         void QueueOperation(IOperation Operation);
         int QueuedOperations { get; }
+        void Suspend();
     }
 }

@@ -9,6 +9,7 @@ namespace Core.Components
 {
     public class CPU : ICPU
     {
+        private bool m_Suspended = false;
         private int m_Ticks = 0;
         public int Ticks => m_Ticks;
 
@@ -16,10 +17,9 @@ namespace Core.Components
         public int ExecutedOperations => m_ExecutedOperations;
 
         public int QueuedOperations => m_OperationQueue.Count;
-
         private Queue<IOperation> m_OperationQueue = new Queue<IOperation>();
 
-        public void ExecuteOP(IOperation Operation)
+        public void ExecuteOperation(IOperation Operation)
         {
             m_ExecutedOperations++;
         }
@@ -37,11 +37,28 @@ namespace Core.Components
 
         private void _DequeueAndExecuteOperation()
         {
-            if (m_OperationQueue.Count > 0)
+            if (_CanExecute())
             {
                 var t_Operation = m_OperationQueue.Dequeue();
                 m_ExecutedOperations++;
             }
+        }
+
+        public void Suspend()
+        {
+            m_Suspended = true;
+        }
+
+        private bool _CanExecute()
+        {
+            return 
+                m_OperationQueue.Count > 0 &&
+                !_IsSuspended();
+        }
+
+        private bool _IsSuspended()
+        {
+            return m_Suspended;
         }
     }
 }
