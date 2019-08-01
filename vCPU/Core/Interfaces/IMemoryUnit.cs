@@ -10,6 +10,6 @@ namespace Core.Interfaces
     {
         int Size { get; }
         void Store<T>(T Value) where T : struct;
-        T Retrieve<T>();
+        T Load<T>();
     }
 }

@@ -30,7 +30,7 @@ namespace CoreTests
             var t_Memory = new MemoryUnit(4);
 
             t_Memory.Store(10);
-            var t_Value = t_Memory.Retrieve<int>();
+            var t_Value = t_Memory.Load<int>();
 
             t_Value.Should().Be(10, "We stored the number 10.");
         }

@@ -32,7 +32,7 @@ namespace Core.Components
             m_Storage = m_Converter.ConvertValueTypeToBytes(Value).ToList();
         }
 
-        public T Retrieve<T>()
+        public T Load<T>()
         {
             return m_Converter.ConvertBytesToValueType<T>(m_Storage.ToArray());
         }
