@@ -15,5 +15,6 @@ namespace Core.Interfaces
         void QueueOperation(IOperation Operation);
         int QueuedOperations { get; }
         void Suspend();
+        void Resume();
     }
 }

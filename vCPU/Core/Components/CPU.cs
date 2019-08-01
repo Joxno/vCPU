@@ -49,6 +49,11 @@ namespace Core.Components
             m_Suspended = true;
         }
 
+        public void Resume()
+        {
+            m_Suspended = false;
+        }
+
         private bool _CanExecute()
         {
             return 

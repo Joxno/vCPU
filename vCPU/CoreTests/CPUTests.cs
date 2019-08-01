@@ -66,6 +66,18 @@ namespace CoreTests
             m_CPU.ExecutedOperations.Should().Be(1, "Suspensions should not have any affect on directly executed operations.");
         }
 
+        [TestMethod]
+        public void SuspendAndResumeCPU()
+        {
+            m_CPU.QueueOperation(new NoOp());
+            m_CPU.QueueOperation(new NoOp());
+            m_CPU.Suspend();
+            m_CPU.Tick();
+            m_CPU.Resume();
+            m_CPU.Tick();
+            m_CPU.QueuedOperations.Should().Be(1, "We resumed CPU after suspension and ticked once while CPU was active.");
+        }
+
         [TestInitialize]
         public void InitializeTestVariables()
         {
