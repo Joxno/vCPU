@@ -1,4 +1,5 @@
 ﻿using Core.Interfaces;
+using Core.Utility;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,6 +12,7 @@ namespace Core.Components
 {
     public class MemoryUnit : IMemoryUnit
     {
+        private AnyConverter m_Converter = new AnyConverter();
         private List<Byte> m_Storage = new List<byte>();
         private int m_Size = 0;
 
@@ -27,39 +29,12 @@ namespace Core.Components
 
         public void Store<T>(T Value) where T : struct
         {
-            m_Storage = _GetBytesFromType(Value).ToList();
+            m_Storage = m_Converter.ConvertValueTypeToBytes(Value).ToList();
         }
 
         public T Retrieve<T>()
         {
-            return _GetValueFromBytes<T>(m_Storage.ToArray());
-        }
-
-        /* https://stackoverflow.com/a/3278956 */
-        private Byte[] _GetBytesFromType<T>(T Value) where T : struct
-        {
-            int t_Size = Marshal.SizeOf(Value);
-            Byte[] t_Buffer = new byte[t_Size];
-
-            IntPtr t_Pointer = Marshal.AllocHGlobal(t_Size);
-            Marshal.StructureToPtr(Value, t_Pointer, false);
-            Marshal.Copy(t_Pointer, t_Buffer, 0, t_Size);
-            Marshal.FreeHGlobal(t_Pointer);
-
-            return t_Buffer;
-        }
-
-        private T _GetValueFromBytes<T>(Byte[] Bytes)
-        {
-            int t_Size = Marshal.SizeOf(typeof(T));
-            IntPtr t_Pointer = Marshal.AllocHGlobal(t_Size);
-
-            Marshal.Copy(Bytes, 0, t_Pointer, t_Size);
-
-            T t_Value = (T)Marshal.PtrToStructure(t_Pointer, typeof(T));
-            Marshal.FreeHGlobal(t_Pointer);
-
-            return t_Value;
+            return m_Converter.ConvertBytesToValueType<T>(m_Storage.ToArray());
         }
     }
 }
