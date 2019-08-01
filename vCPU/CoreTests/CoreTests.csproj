@@ -70,6 +70,7 @@
     <Compile Include="CPUTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MemoryUnitTests.cs" />
+    <Compile Include="MemoryBankTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
