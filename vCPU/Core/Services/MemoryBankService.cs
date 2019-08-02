@@ -1,4 +1,5 @@
-﻿using Core.Interfaces;
+﻿using Core.Exceptions;
+using Core.Interfaces;
 using Core.Models;
 using System;
 using System.Collections.Generic;
@@ -33,6 +34,8 @@ namespace Core.Services
         {
             if (!HasBankAtAddress(Address))
                 m_Banks.Add(Address, Bank);
+            else
+                throw new AddressOccupied();
         }
 
         public void Detach(MemoryBankAddress Address)

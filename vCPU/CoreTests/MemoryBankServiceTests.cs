@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Core.Components;
+using Core.Exceptions;
 using Core.Interfaces;
 using Core.Models;
 using Core.Services;
@@ -42,6 +43,13 @@ namespace CoreTests
 
             t_Bank.Should().NotBeNull();
             t_Bank.Size.Should().Be(96);
+        }
+
+        [TestMethod]
+        public void AttachNewBankAtOccupiedAddress()
+        {
+            Action t_Attach = () => m_Service.AttachAtAddress(new MemoryBank(16), new MemoryBankAddress(0));
+            t_Attach.Should().Throw<AddressOccupied>();
         }
 
         [TestMethod]

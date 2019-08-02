@@ -46,6 +46,7 @@
     <Compile Include="Components\OperationFeeder.cs" />
     <Compile Include="Components\OperationReader.cs" />
     <Compile Include="DTO\OperationDTO.cs" />
+    <Compile Include="Exceptions\AddressOccupied.cs" />
     <Compile Include="Exceptions\AddressOutOfRange.cs" />
     <Compile Include="Interfaces\ICPU.cs" />
     <Compile Include="Interfaces\IMemoryBank.cs" />
