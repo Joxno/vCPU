@@ -8,12 +8,13 @@ namespace Core.Interfaces
 {
     public interface ICPU
     {
-        void Tick();
         int Ticks { get; }
-        void ExecuteOperation(IOperation Operation);
         int ExecutedOperations { get; }
-        void QueueOperation(IOperation Operation);
         int QueuedOperations { get; }
+
+        void Tick();
+        void ExecuteOperation(IOperation Operation);
+        void QueueOperation(IOperation Operation);
         void Suspend();
         void Resume();
     }

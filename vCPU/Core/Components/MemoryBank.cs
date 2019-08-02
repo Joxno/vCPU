@@ -59,8 +59,8 @@ namespace Core.Components
         private void _MapAndStoreBytes(byte[] Data, int Index)
         {
             var t_EndIndex = Index + Data.Length;
-            for (int i = Index; i < t_EndIndex; i++)
-                m_Storage[i].Store<byte>(Data[i]);
+            for (int i = Index, j = 0; i < t_EndIndex; i++, j++)
+                m_Storage[i].Store<byte>(Data[j]);
         }
 
         private byte[] _MapAndLoadBytes(int Index, int Size)

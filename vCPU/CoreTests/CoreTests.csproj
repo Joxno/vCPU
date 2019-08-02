@@ -72,6 +72,7 @@
     <Compile Include="MemoryUnitTests.cs" />
     <Compile Include="MemoryBankTests.cs" />
     <Compile Include="AnyConverterTests.cs" />
+    <Compile Include="OperationFeederTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -4,6 +4,7 @@ using Core.Interfaces;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FluentAssertions;
 using Core.Operations;
+using Core.Models;
 
 namespace CoreTests
 {
@@ -76,6 +77,27 @@ namespace CoreTests
             m_CPU.Resume();
             m_CPU.Tick();
             m_CPU.QueuedOperations.Should().Be(1, "We resumed CPU after suspension and ticked once while CPU was active.");
+        }
+
+        [TestMethod]
+        public void ExecuteLoadValueOperation()
+        {
+            var t_Bank = new MemoryBank(32);
+            m_CPU.ExecuteOperation(new OpLoad<int>(5, new MemoryAddress(0), t_Bank));
+            var t_Value = t_Bank.Load<int>(new MemoryAddress(0));
+
+            t_Value.Should().Be(5, "We executed a Load operation that should load the value 5 into memory.");
+        }
+
+        [TestMethod]
+        public void ExecuteLoadAddressOperation()
+        {
+            var t_Bank = new MemoryBank(32);
+            m_CPU.ExecuteOperation(new OpLoad<int>(5, new MemoryAddress(0), t_Bank));
+            m_CPU.ExecuteOperation(new OpLoadAddress<int>(new MemoryAddress(0), t_Bank, new MemoryAddress(4), t_Bank));
+            var t_Value = t_Bank.Load<int>(new MemoryAddress(4));
+
+            t_Value.Should().Be(5, "We loaded 5 into memory and copied data into a seperate address and loaded from there.");
         }
 
         [TestInitialize]

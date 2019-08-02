@@ -5,12 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Operations
+namespace Core.Components
 {
-    public class NoOp : IOperation
+    public class OperationFeeder : IOperationFeeder
     {
-        public void Execute()
-        {
-        }
     }
 }
