@@ -34,11 +34,31 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void AttachNewBankAtAddress()
+        {
+            var t_Address = new MemoryBankAddress(100);
+            m_Service.AttachAtAddress(new MemoryBank(96), t_Address);
+            var t_Bank = m_Service.ResolveAddress(t_Address);
+
+            t_Bank.Should().NotBeNull();
+            t_Bank.Size.Should().Be(96);
+        }
+
+        [TestMethod]
+        public void DetachBank()
+        {
+            m_Service.Detach(new MemoryBankAddress(0));
+
+            var t_Found = m_Service.HasBankAtAddress(new MemoryBankAddress(0));
+            t_Found.Should().BeFalse("We detached the initial bank attached to the service.");
+        }
+
+        [TestMethod]
         public void CheckForBankAtAddress()
         {
             var t_Found = m_Service.HasBankAtAddress(new MemoryBankAddress(0));
 
-            t_Found.Should().BeTrue();
+            t_Found.Should().BeTrue("During instantiation we add an initial bank at address 0");
         }
 
         [TestInitialize]

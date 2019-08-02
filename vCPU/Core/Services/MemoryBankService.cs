@@ -10,48 +10,56 @@ namespace Core.Services
 {
     public class MemoryBankService : IMemoryBankService
     {
-        private List<IMemoryBank> m_Banks;
+        private Dictionary<MemoryBankAddress, IMemoryBank> m_Banks = new Dictionary<MemoryBankAddress, IMemoryBank>();
 
         public MemoryBankService(List<IMemoryBank> Banks)
         {
-            m_Banks = Banks;
+            _InitializeBanksFromList(Banks);
         }
 
         public IMemoryBank ResolveAddress(MemoryBankAddress Address)
         {
-            return _RetrieveBankByAddress(Address);
+            return m_Banks[Address];
         }
 
         public MemoryBankAddress Attach(IMemoryBank Bank)
         {
-            m_Banks.Add(Bank);
-            return _ResolveIndexToAddress(m_Banks.Count - 1);
+            var t_Address = _GenerateNewAddress();
+            m_Banks[t_Address] = Bank;
+            return t_Address;
+        }
+
+        public void AttachAtAddress(IMemoryBank Bank, MemoryBankAddress Address)
+        {
+            if (!HasBankAtAddress(Address))
+                m_Banks.Add(Address, Bank);
+        }
+
+        public void Detach(MemoryBankAddress Address)
+        {
+            m_Banks.Remove(Address);
         }
 
         public bool HasBankAtAddress(MemoryBankAddress Address)
         {
-            return _IsAddressValid(Address);
+            return m_Banks.ContainsKey(Address);
         }
 
-        private IMemoryBank _RetrieveBankByAddress(MemoryBankAddress Address)
+        private void _InitializeBanksFromList(List<IMemoryBank> Banks)
         {
-            return m_Banks[_ResolveAddressToIndex(Address)];
+            var t_RawAddress = 0;
+            foreach (var t_Bank in Banks)
+                m_Banks[new MemoryBankAddress(t_RawAddress++)] = t_Bank;
         }
 
-        private int _ResolveAddressToIndex(MemoryBankAddress Address)
+        private MemoryBankAddress _RetrieveLargestAddress()
         {
-            return Address.Value;
+            return m_Banks.Keys.OrderByDescending(A => A.Value).First();
         }
 
-        private MemoryBankAddress _ResolveIndexToAddress(int Index)
+        private MemoryBankAddress _GenerateNewAddress()
         {
-            return new MemoryBankAddress(Index);
-        }
-
-        private bool _IsAddressValid(MemoryBankAddress Address)
-        {
-            var t_Index = _ResolveAddressToIndex(Address);
-            return t_Index >= 0 && t_Index < m_Banks.Count;
+            return new MemoryBankAddress(_RetrieveLargestAddress().Value + 1);
         }
     }
 }

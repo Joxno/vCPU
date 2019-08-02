@@ -11,6 +11,8 @@ namespace Core.Interfaces
     {
         IMemoryBank ResolveAddress(MemoryBankAddress Address);
         MemoryBankAddress Attach(IMemoryBank Bank);
+        void AttachAtAddress(IMemoryBank Bank, MemoryBankAddress Address);
+        void Detach(MemoryBankAddress Address);
         bool HasBankAtAddress(MemoryBankAddress Address);
     }
 }

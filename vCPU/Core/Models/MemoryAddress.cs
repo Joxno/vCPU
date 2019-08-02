@@ -13,5 +13,30 @@ namespace Core.Models
         {
             Value = Address;
         }
+
+        public override bool Equals(object Obj)
+        {
+            if (Obj == null)
+                return false;
+
+            MemoryAddress Adr = Obj as MemoryAddress;
+            if (Adr == null)
+                return false;
+
+            return Value == Adr.Value;
+        }
+
+        public bool Equals(MemoryAddress A)
+        {
+            if (A == null)
+                return false;
+
+            return Value == A.Value;
+        }
+
+        public override int GetHashCode()
+        {
+            return Value;
+        }
     }
 }
