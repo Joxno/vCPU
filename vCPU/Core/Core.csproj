@@ -44,18 +44,27 @@
     <Compile Include="Components\MemoryBank.cs" />
     <Compile Include="Components\MemoryUnit.cs" />
     <Compile Include="Components\OperationFeeder.cs" />
+    <Compile Include="Components\OperationReader.cs" />
+    <Compile Include="DTO\OperationDTO.cs" />
     <Compile Include="Exceptions\AddressOutOfRange.cs" />
     <Compile Include="Interfaces\ICPU.cs" />
     <Compile Include="Interfaces\IMemoryBank.cs" />
+    <Compile Include="Interfaces\IMemoryBankService.cs" />
     <Compile Include="Interfaces\IMemoryUnit.cs" />
     <Compile Include="Interfaces\IOperation.cs" />
     <Compile Include="Components\CPU.cs" />
+    <Compile Include="Interfaces\IOperationConverter.cs" />
     <Compile Include="Interfaces\IOperationFeeder.cs" />
+    <Compile Include="Interfaces\IOperationReader.cs" />
     <Compile Include="Models\MemoryAddress.cs" />
+    <Compile Include="Models\MemoryBankAddress.cs" />
+    <Compile Include="Operations\Converters\NoOpConverter.cs" />
+    <Compile Include="Operations\Converters\OpLoadConverter.cs" />
     <Compile Include="Operations\NoOp.cs" />
     <Compile Include="Operations\OpLoad.cs" />
     <Compile Include="Operations\OpLoadAddress.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\MemoryBankService.cs" />
     <Compile Include="Utility\AnyConverter.cs" />
   </ItemGroup>
   <ItemGroup />

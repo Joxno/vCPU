@@ -12,6 +12,7 @@ namespace CoreTests
     public class CPUTests
     {
         public ICPU m_CPU = null;
+        public IMemoryBank m_Bank = null;
 
         [TestMethod]
         public void TickCPU()
@@ -82,9 +83,8 @@ namespace CoreTests
         [TestMethod]
         public void ExecuteLoadValueOperation()
         {
-            var t_Bank = new MemoryBank(32);
-            m_CPU.ExecuteOperation(new OpLoad<int>(5, new MemoryAddress(0), t_Bank));
-            var t_Value = t_Bank.Load<int>(new MemoryAddress(0));
+            m_CPU.ExecuteOperation(new OpLoad<int>(5, new MemoryAddress(0), m_Bank));
+            var t_Value = m_Bank.Load<int>(new MemoryAddress(0));
 
             t_Value.Should().Be(5, "We executed a Load operation that should load the value 5 into memory.");
         }
@@ -92,10 +92,9 @@ namespace CoreTests
         [TestMethod]
         public void ExecuteLoadAddressOperation()
         {
-            var t_Bank = new MemoryBank(32);
-            m_CPU.ExecuteOperation(new OpLoad<int>(5, new MemoryAddress(0), t_Bank));
-            m_CPU.ExecuteOperation(new OpLoadAddress<int>(new MemoryAddress(0), t_Bank, new MemoryAddress(4), t_Bank));
-            var t_Value = t_Bank.Load<int>(new MemoryAddress(4));
+            m_CPU.ExecuteOperation(new OpLoad<int>(5, new MemoryAddress(0), m_Bank));
+            m_CPU.ExecuteOperation(new OpLoadAddress<int>(new MemoryAddress(0), m_Bank, new MemoryAddress(4), m_Bank));
+            var t_Value = m_Bank.Load<int>(new MemoryAddress(4));
 
             t_Value.Should().Be(5, "We loaded 5 into memory and copied data into a seperate address and loaded from there.");
         }
@@ -104,6 +103,7 @@ namespace CoreTests
         public void InitializeTestVariables()
         {
             m_CPU = new CPU();
+            m_Bank = new MemoryBank(32);
         }
     }
 }

@@ -68,11 +68,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CPUTests.cs" />
+    <Compile Include="OperationConverterTests.cs" />
+    <Compile Include="OperationReaderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MemoryUnitTests.cs" />
     <Compile Include="MemoryBankTests.cs" />
     <Compile Include="AnyConverterTests.cs" />
     <Compile Include="OperationFeederTests.cs" />
+    <Compile Include="MemoryBankServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
