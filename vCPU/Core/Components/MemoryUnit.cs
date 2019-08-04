@@ -24,7 +24,7 @@ namespace Core.Components
 
         public MemoryUnit(int Size)
         {
-            m_Size = Size;
+            _InitializeStorage(Size);
         }
 
         public void Store<T>(T Value) where T : struct
@@ -35,6 +35,13 @@ namespace Core.Components
         public T Load<T>() where T : struct
         {
             return m_Converter.ConvertBytesToValueType<T>(m_Storage.ToArray());
+        }
+
+        private void _InitializeStorage(int Size)
+        {
+            m_Size = Size;
+            for(int i = 0; i < m_Size; i++)
+                m_Storage.Add(0);
         }
     }
 }

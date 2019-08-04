@@ -48,6 +48,7 @@
     <Compile Include="DTO\OperationDTO.cs" />
     <Compile Include="Exceptions\AddressOccupied.cs" />
     <Compile Include="Exceptions\AddressOutOfRange.cs" />
+    <Compile Include="Exceptions\UnknownOperation.cs" />
     <Compile Include="Interfaces\ICPU.cs" />
     <Compile Include="Interfaces\IMemoryBank.cs" />
     <Compile Include="Interfaces\IMemoryBankService.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="Models\MemoryAddress.cs" />
     <Compile Include="Models\MemoryBankAddress.cs" />
     <Compile Include="Operations\Converters\NoOpConverter.cs" />
+    <Compile Include="Operations\Converters\OpLoadAddressConverter.cs" />
     <Compile Include="Operations\Converters\OpLoadConverter.cs" />
     <Compile Include="Operations\NoOp.cs" />
     <Compile Include="Operations\OpLoad.cs" />

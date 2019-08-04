@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Exceptions;
 
 namespace Core.Components
 {
@@ -20,13 +21,22 @@ namespace Core.Components
 
         public IOperation ReadOperation(OperationDTO DTO)
         {
-            return _RetrieveConverter(DTO.OpCode)
-                .Convert(DTO);
+            return 
+                _HasConverterForOperation(DTO.OpCode) ?
+                _RetrieveConverter(DTO.OpCode)
+                .Convert(DTO) 
+                :
+                throw new UnknownOperation(DTO);
         }
 
         private IOperationConverter _RetrieveConverter(int Code)
         {
             return m_Converters[Code];
+        }
+
+        private bool _HasConverterForOperation(int OpCode)
+        {
+            return m_Converters.ContainsKey(OpCode);
         }
     }
 }

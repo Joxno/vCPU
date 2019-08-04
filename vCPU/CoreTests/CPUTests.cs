@@ -90,6 +90,16 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void QueueLoadValueOperationAndTick()
+        {
+            m_CPU.QueueOperation(new OpLoad<int>(10, new MemoryAddress(0), m_Bank));
+            m_CPU.Tick();
+            var t_Value = m_Bank.Load<int>(new MemoryAddress(0));
+
+            t_Value.Should().Be(10, "We queued a Load operation that should load the value 10 into memory.");
+        }
+
+        [TestMethod]
         public void ExecuteLoadAddressOperation()
         {
             m_CPU.ExecuteOperation(new OpLoad<int>(5, new MemoryAddress(0), m_Bank));

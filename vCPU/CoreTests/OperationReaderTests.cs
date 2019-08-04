@@ -7,6 +7,7 @@ using Core.Components;
 using FluentAssertions;
 using Core.Operations;
 using Core.DTO;
+using Core.Exceptions;
 using Core.Operations.Converters;
 using Core.Services;
 
@@ -39,6 +40,28 @@ namespace CoreTests
             t_Operation.Should().BeOfType<OpLoad<int>>();
         }
 
+        [TestMethod]
+        public void ReadALoadAddressOp()
+        {
+            var t_Operation = m_Reader.ReadOperation(new OperationDTO(2, new byte[]
+            {
+                0, 0, 0, 0,
+                0, 0, 0, 0,
+                0, 0, 0, 0,
+                0, 0, 0, 0
+            }));
+
+            t_Operation.Should().BeOfType<OpLoadAddress<int>>();
+        }
+
+        [TestMethod]
+        public void ReadInvalidOpCode()
+        {
+            Action t_Invalid = () => m_Reader.ReadOperation(new OperationDTO(255, new byte[] { }));
+
+            t_Invalid.Should().Throw<UnknownOperation>();
+        }
+
         [TestInitialize]
         public void Initialize()
         {
@@ -51,7 +74,8 @@ namespace CoreTests
             return new Dictionary<int, IOperationConverter>
             {
                 { 0, new NoOpConverter() },
-                { 1, new OpLoadConverter(m_BankService) }
+                { 1, new OpLoadConverter(m_BankService) },
+                { 2, new OpLoadAddressConverter(m_BankService) }
             };
         }
     }

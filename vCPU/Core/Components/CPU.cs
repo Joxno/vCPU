@@ -36,10 +36,7 @@ namespace Core.Components
         private void _DequeueAndExecuteOperation()
         {
             if (_CanExecute())
-            {
-                var t_Operation = m_OperationQueue.Dequeue();
-                ExecutedOperations++;
-            }
+                ExecuteOperation(_RetrieveNextOperation());
         }
 
         public void Suspend()
@@ -62,6 +59,11 @@ namespace Core.Components
         private bool _IsSuspended()
         {
             return m_Suspended;
+        }
+
+        private IOperation _RetrieveNextOperation()
+        {
+            return m_OperationQueue.Dequeue();
         }
     }
 }

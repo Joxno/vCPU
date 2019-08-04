@@ -39,6 +39,21 @@ namespace CoreTests
             t_LoadOp.Should().BeOfType<OpLoad<int>>();
         }
 
+        [TestMethod]
+        public void ConvertLoadAddressOp()
+        {
+            var t_Converter = new OpLoadAddressConverter(m_BankService);
+            var t_LoadAddressOp = t_Converter.Convert(new OperationDTO(2, new byte[]
+            {
+                0, 0, 0, 0,
+                0, 0, 0, 0,
+                0, 0, 0, 0,
+                0, 0, 0, 0,
+            }));
+
+            t_LoadAddressOp.Should().BeOfType<OpLoadAddress<int>>();
+        }
+
         [TestInitialize]
         public void Initialize()
         {

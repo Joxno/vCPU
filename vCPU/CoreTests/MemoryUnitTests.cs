@@ -34,5 +34,17 @@ namespace CoreTests
 
             t_Value.Should().Be(10, "We stored the number 10.");
         }
+
+        [TestMethod]
+        public void LoadFromInitializedUnit()
+        {
+            Action t_NoThrow = () =>
+            {
+                var t_Memory = new MemoryUnit(4);
+                var t_Value = t_Memory.Load<int>();
+            };
+
+            t_NoThrow.Should().NotThrow("MemoryUnit should self-initialize with enough memory to hold specified size.");
+        }
     }
 }
