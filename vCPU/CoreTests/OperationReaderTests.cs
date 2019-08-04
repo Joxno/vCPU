@@ -8,12 +8,14 @@ using FluentAssertions;
 using Core.Operations;
 using Core.DTO;
 using Core.Operations.Converters;
+using Core.Services;
 
 namespace CoreTests
 {
     [TestClass]
     public class OperationReaderTests
     {
+        private IMemoryBankService m_BankService = null;
         private IOperationReader m_Reader = null;
 
         [TestMethod]
@@ -24,18 +26,33 @@ namespace CoreTests
             t_Operation.Should().BeOfType<NoOp>();
         }
 
-        //[TestMethod]
-        //public void ReadALoadOp()
-        //{
-        //    var t_Operation = m_Reader.ReadOperation(new OperationDTO(1, 0, 0, 0));
+        [TestMethod]
+        public void ReadALoadOp()
+        {
+            var t_Operation = m_Reader.ReadOperation(new OperationDTO(1, new byte[]
+            {
+                10, 0, 0, 0,
+                0, 0, 0, 0,
+                0, 0, 0, 0
+            }));
 
-        //    t_Operation.Should().BeOfType<OpLoad<int>>();
-        //}
+            t_Operation.Should().BeOfType<OpLoad<int>>();
+        }
 
         [TestInitialize]
         public void Initialize()
         {
-            m_Reader = new OperationReader(new Dictionary<int, IOperationConverter> { { 0, new NoOpConverter() } });
+            m_BankService = new MemoryBankService(new List<IMemoryBank>() { new MemoryBank(32) });
+            m_Reader = new OperationReader(_CreateConverters());
+        }
+
+        private Dictionary<int, IOperationConverter> _CreateConverters()
+        {
+            return new Dictionary<int, IOperationConverter>
+            {
+                { 0, new NoOpConverter() },
+                { 1, new OpLoadConverter(m_BankService) }
+            };
         }
     }
 }
