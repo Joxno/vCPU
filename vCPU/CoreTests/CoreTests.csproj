@@ -69,6 +69,8 @@
   <ItemGroup>
     <Compile Include="CPUTests.cs" />
     <Compile Include="OperationConverterTests.cs" />
+    <Compile Include="OperationDTOReaderTests.cs" />
+    <Compile Include="OperationDTOTests.cs" />
     <Compile Include="OperationReaderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MemoryUnitTests.cs" />

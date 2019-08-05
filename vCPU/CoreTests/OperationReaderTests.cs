@@ -8,7 +8,9 @@ using FluentAssertions;
 using Core.Operations;
 using Core.DTO;
 using Core.Exceptions;
+using Core.Models;
 using Core.Operations.Converters;
+using Core.Operations.Readers;
 using Core.Services;
 
 namespace CoreTests
@@ -62,11 +64,20 @@ namespace CoreTests
             t_Invalid.Should().Throw<UnknownOperation>();
         }
 
+        [TestMethod]
+        public void ReadNoOpFromMemory()
+        {
+            var t_Bank = new MemoryBank(32);
+            var t_Operation = m_Reader.ReadOperationFromMemory(new MemoryAddress(0), t_Bank);
+
+            t_Operation.Should().BeOfType<NoOp>();
+        }
+
         [TestInitialize]
         public void Initialize()
         {
             m_BankService = new MemoryBankService(new List<IMemoryBank>() { new MemoryBank(32) });
-            m_Reader = new OperationReader(_CreateConverters());
+            m_Reader = new OperationReader(_CreateConverters(), _CreateReaders());
         }
 
         private Dictionary<int, IOperationConverter> _CreateConverters()
@@ -76,6 +87,14 @@ namespace CoreTests
                 { 0, new NoOpConverter() },
                 { 1, new OpLoadConverter(m_BankService) },
                 { 2, new OpLoadAddressConverter(m_BankService) }
+            };
+        }
+
+        private Dictionary<int, IOperationDTOReader> _CreateReaders()
+        {
+            return new Dictionary<int, IOperationDTOReader>
+            {
+                { 0, new NoOpReader() }
             };
         }
     }

@@ -14,5 +14,11 @@ namespace Core.Exceptions
         {
 
         }
+
+        public UnknownOperation(int OpCode)
+            : base($"Unknown Operation with Code: {OpCode}")
+        {
+
+        }
     }
 }

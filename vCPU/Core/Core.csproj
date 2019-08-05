@@ -56,6 +56,7 @@
     <Compile Include="Interfaces\IOperation.cs" />
     <Compile Include="Components\CPU.cs" />
     <Compile Include="Interfaces\IOperationConverter.cs" />
+    <Compile Include="Interfaces\IOperationDTOReader.cs" />
     <Compile Include="Interfaces\IOperationFeeder.cs" />
     <Compile Include="Interfaces\IOperationReader.cs" />
     <Compile Include="Models\MemoryAddress.cs" />
@@ -66,6 +67,7 @@
     <Compile Include="Operations\NoOp.cs" />
     <Compile Include="Operations\OpLoad.cs" />
     <Compile Include="Operations\OpLoadAddress.cs" />
+    <Compile Include="Operations\Readers\NoOpReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\MemoryBankService.cs" />
     <Compile Include="Utility\AnyConverter.cs" />
