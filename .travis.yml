@@ -1,0 +1,4 @@
+language: csharp
+solution: "./vCPU/vCPU.sln"
+script:
+    - xbuild /p:Configuration=Debug vCPU.sln
