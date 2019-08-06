@@ -73,6 +73,16 @@ namespace CoreTests
             t_Operation.Should().BeOfType<NoOp>();
         }
 
+        [TestMethod]
+        public void ReadOpLoadValueFromMemory()
+        {
+            var t_Bank = new MemoryBank(32);
+            _WriteOpLoadToBank(t_Bank);
+            var t_Operation = m_Reader.ReadOperationFromMemory(new MemoryAddress(0), t_Bank);
+
+            t_Operation.Should().BeOfType<OpLoad<int>>();
+        }
+
         [TestInitialize]
         public void Initialize()
         {
@@ -94,8 +104,23 @@ namespace CoreTests
         {
             return new Dictionary<int, IOperationDTOReader>
             {
-                { 0, new NoOpReader() }
+                { 0, new NoOpReader() },
+                { 1, new OpLoadReader() }
             };
+        }
+
+        private void _WriteOpLoadToBank(IMemoryBank Bank)
+        {
+            var t_Data = new byte[]
+            {
+                1,
+                0, 0, 0, 0,
+                0, 0, 0, 0,
+                0, 0, 0, 0
+            };
+
+            for (int i = 0; i < t_Data.Length; i++)
+                Bank.Store(t_Data[i], new MemoryAddress(i));
         }
     }
 }

@@ -55,5 +55,36 @@ namespace CoreTests
             (t_FirstAddress.GetHashCode() == t_SecondAddress.GetHashCode())
                 .Should().BeTrue();
         }
+
+        [TestMethod]
+        public void OperatorEquals()
+        {
+            var t_FirstAddress = new MemoryAddress(0);
+            var t_SecondAddress = new MemoryAddress(0);
+
+            (t_FirstAddress == t_SecondAddress)
+                .Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void OperatorNotEquals()
+        {
+            var t_FirstAddress = new MemoryAddress(0);
+            var t_SecondAddress = new MemoryAddress(1);
+
+            (t_FirstAddress != t_SecondAddress)
+                .Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void AddressAddition()
+        {
+            var t_Address = new MemoryAddress(0) + 
+                            new MemoryAddress(3);
+            var t_CompareAddress = new MemoryAddress(3);
+
+            t_Address.Value.Should().Be(3);
+            t_Address.Equals(t_CompareAddress).Should().BeTrue();
+        }
     }
 }

@@ -16,11 +16,8 @@ namespace Core.Models
 
         public override bool Equals(object Obj)
         {
-            if (Obj == null)
-                return false;
-
             MemoryAddress Adr = Obj as MemoryAddress;
-            if (Adr == null)
+            if (ReferenceEquals(Adr, null))
                 return false;
 
             return Value == Adr.Value;
@@ -28,8 +25,11 @@ namespace Core.Models
 
         public bool Equals(MemoryAddress A)
         {
-            if (A == null)
+            if (ReferenceEquals(A, null))
                 return false;
+
+            if (ReferenceEquals(this, A))
+                return true;
 
             return Value == A.Value;
         }
@@ -37,6 +37,30 @@ namespace Core.Models
         public override int GetHashCode()
         {
             return Value;
+        }
+
+        public static bool operator ==(MemoryAddress A, MemoryAddress B)
+        {
+            if (ReferenceEquals(A, null))
+                return false;
+
+            if (ReferenceEquals(B, null))
+                return false;
+
+            if (ReferenceEquals(A, B))
+                return true;
+
+            return A.Value == B.Value;
+        }
+
+        public static bool operator !=(MemoryAddress A, MemoryAddress B)
+        {
+            return !(A == B);
+        }
+
+        public static MemoryAddress operator +(MemoryAddress A, MemoryAddress B)
+        {
+            return new MemoryAddress(A.Value + B.Value);
         }
     }
 }

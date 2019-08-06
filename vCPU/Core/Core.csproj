@@ -68,6 +68,7 @@
     <Compile Include="Operations\OpLoad.cs" />
     <Compile Include="Operations\OpLoadAddress.cs" />
     <Compile Include="Operations\Readers\NoOpReader.cs" />
+    <Compile Include="Operations\Readers\OpLoadReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\MemoryBankService.cs" />
     <Compile Include="Utility\AnyConverter.cs" />
