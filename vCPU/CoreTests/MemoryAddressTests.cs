@@ -19,6 +19,34 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void EqualsObject()
+        {
+            var t_FirstAddress = new MemoryAddress(0);
+            object t_SecondAddress = new MemoryAddress(0);
+
+            t_FirstAddress.Equals(t_SecondAddress)
+                .Should().BeTrue();
+        }
+
+        [TestMethod]
+        public void EqualsNull()
+        {
+            var t_FirstAddress = new MemoryAddress(0);
+
+            t_FirstAddress.Equals(null)
+                .Should().BeFalse();
+        }
+
+        [TestMethod]
+        public void EqualsIncorrectType()
+        {
+            var t_FirstAddress = new MemoryAddress(0);
+
+            t_FirstAddress.Equals(new int())
+                .Should().BeFalse();
+        }
+
+        [TestMethod]
         public void HashCode()
         {
             var t_FirstAddress = new MemoryAddress(0);
