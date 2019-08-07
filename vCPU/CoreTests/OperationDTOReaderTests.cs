@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using Core.Components;
+using Core.DTO;
 using Core.Interfaces;
 using Core.Models;
-using Core.Operations.Readers;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -14,10 +15,14 @@ namespace CoreTests
         private IMemoryBank m_Bank = null;
 
         [TestMethod]
-        public void ReadNoOpFromRawData()
+        public void ReadNoOpFromRawDataWithGenericReader()
         {
-            m_Bank.Store(0, new MemoryAddress(0));
-            var t_Reader = new NoOpReader();
+            var t_Reader = new OperationDTOReader(
+                new List<OperationDefinition>
+                {
+                    new OperationDefinition(0, 0)
+                });
+
             var t_DTO = t_Reader.ReadMemory(new MemoryAddress(0), m_Bank);
 
             t_DTO.Should().NotBeNull();
@@ -26,14 +31,33 @@ namespace CoreTests
         }
 
         [TestMethod]
-        public void ReadOpLoadValueFromRawData()
+        public void ReadOpLoadValueFromRawDataWithGenericReader()
         {
             _WriteOpLoadToBank(m_Bank);
-            var t_Reader = new OpLoadReader();
+            var t_Reader = new OperationDTOReader(
+                new List<OperationDefinition>
+                {
+                    new OperationDefinition(1, 3*4)
+                });
             var t_DTO = t_Reader.ReadMemory(new MemoryAddress(0), m_Bank);
 
+            t_DTO.OpCode.Should().Be(1);
             t_DTO.Should().NotBeNull();
             t_DTO.Data.Length.Should().Be(3 * 4);
+        }
+
+        [TestMethod]
+        public void CheckCanReadOperation()
+        {
+            var t_Reader = new OperationDTOReader(
+                new List<OperationDefinition>
+                {
+                    new OperationDefinition(0, 0)
+                });
+
+            var t_CanRead = t_Reader.CanRead(0);
+
+            t_CanRead.Should().BeTrue();
         }
 
         [TestInitialize]

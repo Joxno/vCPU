@@ -14,13 +14,13 @@ namespace Core.Components
     public class OperationReader : IOperationReader
     {
         private Dictionary<int, IOperationConverter> m_Converters = null;
-        private Dictionary<int, IOperationDTOReader> m_DTOReader = null;
+        private IOperationDTOReader m_DTOReader = null;
 
         public OperationReader(Dictionary<int, IOperationConverter> Converters,
-            Dictionary<int, IOperationDTOReader> DTOReaders)
+            IOperationDTOReader OperationDTOReader)
         {
             m_Converters = Converters;
-            m_DTOReader = DTOReaders;
+            m_DTOReader = OperationDTOReader;
         }
 
         public IOperation ReadOperation(OperationDTO DTO)
@@ -48,23 +48,12 @@ namespace Core.Components
             return m_Converters.ContainsKey(OpCode);
         }
 
-        private IOperationDTOReader _RetrieveReader(int Code)
-        {
-            return m_DTOReader[Code];
-        }
-
-        private bool _HasReaderForOperation(int OpCode)
-        {
-            return m_DTOReader.ContainsKey(OpCode);
-        }
-
         private OperationDTO _ReadOperationDTOFromMemory(MemoryAddress Address, IMemoryBank Bank)
         {
             var t_OpCode = _InspectCode(Address, Bank);
             return 
-                _HasReaderForOperation(t_OpCode) ?
-                _RetrieveReader(t_OpCode)
-                    .ReadMemory(Address, Bank) :
+                m_DTOReader.CanRead(t_OpCode) ?
+                m_DTOReader.ReadMemory(Address, Bank) :
                 throw new UnknownOperation(t_OpCode);
         }
 

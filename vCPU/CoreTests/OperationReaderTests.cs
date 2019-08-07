@@ -10,7 +10,6 @@ using Core.DTO;
 using Core.Exceptions;
 using Core.Models;
 using Core.Operations.Converters;
-using Core.Operations.Readers;
 using Core.Services;
 
 namespace CoreTests
@@ -87,7 +86,7 @@ namespace CoreTests
         public void Initialize()
         {
             m_BankService = new MemoryBankService(new List<IMemoryBank>() { new MemoryBank(32) });
-            m_Reader = new OperationReader(_CreateConverters(), _CreateReaders());
+            m_Reader = new OperationReader(_CreateConverters(), _CreateReader());
         }
 
         private Dictionary<int, IOperationConverter> _CreateConverters()
@@ -100,13 +99,13 @@ namespace CoreTests
             };
         }
 
-        private Dictionary<int, IOperationDTOReader> _CreateReaders()
+        private IOperationDTOReader _CreateReader()
         {
-            return new Dictionary<int, IOperationDTOReader>
+            return new OperationDTOReader(new List<OperationDefinition>
             {
-                { 0, new NoOpReader() },
-                { 1, new OpLoadReader() }
-            };
+                new OperationDefinition(0, 0),
+                new OperationDefinition(1, 4*3)
+            });
         }
 
         private void _WriteOpLoadToBank(IMemoryBank Bank)

@@ -43,8 +43,10 @@
   <ItemGroup>
     <Compile Include="Components\MemoryBank.cs" />
     <Compile Include="Components\MemoryUnit.cs" />
+    <Compile Include="Components\OperationDTOReader.cs" />
     <Compile Include="Components\OperationFeeder.cs" />
     <Compile Include="Components\OperationReader.cs" />
+    <Compile Include="DTO\OperationDefinition.cs" />
     <Compile Include="DTO\OperationDTO.cs" />
     <Compile Include="Exceptions\AddressOccupied.cs" />
     <Compile Include="Exceptions\AddressOutOfRange.cs" />
@@ -67,12 +69,12 @@
     <Compile Include="Operations\NoOp.cs" />
     <Compile Include="Operations\OpLoad.cs" />
     <Compile Include="Operations\OpLoadAddress.cs" />
-    <Compile Include="Operations\Readers\NoOpReader.cs" />
-    <Compile Include="Operations\Readers\OpLoadReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\MemoryBankService.cs" />
     <Compile Include="Utility\AnyConverter.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Operations\Readers\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
