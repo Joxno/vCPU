@@ -16,11 +16,11 @@ namespace Core.Models
 
         public override bool Equals(object Obj)
         {
-            MemoryAddress Adr = Obj as MemoryAddress;
-            if (ReferenceEquals(Adr, null))
+            MemoryAddress t_Address = Obj as MemoryAddress;
+            if (ReferenceEquals(t_Address, null))
                 return false;
 
-            return Value == Adr.Value;
+            return Value == t_Address.Value;
         }
 
         public bool Equals(MemoryAddress A)

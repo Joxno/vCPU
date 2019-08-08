@@ -106,7 +106,7 @@ namespace CoreTests
             m_CPU.ExecuteOperation(new OpLoadAddress<int>(new MemoryAddress(0), m_Bank, new MemoryAddress(4), m_Bank));
             var t_Value = m_Bank.Load<int>(new MemoryAddress(4));
 
-            t_Value.Should().Be(5, "We loaded 5 into memory and copied data into a seperate address and loaded from there.");
+            t_Value.Should().Be(5, "We loaded 5 into memory and copied data into a separate address and loaded from there.");
         }
 
         [SetUp]
