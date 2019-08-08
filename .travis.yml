@@ -1,4 +1,8 @@
 language: csharp
 solution: "./vCPU/vCPU.sln"
+install:
+    - nuget restore "./vCPU/vCPU.sln"
+    - nuget install NUnit.Console -Version 3.9.0 -OutputDirectory testrunner
 script:
     - msbuild /p:Configuration=Debug "./vCPU/vCPU.sln"
+    - mono ./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./vCPU/CoreTests/bin/Debug/CoreTests.dll
