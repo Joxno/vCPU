@@ -1,20 +1,20 @@
 ﻿using System;
 using Core.Components;
 using Core.Interfaces;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using FluentAssertions;
 using Core.Operations;
 using Core.Models;
 
 namespace CoreTests
 {
-    [TestClass]
+    [TestFixture]
     public class CPUTests
     {
         public ICPU m_CPU = null;
         public IMemoryBank m_Bank = null;
 
-        [TestMethod]
+        [Test]
         public void TickCPU()
         {
             m_CPU.Tick();
@@ -23,7 +23,7 @@ namespace CoreTests
             t_Counter.Should().Be(1, "We called Tick once.");
         }
 
-        [TestMethod]
+        [Test]
         public void ExecuteOpCode()
         {
             m_CPU.ExecuteOperation(new NoOp());
@@ -32,7 +32,7 @@ namespace CoreTests
             t_OpCounter.Should().Be(1, "We executed a NoOp operation");
         }
 
-        [TestMethod]
+        [Test]
         public void QueueOpCode()
         {
             m_CPU.QueueOperation(new NoOp());
@@ -41,7 +41,7 @@ namespace CoreTests
             t_QueuedCounter.Should().Be(1, "We queued up a NoOp operation");
         }
 
-        [TestMethod]
+        [Test]
         public void QueueAndExecuteOpCodeFromTick()
         {
             m_CPU.QueueOperation(new NoOp());
@@ -51,7 +51,7 @@ namespace CoreTests
             m_CPU.ExecutedOperations.Should().Be(1, "Tick should execute queued operation");
         }
 
-        [TestMethod]
+        [Test]
         public void SuspendCPU()
         {
             m_CPU.QueueOperation(new NoOp());
@@ -60,7 +60,7 @@ namespace CoreTests
             m_CPU.QueuedOperations.Should().Be(1, "We suspended the CPU after queuing a NoOp");
         }
 
-        [TestMethod]
+        [Test]
         public void ExecuteOperationWhileCPUSuspended()
         {
             m_CPU.Suspend();
@@ -68,7 +68,7 @@ namespace CoreTests
             m_CPU.ExecutedOperations.Should().Be(1, "Suspensions should not have any affect on directly executed operations.");
         }
 
-        [TestMethod]
+        [Test]
         public void SuspendAndResumeCPU()
         {
             m_CPU.QueueOperation(new NoOp());
@@ -80,7 +80,7 @@ namespace CoreTests
             m_CPU.QueuedOperations.Should().Be(1, "We resumed CPU after suspension and ticked once while CPU was active.");
         }
 
-        [TestMethod]
+        [Test]
         public void ExecuteLoadValueOperation()
         {
             m_CPU.ExecuteOperation(new OpLoad<int>(5, new MemoryAddress(0), m_Bank));
@@ -89,7 +89,7 @@ namespace CoreTests
             t_Value.Should().Be(5, "We executed a Load operation that should load the value 5 into memory.");
         }
 
-        [TestMethod]
+        [Test]
         public void QueueLoadValueOperationAndTick()
         {
             m_CPU.QueueOperation(new OpLoad<int>(10, new MemoryAddress(0), m_Bank));
@@ -99,7 +99,7 @@ namespace CoreTests
             t_Value.Should().Be(10, "We queued a Load operation that should load the value 10 into memory.");
         }
 
-        [TestMethod]
+        [Test]
         public void ExecuteLoadAddressOperation()
         {
             m_CPU.ExecuteOperation(new OpLoad<int>(5, new MemoryAddress(0), m_Bank));
@@ -109,7 +109,7 @@ namespace CoreTests
             t_Value.Should().Be(5, "We loaded 5 into memory and copied data into a seperate address and loaded from there.");
         }
 
-        [TestInitialize]
+        [SetUp]
         public void InitializeTestVariables()
         {
             m_CPU = new CPU();

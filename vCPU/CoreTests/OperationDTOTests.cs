@@ -1,14 +1,14 @@
 ﻿using System;
 using Core.DTO;
 using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace CoreTests
 {
-    [TestClass]
+    [TestFixture]
     public class OperationDTOTests
     {
-        [TestMethod]
+        [Test]
         public void RetrieveSizeOfNoOp()
         {
             var t_DTO = new OperationDTO(0, new byte[] { });
@@ -16,7 +16,7 @@ namespace CoreTests
             t_DTO.Size.Should().Be(1);
         }
 
-        [TestMethod]
+        [Test]
         public void RetrieveSizeOfOpLoadValue()
         {
             var t_DTO = new OperationDTO(1, new byte[] 

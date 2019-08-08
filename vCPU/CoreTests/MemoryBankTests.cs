@@ -3,20 +3,20 @@ using Core.Components;
 using Core.Exceptions;
 using Core.Models;
 using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace CoreTests
 {
-    [TestClass]
+    [TestFixture]
     public class MemoryBankTests
     {
-        [TestMethod]
+        [Test]
         public void InitializeMemoryBank()
         {
             var t_Bank = new MemoryBank(100);
         }
 
-        [TestMethod]
+        [Test]
         public void GetSizeOfMemoryBank()
         {
             var t_Bank = new MemoryBank(100);
@@ -25,7 +25,7 @@ namespace CoreTests
             t_Size.Should().Be(100, "We set MemoryBank to be able to hold 100 bytes in constructor.");
         }
 
-        [TestMethod]
+        [Test]
         public void StoreAndLoadValueAtAddress()
         {
             var t_Bank = new MemoryBank(100);
@@ -36,7 +36,7 @@ namespace CoreTests
             t_Value.Should().Be(10, "We stored the number 10 into the MemoryBank.");
         }
 
-        [TestMethod]
+        [Test]
         public void ValidateAddress()
         {
             var t_Bank = new MemoryBank(100);
@@ -44,7 +44,7 @@ namespace CoreTests
             t_Valid.Should().Be(true);
         }
 
-        [TestMethod]
+        [Test]
         public void ValidateInvalidAddress()
         {
             var t_Bank = new MemoryBank(100);
@@ -52,7 +52,7 @@ namespace CoreTests
             t_Valid.Should().Be(false);
         }
 
-        [TestMethod]
+        [Test]
         public void LoadValueOutOfRangeAddress()
         {
             var t_Bank = new MemoryBank(100);
@@ -60,7 +60,7 @@ namespace CoreTests
             t_LoadAction.Should().Throw<AddressOutOfRange>();
         }
 
-        [TestMethod]
+        [Test]
         public void StoreValueOutOfRangeAddress()
         {
             var t_Bank = new MemoryBank(100);

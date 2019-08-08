@@ -1,14 +1,14 @@
 ﻿using System;
 using Core.Components;
 using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace CoreTests
 {
-    [TestClass]
+    [TestFixture]
     public class MemoryUnitTests
     {
-        [TestMethod]
+        [Test]
         public void RetrieveDefaultStorageSize()
         {
             var t_Memory = new MemoryUnit();
@@ -16,7 +16,7 @@ namespace CoreTests
             t_Memory.Size.Should().Be(0, "No size specified.");
         }
 
-        [TestMethod]
+        [Test]
         public void RetrieveSpecifiedStorageSize()
         {
             var t_Memory = new MemoryUnit(100);
@@ -24,7 +24,7 @@ namespace CoreTests
             t_Memory.Size.Should().Be(100, "Number of bytes specified.");
         }
 
-        [TestMethod]
+        [Test]
         public void StoreAndRetrieveIntegerValue()
         {
             var t_Memory = new MemoryUnit(4);
@@ -35,7 +35,7 @@ namespace CoreTests
             t_Value.Should().Be(10, "We stored the number 10.");
         }
 
-        [TestMethod]
+        [Test]
         public void LoadFromInitializedUnit()
         {
             Action t_NoThrow = () =>

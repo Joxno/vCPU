@@ -73,8 +73,6 @@
     <Compile Include="Services\MemoryBankService.cs" />
     <Compile Include="Utility\AnyConverter.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Operations\Readers\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,14 +1,14 @@
 ﻿using System;
 using Core.Models;
 using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace CoreTests
 {
-    [TestClass]
+    [TestFixture]
     public class MemoryAddressTests
     {
-        [TestMethod]
+        [Test]
         public void Equals()
         {
             var t_FirstAddress = new MemoryAddress(0);
@@ -18,7 +18,7 @@ namespace CoreTests
                 .Should().BeTrue();
         }
 
-        [TestMethod]
+        [Test]
         public void EqualsObject()
         {
             var t_FirstAddress = new MemoryAddress(0);
@@ -28,7 +28,7 @@ namespace CoreTests
                 .Should().BeTrue();
         }
 
-        [TestMethod]
+        [Test]
         public void EqualsNull()
         {
             var t_FirstAddress = new MemoryAddress(0);
@@ -37,7 +37,7 @@ namespace CoreTests
                 .Should().BeFalse();
         }
 
-        [TestMethod]
+        [Test]
         public void EqualsIncorrectType()
         {
             var t_FirstAddress = new MemoryAddress(0);
@@ -46,7 +46,7 @@ namespace CoreTests
                 .Should().BeFalse();
         }
 
-        [TestMethod]
+        [Test]
         public void HashCode()
         {
             var t_FirstAddress = new MemoryAddress(0);
@@ -56,7 +56,7 @@ namespace CoreTests
                 .Should().BeTrue();
         }
 
-        [TestMethod]
+        [Test]
         public void OperatorEquals()
         {
             var t_FirstAddress = new MemoryAddress(0);
@@ -66,7 +66,7 @@ namespace CoreTests
                 .Should().BeTrue();
         }
 
-        [TestMethod]
+        [Test]
         public void OperatorNotEquals()
         {
             var t_FirstAddress = new MemoryAddress(0);
@@ -76,7 +76,7 @@ namespace CoreTests
                 .Should().BeTrue();
         }
 
-        [TestMethod]
+        [Test]
         public void AddressAddition()
         {
             var t_Address = new MemoryAddress(0) + 

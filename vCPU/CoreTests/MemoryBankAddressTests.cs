@@ -1,14 +1,14 @@
 ﻿using System;
 using Core.Models;
 using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace CoreTests
 {
-    [TestClass]
+    [TestFixture]
     public class MemoryBankAddressTests
     {
-        [TestMethod]
+        [Test]
         public void Equals()
         {
             var t_FirstAddress = new MemoryBankAddress(0);
@@ -18,7 +18,7 @@ namespace CoreTests
                 .Should().BeTrue();
         }
 
-        [TestMethod]
+        [Test]
         public void HashCode()
         {
             var t_FirstAddress = new MemoryBankAddress(0);

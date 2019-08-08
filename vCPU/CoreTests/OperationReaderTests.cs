@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using Core.Interfaces;
 using Core.Components;
 using FluentAssertions;
@@ -14,13 +14,13 @@ using Core.Services;
 
 namespace CoreTests
 {
-    [TestClass]
+    [TestFixture]
     public class OperationReaderTests
     {
         private IMemoryBankService m_BankService = null;
         private IOperationReader m_Reader = null;
 
-        [TestMethod]
+        [Test]
         public void ReadANoOp()
         {
             var t_Operation = m_Reader.ReadOperation(new OperationDTO(0));
@@ -28,7 +28,7 @@ namespace CoreTests
             t_Operation.Should().BeOfType<NoOp>();
         }
 
-        [TestMethod]
+        [Test]
         public void ReadALoadOp()
         {
             var t_Operation = m_Reader.ReadOperation(new OperationDTO(1, new byte[]
@@ -41,7 +41,7 @@ namespace CoreTests
             t_Operation.Should().BeOfType<OpLoad<int>>();
         }
 
-        [TestMethod]
+        [Test]
         public void ReadALoadAddressOp()
         {
             var t_Operation = m_Reader.ReadOperation(new OperationDTO(2, new byte[]
@@ -55,7 +55,7 @@ namespace CoreTests
             t_Operation.Should().BeOfType<OpLoadAddress<int>>();
         }
 
-        [TestMethod]
+        [Test]
         public void ReadInvalidOpCode()
         {
             Action t_Invalid = () => m_Reader.ReadOperation(new OperationDTO(255, new byte[] { }));
@@ -63,7 +63,7 @@ namespace CoreTests
             t_Invalid.Should().Throw<UnknownOperation>();
         }
 
-        [TestMethod]
+        [Test]
         public void ReadNoOpFromMemory()
         {
             var t_Bank = new MemoryBank(32);
@@ -72,7 +72,7 @@ namespace CoreTests
             t_Operation.Should().BeOfType<NoOp>();
         }
 
-        [TestMethod]
+        [Test]
         public void ReadOpLoadValueFromMemory()
         {
             var t_Bank = new MemoryBank(32);
@@ -82,7 +82,7 @@ namespace CoreTests
             t_Operation.Should().BeOfType<OpLoad<int>>();
         }
 
-        [TestInitialize]
+        [SetUp]
         public void Initialize()
         {
             m_BankService = new MemoryBankService(new List<IMemoryBank>() { new MemoryBank(32) });

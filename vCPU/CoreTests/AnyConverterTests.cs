@@ -2,14 +2,14 @@
 using System.ComponentModel;
 using Core.Utility;
 using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace CoreTests
 {
-    [TestClass]
+    [TestFixture]
     public class AnyConverterTests
     {
-        [TestMethod]
+        [Test]
         public void ConvertIntegerToBytes()
         {
             var t_Converter = new AnyConverter();
@@ -19,7 +19,7 @@ namespace CoreTests
             t_Bytes[0].Should().Be(10);
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertBytesToInteger()
         {
             var t_Converter = new AnyConverter();

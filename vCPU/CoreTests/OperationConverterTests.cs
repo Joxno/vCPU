@@ -7,16 +7,16 @@ using Core.Operations;
 using Core.Operations.Converters;
 using Core.Services;
 using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace CoreTests
 {
-    [TestClass]
+    [TestFixture]
     public class OperationConverterTests
     {
         private IMemoryBankService m_BankService = null;
 
-        [TestMethod]
+        [Test]
         public void ConvertNoOp()
         {
             var t_Converter = new NoOpConverter();
@@ -25,7 +25,7 @@ namespace CoreTests
             t_NoOp.Should().BeOfType<NoOp>();
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertLoadValueOp()
         {
             var t_Converter = new OpLoadConverter(m_BankService);
@@ -39,7 +39,7 @@ namespace CoreTests
             t_LoadOp.Should().BeOfType<OpLoad<int>>();
         }
 
-        [TestMethod]
+        [Test]
         public void ConvertLoadAddressOp()
         {
             var t_Converter = new OpLoadAddressConverter(m_BankService);
@@ -54,7 +54,7 @@ namespace CoreTests
             t_LoadAddressOp.Should().BeOfType<OpLoadAddress<int>>();
         }
 
-        [TestInitialize]
+        [SetUp]
         public void Initialize()
         {
             m_BankService = new MemoryBankService(new List<IMemoryBank> { new MemoryBank(128) });

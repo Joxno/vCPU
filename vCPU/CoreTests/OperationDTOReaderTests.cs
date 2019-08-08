@@ -5,16 +5,16 @@ using Core.DTO;
 using Core.Interfaces;
 using Core.Models;
 using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace CoreTests
 {
-    [TestClass]
+    [TestFixture]
     public class OperationDTOReaderTests
     {
         private IMemoryBank m_Bank = null;
 
-        [TestMethod]
+        [Test]
         public void ReadNoOpFromRawDataWithGenericReader()
         {
             var t_Reader = new OperationDTOReader(
@@ -30,7 +30,7 @@ namespace CoreTests
             t_DTO.Data.Length.Should().Be(0);
         }
 
-        [TestMethod]
+        [Test]
         public void ReadOpLoadValueFromRawDataWithGenericReader()
         {
             _WriteOpLoadToBank(m_Bank);
@@ -46,7 +46,7 @@ namespace CoreTests
             t_DTO.Data.Length.Should().Be(3 * 4);
         }
 
-        [TestMethod]
+        [Test]
         public void CheckCanReadOperation()
         {
             var t_Reader = new OperationDTOReader(
@@ -60,7 +60,7 @@ namespace CoreTests
             t_CanRead.Should().BeTrue();
         }
 
-        [TestInitialize]
+        [SetUp]
         public void Initialize()
         {
             m_Bank = new MemoryBank(64);

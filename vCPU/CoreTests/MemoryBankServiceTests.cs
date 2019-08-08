@@ -6,16 +6,16 @@ using Core.Interfaces;
 using Core.Models;
 using Core.Services;
 using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace CoreTests
 {
-    [TestClass]
+    [TestFixture]
     public class MemoryBankServiceTests
     {
         private IMemoryBankService m_Service = null;
 
-        [TestMethod]
+        [Test]
         public void ResolveAddress()
         {
             var t_Bank = m_Service.ResolveAddress(new MemoryBankAddress(0));
@@ -24,7 +24,7 @@ namespace CoreTests
             t_Bank.Size.Should().Be(32);
         }
 
-        [TestMethod]
+        [Test]
         public void AttachNewBank()
         {
             var t_Address = m_Service.Attach(new MemoryBank(64));
@@ -34,7 +34,7 @@ namespace CoreTests
             t_Bank.Size.Should().Be(64);
         }
 
-        [TestMethod]
+        [Test]
         public void AttachNewBankAtAddress()
         {
             var t_Address = new MemoryBankAddress(100);
@@ -45,14 +45,14 @@ namespace CoreTests
             t_Bank.Size.Should().Be(96);
         }
 
-        [TestMethod]
+        [Test]
         public void AttachNewBankAtOccupiedAddress()
         {
             Action t_Attach = () => m_Service.AttachAtAddress(new MemoryBank(16), new MemoryBankAddress(0));
             t_Attach.Should().Throw<AddressOccupied>();
         }
 
-        [TestMethod]
+        [Test]
         public void DetachBank()
         {
             m_Service.Detach(new MemoryBankAddress(0));
@@ -61,7 +61,7 @@ namespace CoreTests
             t_Found.Should().BeFalse("We detached the initial bank attached to the service.");
         }
 
-        [TestMethod]
+        [Test]
         public void CheckForBankAtAddress()
         {
             var t_Found = m_Service.HasBankAtAddress(new MemoryBankAddress(0));
@@ -69,7 +69,7 @@ namespace CoreTests
             t_Found.Should().BeTrue("During instantiation we add an initial bank at address 0");
         }
 
-        [TestInitialize]
+        [SetUp]
         public void Initialize()
         {
             m_Service = new MemoryBankService(new List<IMemoryBank> { new MemoryBank(32) });

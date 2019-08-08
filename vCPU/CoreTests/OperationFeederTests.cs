@@ -1,22 +1,22 @@
 ﻿using System;
 using Core.Components;
 using Core.Interfaces;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace CoreTests
 {
-    [TestClass]
+    [TestFixture]
     public class OperationFeederTests
     {
         private IOperationFeeder m_Feeder = null;
 
-        [TestMethod]
+        [Test]
         public void TestMethod1()
         {
 
         }
 
-        [TestInitialize]
+        [SetUp]
         public void Initialize()
         {
             m_Feeder = new OperationFeeder();
