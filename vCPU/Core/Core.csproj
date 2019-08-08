@@ -44,7 +44,7 @@
     <Compile Include="Components\MemoryBank.cs" />
     <Compile Include="Components\MemoryUnit.cs" />
     <Compile Include="Components\OperationDTOReader.cs" />
-    <Compile Include="Components\OperationFeeder.cs" />
+    <Compile Include="Components\OperationFetcher.cs" />
     <Compile Include="Components\OperationReader.cs" />
     <Compile Include="DTO\OperationDefinition.cs" />
     <Compile Include="DTO\OperationDTO.cs" />
@@ -59,7 +59,7 @@
     <Compile Include="Components\CPU.cs" />
     <Compile Include="Interfaces\IOperationConverter.cs" />
     <Compile Include="Interfaces\IOperationDTOReader.cs" />
-    <Compile Include="Interfaces\IOperationFeeder.cs" />
+    <Compile Include="Interfaces\IOperationFetcher.cs" />
     <Compile Include="Interfaces\IOperationReader.cs" />
     <Compile Include="Models\MemoryAddress.cs" />
     <Compile Include="Models\MemoryBankAddress.cs" />
