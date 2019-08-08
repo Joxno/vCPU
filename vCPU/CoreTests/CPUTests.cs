@@ -81,6 +81,27 @@ namespace CoreTests
         }
 
         [Test]
+        public void ForceTick()
+        {
+            m_CPU.QueueOperation(new NoOp());
+            m_CPU.Suspend();
+            m_CPU.ForceTick();
+
+            m_CPU.QueuedOperations.Should()
+                .Be(0, "We used a force tick which should force execution when CPU is suspended.");
+            m_CPU.ExecutedOperations.Should().Be(1);
+        }
+
+        [Test]
+        public void ForceTickWithNoQueuedOperations()
+        {
+            m_CPU.Suspend();
+            m_CPU.ForceTick();
+
+            m_CPU.ExecutedOperations.Should().Be(0, "We have not queued any operations before ForceTick call.");
+        }
+
+        [Test]
         public void ExecuteLoadValueOperation()
         {
             m_CPU.ExecuteOperation(new OpLoad<int>(5, new MemoryAddress(0), m_Bank));

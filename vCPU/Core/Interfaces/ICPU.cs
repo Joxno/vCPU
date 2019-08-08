@@ -13,6 +13,7 @@ namespace Core.Interfaces
         int QueuedOperations { get; }
 
         void Tick();
+        void ForceTick();
         void ExecuteOperation(IOperation Operation);
         void QueueOperation(IOperation Operation);
         void Suspend();

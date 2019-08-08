@@ -24,6 +24,13 @@ namespace Core.Components
             Ticks++;
         }
 
+        public void ForceTick()
+        {
+            if(_CanDequeue())
+                ExecuteOperation(_RetrieveNextOperation());
+            Ticks++;
+        }
+
         public void QueueOperation(IOperation Operation)
         {
             m_OperationQueue.Enqueue(Operation);
@@ -50,6 +57,11 @@ namespace Core.Components
             return 
                 m_OperationQueue.Count > 0 &&
                 !_IsSuspended();
+        }
+
+        private bool _CanDequeue()
+        {
+            return m_OperationQueue.Count > 0;
         }
 
         private bool _IsSuspended()
