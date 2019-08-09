@@ -10,27 +10,21 @@ namespace Core.Operations
 {
     public class OpLoadAddress<T> : IOperation where T : struct
     {
-        private MemoryAddress m_FromAddress = null;
-        private IMemoryBank m_FromBank = null;
-        private MemoryAddress m_ToAddress = null;
-        private IMemoryBank m_ToBank = null;
+        private MemoryLocation m_From = null;
+        private MemoryLocation m_To = null;
 
         public OpLoadAddress(
-            MemoryAddress FromAddress, 
-            IMemoryBank FromBank, 
-            MemoryAddress ToAddress, 
-            IMemoryBank ToBank)
+            MemoryLocation From,
+            MemoryLocation To)
         {
-            m_FromAddress = FromAddress;
-            m_FromBank = FromBank;
-            m_ToAddress = ToAddress;
-            m_ToBank = ToBank;
+            m_From = From;
+            m_To = To;
         }
         public void Execute()
         {
-            m_ToBank.Store<T>(
-                m_FromBank.Load<T>(m_FromAddress), 
-                m_ToAddress
+            m_To.Bank.Store<T>(
+                m_From.Bank.Load<T>(m_From.Address), 
+                m_To.Address
             );
         }
     }

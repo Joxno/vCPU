@@ -11,19 +11,17 @@ namespace Core.Operations
     public class OpLoad<T> : IOperation where T : struct
     {
         private T m_Value = default;
-        private MemoryAddress m_Address = null;
-        private IMemoryBank m_Bank = null;
+        private MemoryLocation m_Destination = null;
 
-        public OpLoad(T Value, MemoryAddress Address, IMemoryBank Bank)
+        public OpLoad(T Value, MemoryLocation Destination)
         {
             m_Value = Value;
-            m_Address = Address;
-            m_Bank = Bank;
+            m_Destination = Destination;
         }
 
         public void Execute()
         {
-            m_Bank.Store<T>(m_Value, m_Address);
+            m_Destination.Bank.Store<T>(m_Value, m_Destination.Address);
         }
     }
 }

@@ -35,9 +35,12 @@ namespace Core.Operations.Converters
         {
             return new OpLoad<int>(
                 Data.Value,
-                new MemoryAddress(Data.MemoryAddress),
-                _LookupMemoryBank(new MemoryBankAddress(Data.BankAddress))
-                );
+                new MemoryLocation
+                (
+                    new MemoryAddress(Data.MemoryAddress),
+                    _LookupMemoryBank(new MemoryBankAddress(Data.BankAddress))
+                )
+            );
         }
 
         private IMemoryBank _LookupMemoryBank(MemoryBankAddress Address)

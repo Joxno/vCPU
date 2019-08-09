@@ -30,10 +30,10 @@ namespace Core.Operations.Converters
         {
             return new OpLoadAddress<int>
             (
-                new MemoryAddress(Data.FromAddress), 
-                _LookupMemoryBank(new MemoryBankAddress(Data.FromBankAddress)), 
-                new MemoryAddress(Data.ToAddress), 
-                _LookupMemoryBank(new MemoryBankAddress(Data.ToBankAddress))
+                new MemoryLocation(new MemoryAddress(Data.FromAddress),
+                    _LookupMemoryBank(new MemoryBankAddress(Data.FromBankAddress))), 
+                new MemoryLocation(new MemoryAddress(Data.ToAddress),
+                    _LookupMemoryBank(new MemoryBankAddress(Data.ToBankAddress)))
             );
         }
 

@@ -66,6 +66,8 @@
     <Compile Include="Interfaces\ITickable.cs" />
     <Compile Include="Models\MemoryAddress.cs" />
     <Compile Include="Models\MemoryBankAddress.cs" />
+    <Compile Include="Models\MemoryLocation.cs" />
+    <Compile Include="Operations\OpAdd.cs" />
     <Compile Include="Operations\Converters\NoOpConverter.cs" />
     <Compile Include="Operations\Converters\OpLoadAddressConverter.cs" />
     <Compile Include="Operations\Converters\OpLoadConverter.cs" />
