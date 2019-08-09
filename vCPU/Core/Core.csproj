@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\Clock.cs" />
     <Compile Include="Components\MemoryBank.cs" />
     <Compile Include="Components\MemoryUnit.cs" />
     <Compile Include="Components\OperationDTOReader.cs" />
@@ -55,12 +56,14 @@
     <Compile Include="Interfaces\IMemoryBank.cs" />
     <Compile Include="Interfaces\IMemoryBankService.cs" />
     <Compile Include="Interfaces\IMemoryUnit.cs" />
+    <Compile Include="Interfaces\IOscillator.cs" />
     <Compile Include="Interfaces\IOperation.cs" />
     <Compile Include="Components\CPU.cs" />
     <Compile Include="Interfaces\IOperationConverter.cs" />
     <Compile Include="Interfaces\IOperationDTOReader.cs" />
     <Compile Include="Interfaces\IOperationFetcher.cs" />
     <Compile Include="Interfaces\IOperationReader.cs" />
+    <Compile Include="Interfaces\ITickable.cs" />
     <Compile Include="Models\MemoryAddress.cs" />
     <Compile Include="Models\MemoryBankAddress.cs" />
     <Compile Include="Operations\Converters\NoOpConverter.cs" />
@@ -72,6 +75,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\MemoryBankService.cs" />
     <Compile Include="Utility\AnyConverter.cs" />
+    <Compile Include="Utility\Extensions\TimeSpanExtensions.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

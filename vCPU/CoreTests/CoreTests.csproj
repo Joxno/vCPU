@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CPUTests.cs" />
+    <Compile Include="Mocks\MockTickable.cs" />
     <Compile Include="OperationConverterTests.cs" />
     <Compile Include="OperationDTOReaderTests.cs" />
     <Compile Include="OperationDTOTests.cs" />
@@ -79,6 +80,8 @@
     <Compile Include="MemoryBankServiceTests.cs" />
     <Compile Include="MemoryAddressTests.cs" />
     <Compile Include="MemoryBankAddressTests.cs" />
+    <Compile Include="ClockTests.cs" />
+    <Compile Include="TimeSpanExtensionsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -89,6 +92,7 @@
       <Name>Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
