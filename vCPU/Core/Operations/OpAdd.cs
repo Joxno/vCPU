@@ -23,20 +23,10 @@ namespace Core.Operations
 
         public void Execute()
         {
-            var t_Value = _LoadValueFromLocation<int>(m_First) +
-                          _LoadValueFromLocation<int>(m_Second);
+            var t_Value = m_First.Load<int>() +
+                          m_Second.Load<int>();
 
-            _StoreValue(t_Value, m_Destination);
-        }
-
-        private T _LoadValueFromLocation<T>(MemoryLocation Location) where T : struct
-        {
-            return Location.Bank.Load<T>(Location.Address);
-        }
-
-        private void _StoreValue<T>(T Value, MemoryLocation Destination) where T : struct
-        {
-            Destination.Bank.Store(Value, Destination.Address);
+            m_Destination.Store(t_Value);
         }
     }
 }

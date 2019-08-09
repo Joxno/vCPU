@@ -21,7 +21,7 @@ namespace Core.Operations
 
         public void Execute()
         {
-            m_Destination.Bank.Store<T>(m_Value, m_Destination.Address);
+            m_Destination.Store(m_Value);
         }
     }
 }

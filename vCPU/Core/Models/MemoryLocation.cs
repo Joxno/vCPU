@@ -9,23 +9,23 @@ namespace Core.Models
 {
     public class MemoryLocation
     {
-        public MemoryAddress Address { get; private set; }
-        public IMemoryBank Bank { get; private set;  }
+        private MemoryAddress m_Address = null;
+        private IMemoryBank m_Bank = null;
 
         public MemoryLocation(MemoryAddress Address, IMemoryBank Bank)
         {
-            this.Address = Address;
-            this.Bank = Bank;
+            m_Address = Address;
+            m_Bank = Bank;
         }
 
         public T Load<T>() where T : struct
         {
-            return Bank.Load<T>(Address);
+            return m_Bank.Load<T>(m_Address);
         }
 
         public void Store<T>(T Value) where T : struct
         {
-            Bank.Store(Value, Address);
+            m_Bank.Store(Value, m_Address);
         }
 
 

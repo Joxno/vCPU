@@ -22,10 +22,7 @@ namespace Core.Operations
         }
         public void Execute()
         {
-            m_To.Bank.Store<T>(
-                m_From.Bank.Load<T>(m_From.Address), 
-                m_To.Address
-            );
+            m_To.Store(m_From.Load<T>());
         }
     }
 }
