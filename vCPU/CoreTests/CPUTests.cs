@@ -120,38 +120,6 @@ namespace CoreTests
             t_Value.Should().Be(10, "We queued a Load operation that should load the value 10 into memory.");
         }
 
-        [Test]
-        public void ExecuteLoadAddressOperation()
-        {
-            m_CPU.ExecuteOperation(new OpLoad<int>(5, new MemoryLocation(new MemoryAddress(0), m_Bank)));
-            m_CPU.ExecuteOperation(new OpLoadAddress<int>(new MemoryLocation(new MemoryAddress(0), m_Bank),
-                new MemoryLocation(new MemoryAddress(4), m_Bank)));
-            var t_Value = m_Bank.Load<int>(new MemoryAddress(4));
-
-            t_Value.Should().Be(5, "We loaded 5 into memory and copied data into a separate address and loaded from there.");
-        }
-
-        [Test]
-        public void ExecuteAddOperation()
-        {
-            m_Bank.Store(10, new MemoryAddress(0));
-            m_Bank.Store(20, new MemoryAddress(4));
-
-            m_CPU.ExecuteOperation
-            (
-                new OpAdd
-                (
-        new MemoryLocation(new MemoryAddress(0), m_Bank),
-        new MemoryLocation(new MemoryAddress(4), m_Bank),
-        new MemoryLocation(new MemoryAddress(8), m_Bank)
-                )
-            );
-
-            var t_Value = m_Bank.Load<int>(new MemoryAddress(8));
-
-            t_Value.Should().Be(30);
-        }
-
         [SetUp]
         public void InitializeTestVariables()
         {
