@@ -18,6 +18,16 @@ namespace Core.Models
             this.Bank = Bank;
         }
 
+        public T Load<T>() where T : struct
+        {
+            return Bank.Load<T>(Address);
+        }
+
+        public void Store<T>(T Value) where T : struct
+        {
+            Bank.Store(Value, Address);
+        }
+
 
     }
 }
