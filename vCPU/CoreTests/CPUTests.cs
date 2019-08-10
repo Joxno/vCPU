@@ -11,7 +11,7 @@ namespace CoreTests
     [TestFixture]
     public class CPUTests
     {
-        public ICPU m_CPU = null;
+        public CPU m_CPU = null;
         public IMemoryBank m_Bank = null;
 
         [Test]

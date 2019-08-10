@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 namespace Core.Components
 {
-    public class CPU : ICPU
+    public class CPU : ICPU, ITickable
     {
         private Queue<IOperation> m_OperationQueue = new Queue<IOperation>();
-        private bool m_Suspended = false;
 
         public int Ticks { get; private set; } = 0;
+        public bool IsSuspended { get; private set; } = false;
         public int ExecutedOperations { get; private set; } = 0;
         public int QueuedOperations => m_OperationQueue.Count;
 
@@ -44,29 +44,24 @@ namespace Core.Components
 
         public void Suspend()
         {
-            m_Suspended = true;
+            IsSuspended = true;
         }
 
         public void Resume()
         {
-            m_Suspended = false;
+            IsSuspended = false;
         }
 
         private bool _CanExecute()
         {
             return 
                 m_OperationQueue.Count > 0 &&
-                !_IsSuspended();
+                !IsSuspended;
         }
 
         private bool _CanDequeue()
         {
             return m_OperationQueue.Count > 0;
-        }
-
-        private bool _IsSuspended()
-        {
-            return m_Suspended;
         }
 
         private IOperation _RetrieveNextOperation()
