@@ -36,6 +36,12 @@ namespace Core.Components
             m_OperationQueue.Enqueue(Operation);
         }
 
+        public void Execute()
+        {
+            if (_CanDequeue())
+                ExecuteOperation(_RetrieveNextOperation());
+        }
+
         private void _DequeueAndExecuteOperation()
         {
             if (_CanExecute())

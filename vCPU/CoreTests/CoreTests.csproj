@@ -83,6 +83,7 @@
     <Compile Include="ClockTests.cs" />
     <Compile Include="TimeSpanExtensionsTests.cs" />
     <Compile Include="OperationsTests.cs" />
+    <Compile Include="CPUTickableTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

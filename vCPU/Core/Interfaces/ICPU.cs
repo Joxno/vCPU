@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 namespace Core.Interfaces
 {
     public interface ICPU
-    {
-        int Ticks { get; }
+    { 
         int ExecutedOperations { get; }
         int QueuedOperations { get; }
 
         void ExecuteOperation(IOperation Operation);
         void QueueOperation(IOperation Operation);
+        void Execute();
     }
 }

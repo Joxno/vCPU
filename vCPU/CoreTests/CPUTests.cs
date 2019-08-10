@@ -15,12 +15,12 @@ namespace CoreTests
         public IMemoryBank m_Bank = null;
 
         [Test]
-        public void TickCPU()
+        public void ExecuteSingleQueuedOperationCPU()
         {
-            m_CPU.Tick();
+            m_CPU.QueueOperation(new NoOp());
+            m_CPU.Execute();
 
-            var t_Counter = m_CPU.Ticks;
-            t_Counter.Should().Be(1, "We called Tick once.");
+            m_CPU.ExecutedOperations.Should().Be(1, "We queued a NoOp and called Execute once.");
         }
 
         [Test]
@@ -42,66 +42,6 @@ namespace CoreTests
         }
 
         [Test]
-        public void QueueAndExecuteOpCodeFromTick()
-        {
-            m_CPU.QueueOperation(new NoOp());
-            m_CPU.Tick();
-
-            m_CPU.QueuedOperations.Should().Be(0, "Tick should execute queued operation");
-            m_CPU.ExecutedOperations.Should().Be(1, "Tick should execute queued operation");
-        }
-
-        [Test]
-        public void SuspendCPU()
-        {
-            m_CPU.QueueOperation(new NoOp());
-            m_CPU.Suspend();
-            m_CPU.Tick();
-            m_CPU.QueuedOperations.Should().Be(1, "We suspended the CPU after queuing a NoOp");
-        }
-
-        [Test]
-        public void ExecuteOperationWhileCPUSuspended()
-        {
-            m_CPU.Suspend();
-            m_CPU.ExecuteOperation(new NoOp());
-            m_CPU.ExecutedOperations.Should().Be(1, "Suspensions should not have any affect on directly executed operations.");
-        }
-
-        [Test]
-        public void SuspendAndResumeCPU()
-        {
-            m_CPU.QueueOperation(new NoOp());
-            m_CPU.QueueOperation(new NoOp());
-            m_CPU.Suspend();
-            m_CPU.Tick();
-            m_CPU.Resume();
-            m_CPU.Tick();
-            m_CPU.QueuedOperations.Should().Be(1, "We resumed CPU after suspension and ticked once while CPU was active.");
-        }
-
-        [Test]
-        public void ForceTick()
-        {
-            m_CPU.QueueOperation(new NoOp());
-            m_CPU.Suspend();
-            m_CPU.ForceTick();
-
-            m_CPU.QueuedOperations.Should()
-                .Be(0, "We used a force tick which should force execution when CPU is suspended.");
-            m_CPU.ExecutedOperations.Should().Be(1);
-        }
-
-        [Test]
-        public void ForceTickWithNoQueuedOperations()
-        {
-            m_CPU.Suspend();
-            m_CPU.ForceTick();
-
-            m_CPU.ExecutedOperations.Should().Be(0, "We have not queued any operations before ForceTick call.");
-        }
-
-        [Test]
         public void ExecuteLoadValueOperation()
         {
             m_CPU.ExecuteOperation(new OpLoad<int>(5, new MemoryLocation(new MemoryAddress(0), m_Bank)));
@@ -111,13 +51,23 @@ namespace CoreTests
         }
 
         [Test]
-        public void QueueLoadValueOperationAndTick()
+        public void QueueAndExecuteAddValueOperation()
         {
-            m_CPU.QueueOperation(new OpLoad<int>(10, new MemoryLocation(new MemoryAddress(0), m_Bank)));
-            m_CPU.Tick();
-            var t_Value = m_Bank.Load<int>(new MemoryAddress(0));
+            m_Bank.Store(5, new MemoryAddress(0));
+            m_Bank.Store(15, new MemoryAddress(4));
+            m_CPU.QueueOperation(new OpAdd
+            (
+                new MemoryLocation(new MemoryAddress(0), m_Bank ),
+                new MemoryLocation(new MemoryAddress(4), m_Bank), 
+                new MemoryLocation(new MemoryAddress(8), m_Bank)
+            ));
 
-            t_Value.Should().Be(10, "We queued a Load operation that should load the value 10 into memory.");
+            m_CPU.Execute();
+
+            var t_Value = m_Bank.Load<int>(new MemoryAddress(8));
+
+            t_Value.Should().Be(20);
+            m_CPU.ExecutedOperations.Should().Be(1);
         }
 
         [SetUp]
