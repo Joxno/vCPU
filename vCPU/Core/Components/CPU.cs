@@ -26,8 +26,7 @@ namespace Core.Components
 
         public void ForceTick()
         {
-            if(_CanDequeue())
-                ExecuteOperation(_RetrieveNextOperation());
+            Execute();
             Ticks++;
         }
 

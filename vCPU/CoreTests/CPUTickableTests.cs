@@ -93,6 +93,17 @@ namespace CoreTests
             t_Value.Should().Be(10, "We queued a Load operation that should load the value 10 into memory.");
         }
 
+        [Test]
+        public void QueueOperationAndSuspendAndExecute()
+        {
+            m_CPU.QueueOperation(new NoOp());
+            m_CPU.Suspend();
+            m_CPU.Execute();
+
+            m_CPU.ExecutedOperations.Should().Be(1);
+            m_CPU.IsSuspended.Should().BeTrue();
+        }
+
         [SetUp]
         public void Initialize()
         {
