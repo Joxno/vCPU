@@ -42,15 +42,12 @@ namespace Core.Models
         public static bool operator ==(MemoryAddress A, MemoryAddress B)
         {
             if (ReferenceEquals(A, null))
-                return false;
-
-            if (ReferenceEquals(B, null))
-                return false;
+                return ReferenceEquals(B, null);
 
             if (ReferenceEquals(A, B))
                 return true;
 
-            return A.Value == B.Value;
+            return A.Equals(B);
         }
 
         public static bool operator !=(MemoryAddress A, MemoryAddress B)

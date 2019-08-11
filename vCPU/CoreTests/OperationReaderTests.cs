@@ -64,6 +64,17 @@ namespace CoreTests
         }
 
         [Test]
+        public void ReadInvalidOpCodeFromMemory()
+        {
+            var t_Bank = new MemoryBank(32);
+            t_Bank.Store(255, new MemoryAddress(0));
+
+            Action t_Invalid = () => m_Reader.ReadOperationFromMemory(new MemoryAddress(0), t_Bank);
+
+            t_Invalid.Should().Throw<UnknownOperation>();
+        }
+
+        [Test]
         public void ReadNoOpFromMemory()
         {
             var t_Bank = new MemoryBank(32);

@@ -58,19 +58,14 @@ namespace Core.Models
         }
 
         public static bool operator ==(MemoryLocation A, MemoryLocation B)
-        {
+        { 
             if (ReferenceEquals(A, null))
-                return false;
-
-            if (ReferenceEquals(B, null))
-                return false;
+                return ReferenceEquals(B, null);
 
             if (ReferenceEquals(A, B))
                 return true;
 
-            return
-                A.m_Address == B.m_Address &&
-                A.m_Bank == B.m_Bank;
+            return A.Equals(B);
         }
 
         public static bool operator !=(MemoryLocation A, MemoryLocation B)

@@ -47,6 +47,14 @@ namespace CoreTests
         }
 
         [Test]
+        public void EqualsSameInstance()
+        {
+            var t_FirstAddress = new MemoryAddress(0);
+            t_FirstAddress.Equals(t_FirstAddress)
+                .Should().BeTrue();
+        }
+
+        [Test]
         public void HashCode()
         {
             var t_FirstAddress = new MemoryAddress(0);
@@ -73,6 +81,34 @@ namespace CoreTests
             var t_SecondAddress = new MemoryAddress(1);
 
             (t_FirstAddress != t_SecondAddress)
+                .Should().BeTrue();
+        }
+
+        [Test]
+        public void OperatorEqualsSameInstance()
+        {
+            var t_Address = new MemoryAddress(0);
+
+            (t_Address == t_Address)
+                .Should().BeTrue();
+        }
+
+        [Test]
+        public void OperatorEqualsNull()
+        {
+            var t_Address = new MemoryAddress(0);
+
+            (t_Address == null)
+                .Should().BeFalse();
+        }
+
+        [Test]
+        public void OperatorBothInstancesEqualsNull()
+        {
+            MemoryAddress t_FirstAddress = null;
+            MemoryAddress t_SecondAddress = null;
+
+            (t_FirstAddress == t_SecondAddress)
                 .Should().BeTrue();
         }
 
