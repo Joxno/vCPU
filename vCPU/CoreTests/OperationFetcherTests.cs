@@ -22,7 +22,8 @@ namespace CoreTests
         public void SetCurrentAddress()
         {
             m_Fetcher.SetFetchAddress(new MemoryAddress(1), new MemoryBankAddress(0));
-            m_Fetcher.CurrentAddress.Should().Be(new MemoryAddress(1));
+            m_Fetcher.CurrentAddress
+                .Should().Be(new MemoryAddress(1));
         }
 
         [Test]
@@ -32,6 +33,32 @@ namespace CoreTests
             var t_Operation = m_Fetcher.FetchOperation();
 
             t_Operation.Should().BeOfType<NoOp>();
+        }
+
+        [Test]
+        public void FetchOperationFromInvalidMemory()
+        {
+            m_Fetcher.SetFetchAddress(new MemoryAddress(200), new MemoryBankAddress(0));
+            var t_Operation = m_Fetcher.FetchOperation();
+
+            t_Operation.Should().BeOfType<NoOp>();
+        }
+
+        [Test]
+        public void FetchOperationWithoutSettingAMemoryAddress()
+        {
+            var t_Operation = m_Fetcher.FetchOperation();
+            t_Operation.Should().BeOfType<NoOp>();
+        }
+
+        [Test]
+        public void FetchOperationShouldIncrementFetchAddress()
+        {
+            m_Fetcher.SetFetchAddress(new MemoryAddress(0), new MemoryBankAddress(0));
+            m_Fetcher.FetchOperation();
+
+            m_Fetcher.CurrentAddress
+                .Should().Be(new MemoryAddress(1));
         }
 
         [SetUp]

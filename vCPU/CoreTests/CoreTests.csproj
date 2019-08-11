@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CPUTests.cs" />
+    <Compile Include="Mocks\MockOperationConsumer.cs" />
     <Compile Include="Mocks\MockTickable.cs" />
     <Compile Include="OperationConverterTests.cs" />
     <Compile Include="OperationDTOReaderTests.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="TimeSpanExtensionsTests.cs" />
     <Compile Include="OperationsTests.cs" />
     <Compile Include="CPUTickableTests.cs" />
+    <Compile Include="OperationFeederTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

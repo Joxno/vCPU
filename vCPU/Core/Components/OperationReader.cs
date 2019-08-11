@@ -38,6 +38,12 @@ namespace Core.Components
             return ReadOperation(_ReadOperationDTOFromMemory(Address, Bank));
         }
 
+        public MemoryAddress ReadNextOperationAddress(MemoryAddress Address, IMemoryBank Bank)
+        {
+            var t_DTO = _ReadOperationDTOFromMemory(Address, Bank);
+            return Address + new MemoryAddress(t_DTO.Size);
+        }
+
         private IOperationConverter _RetrieveConverter(int Code)
         {
             return m_Converters[Code];

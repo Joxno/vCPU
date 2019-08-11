@@ -12,5 +12,6 @@ namespace Core.Interfaces
     {
         IOperation ReadOperation(OperationDTO DTO);
         IOperation ReadOperationFromMemory(MemoryAddress Address, IMemoryBank Bank);
+        MemoryAddress ReadNextOperationAddress(MemoryAddress Address, IMemoryBank Bank);
     }
 }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Models;
+using Core.Operations;
 
 namespace Core.Components
 {
@@ -23,13 +24,28 @@ namespace Core.Components
 
         public IOperation FetchOperation()
         {
-            return m_Reader.ReadOperationFromMemory(CurrentAddress, m_CurrentBank);
+            if (m_CurrentBank != null && m_CurrentBank.IsValid(CurrentAddress))
+                return _ReadOperation();
+
+            return new NoOp();
         }
 
         public void SetFetchAddress(MemoryAddress MemoryAddress, MemoryBankAddress BankAddress)
         {
             CurrentAddress = MemoryAddress;
             m_CurrentBank = m_BankService.ResolveAddress(BankAddress);
+        }
+
+        private IOperation _ReadOperation()
+        {
+            var t_Operation = m_Reader.ReadOperationFromMemory(CurrentAddress, m_CurrentBank);
+            _IncrementAddress();
+            return t_Operation;
+        }
+
+        private void _IncrementAddress()
+        {
+            CurrentAddress = m_Reader.ReadNextOperationAddress(CurrentAddress, m_CurrentBank);
         }
     }
 }

@@ -82,6 +82,18 @@ namespace CoreTests
             t_Operation.Should().BeOfType<OpLoad<int>>();
         }
 
+        [Test]
+        public void ReadNextOperationLocation()
+        {
+            var t_Bank = new MemoryBank(64);
+            _WriteOpLoadToBank(t_Bank);
+
+            var t_NextAddress = m_Reader.ReadNextOperationAddress(new MemoryAddress(0), t_Bank);
+
+            (t_NextAddress == new MemoryAddress(1 + 3 * 4))
+                .Should().BeTrue();
+        }
+
         [SetUp]
         public void Initialize()
         {
