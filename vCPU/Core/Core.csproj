@@ -67,6 +67,7 @@
     <Compile Include="Interfaces\IOperationFetcher.cs" />
     <Compile Include="Interfaces\IOperationReader.cs" />
     <Compile Include="Interfaces\ITickable.cs" />
+    <Compile Include="Models\MemoryLocationAddress.cs" />
     <Compile Include="Models\MemoryAddress.cs" />
     <Compile Include="Models\MemoryBankAddress.cs" />
     <Compile Include="Models\MemoryLocation.cs" />

@@ -16,85 +16,46 @@ namespace CoreTests
         private MockTickable m_Tickable = null;
 
         [Test]
-        public void TickClock()
+        public void SetFrequencyAndStartClock()
         {
             m_Clock.Add(m_Tickable);
 
-            m_Clock.Tick();
+            m_Clock.SetFrequency(new TimeSpan(0));
+            m_Clock.Start();
+            m_Clock.Oscillate();
 
             m_Tickable.Ticks
-                .Should().Be(1);
-            m_Clock.Ticks
                 .Should().Be(1);
         }
 
         [Test]
-        public void SuspendAndTickClock()
+        public void StartStopClock()
         {
             m_Clock.Add(m_Tickable);
 
-            m_Clock.Suspend();
-            m_Clock.Tick();
+            m_Clock.SetFrequency(new TimeSpan().FromMicroseconds(1000));
+            m_Clock.Start();
+            m_Clock.Stop();
+            m_Clock.Oscillate();
 
             m_Tickable.Ticks
                 .Should().Be(0);
-            m_Clock.IsSuspended
-                .Should().BeTrue();
         }
 
         [Test]
-        public void ForceTickClock()
+        public void AddAndRemoveTickable()
         {
-            m_Clock.Add(m_Tickable);
+            m_Clock.SetFrequency(new TimeSpan(0));
+            m_Clock.Start();
 
-            m_Clock.Suspend();
-            m_Clock.ForceTick();
-
-            m_Tickable.Ticks
-                .Should().Be(1);
-        }
-
-        [Test]
-        public void AddAndRemoveTickableAndTickClock()
-        {
             m_Clock.Add(m_Tickable);
             m_Clock.Remove(m_Tickable);
-            m_Clock.Tick();
+
+            m_Clock.Oscillate();
 
             m_Tickable.Ticks
                 .Should().Be(0);
-        }
 
-        [Test]
-        public void SuspendAndForceTick()
-        {
-            m_Clock.Add(m_Tickable);
-
-            m_Clock.Suspend();
-            m_Clock.ForceTick();
-
-            m_Tickable.Ticks
-                .Should().Be(1);
-        }
-
-        [Test]
-        public void SuspendTickAndResumeTick()
-        {
-            m_Clock.Add(m_Tickable);
-
-            m_Clock.Suspend();
-            m_Clock.Tick();
-            m_Clock.Resume();
-            m_Clock.Tick();
-
-            m_Tickable.Ticks
-                .Should().Be(1);
-        }
-
-        [Test]
-        public void SetClockSpeed()
-        {
-            m_Clock.SetFrequency(new TimeSpan().FromMicroseconds(1000));
         }
 
         [SetUp]

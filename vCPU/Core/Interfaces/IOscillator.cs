@@ -11,5 +11,8 @@ namespace Core.Interfaces
         void Add(ITickable Tickable);
         void Remove(ITickable Tickable);
         void SetFrequency(TimeSpan Time);
+        void Start();
+        void Stop();
+        void Oscillate();
     }
 }
