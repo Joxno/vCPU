@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Components\MemoryLocationAddressReader.cs" />
     <Compile Include="Components\Clock.cs" />
     <Compile Include="Components\MemoryBank.cs" />
     <Compile Include="Components\MemoryUnit.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="Exceptions\AddressOccupied.cs" />
     <Compile Include="Exceptions\AddressOutOfRange.cs" />
     <Compile Include="Exceptions\UnknownOperation.cs" />
+    <Compile Include="Interfaces\IMemoryLocationAddressReader.cs" />
     <Compile Include="Interfaces\IOperationConsumer.cs" />
     <Compile Include="Interfaces\ICPU.cs" />
     <Compile Include="Interfaces\IMemoryBank.cs" />

@@ -55,8 +55,9 @@ namespace CoreTests
 
             m_Tickable.Ticks
                 .Should().Be(0);
-
         }
+
+
 
         [SetUp]
         public void Initialize()
