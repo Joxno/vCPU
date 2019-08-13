@@ -66,7 +66,7 @@ namespace CoreTests
         public void ExecuteLoadIfZeroOperation()
         {
             var t_Destination = new MemoryLocation(new MemoryAddress(4), m_Bank);
-            new OpLoadIfZero<int>(5,
+            new OpLoadConstIfZero<int>(5,
                     t_Destination,
                     new MemoryLocation(new MemoryAddress(8), m_Bank))
                 .Execute();

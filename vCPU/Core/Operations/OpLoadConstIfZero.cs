@@ -8,13 +8,13 @@ using Core.Models;
 
 namespace Core.Operations
 {
-    public class OpLoadIfZero<T> : IOperation where T : struct
+    public class OpLoadConstIfZero<T> : IOperation where T : struct
     {
         private T m_Value = default;
         private MemoryLocation m_Destination = null;
         private MemoryLocation m_CompareLocation = null;
 
-        public OpLoadIfZero(T Value, MemoryLocation Destination, MemoryLocation CompareLocation)
+        public OpLoadConstIfZero(T Value, MemoryLocation Destination, MemoryLocation CompareLocation)
         {
             m_Value = Value;
             m_Destination = Destination;

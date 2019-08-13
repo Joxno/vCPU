@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Core.Components;
 using Core.DTO;
+using Core.Exceptions;
 using Core.Interfaces;
 using Core.Models;
 using Core.Operations;
@@ -19,11 +20,20 @@ namespace CoreTests
         private IMemoryBankService m_BankService = null;
 
         [Test]
-        public void SetCurrentAddress()
+        public void SetFetchFromAddress()
         {
+            m_BankService.ResolveAddress(new MemoryBankAddress(0))
+                .Store(5, new MemoryAddress(1));
+
             m_Fetcher.SetFetchFromAddress(new MemoryAddress(1), new MemoryBankAddress(0));
+
             m_Fetcher.FetchFromAddress
-                .Should().Be(new MemoryAddress(1));
+                .Should().Be(new MemoryAddress(1), "We set fetch address to 1.");
+            m_Fetcher.CurrentReadAddress
+                .Should().Be(new MemoryAddress(5), "We stored the address 1 in the FetchAddress location.");
+            m_Fetcher.NextReadAddress
+                .Should().Be(new MemoryAddress(6),
+                    "We stored the address 1 in the FetchAddress location and this should show the address of the next operation to be read.");
         }
 
         [Test]
@@ -36,12 +46,38 @@ namespace CoreTests
         }
 
         [Test]
-        public void FetchOperationFromInvalidMemory()
+        public void SetFetchAddressToInvalidMemory()
         {
-            m_Fetcher.SetFetchFromAddress(new MemoryAddress(200), new MemoryBankAddress(0));
-            var t_Operation = m_Fetcher.FetchOperation();
+            Action t_Invalid = () => m_Fetcher.SetFetchFromAddress(new MemoryAddress(200), new MemoryBankAddress(0));
 
-            t_Operation.Should().BeOfType<NoOp>();
+            t_Invalid.Should().Throw<AddressOutOfRange>();
+        }
+
+        [Test]
+        public void NextAddressInInvalidMemory()
+        {
+            m_BankService.ResolveAddress(new MemoryBankAddress(0))
+                .Store(127, new MemoryAddress(0));
+            m_Fetcher.SetFetchFromAddress(new MemoryAddress(0), new MemoryBankAddress(0));
+        }
+
+        [Test]
+        public void ReadUntilInvalidMemory()
+        {
+            var t_OpBank = new MemoryBank(1);
+            m_BankService.Attach(t_OpBank);
+
+            m_BankService.ResolveAddress(new MemoryBankAddress(0)).Store(1, new MemoryAddress(4));
+            m_Fetcher.SetFetchFromAddress(new MemoryAddress(0), new MemoryBankAddress(0));
+
+            Action t_InvalidMemory = () =>
+            {
+                m_Fetcher.FetchOperation();
+                m_Fetcher.FetchOperation();
+                m_Fetcher.FetchOperation();
+            };
+
+            t_InvalidMemory.Should().Throw<AddressOutOfRange>();
         }
 
         [Test]

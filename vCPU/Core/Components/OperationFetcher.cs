@@ -47,6 +47,15 @@ namespace Core.Components
         {
             FetchFromAddress = MemoryAddress;
             m_CurrentBank = _ResolveMemoryBank(BankAddress);
+            _SetReadAndNextLocations(MemoryAddress, BankAddress);
+        }
+
+        private IOperation _ReadOperation()
+        {
+            m_CurrentLocationAddress = _ReadLocation();
+            var t_Operation = _ReadOperationFromMemory(m_CurrentLocationAddress);
+            _IncrementAddress();
+            return t_Operation;
         }
 
         private IMemoryBank _ResolveMemoryBank(MemoryBankAddress Address)
@@ -54,17 +63,22 @@ namespace Core.Components
             return m_BankService.ResolveAddress(Address);
         }
 
-        private IOperation _ReadOperation()
+        private void _SetReadAndNextLocations(MemoryAddress Address, MemoryBankAddress BankAddress)
         {
-            m_CurrentLocationAddress = _ReadNextLocation();
-            var t_Operation = _ReadOperationFromMemory(m_CurrentLocationAddress);
-            _IncrementAddress();
-            return t_Operation;
+            m_CurrentLocationAddress = _ReadLocation();
+            m_NextLocationAddress = _ReadNextLocation();
+        }
+
+        private MemoryLocationAddress _ReadLocation()
+        {
+            return m_LocationReader.ReadLocationAddressFromMemory(FetchFromAddress, m_CurrentBank);
         }
 
         private MemoryLocationAddress _ReadNextLocation()
         {
-            return m_LocationReader.ReadLocationAddressFromMemory(FetchFromAddress, m_CurrentBank);
+            var t_Next = _ReadLocation();
+            t_Next.Address = _ReadNextOperationAddress(t_Next);
+            return t_Next;
         }
 
         private IOperation _ReadOperationFromMemory(MemoryLocationAddress LocationAddress)

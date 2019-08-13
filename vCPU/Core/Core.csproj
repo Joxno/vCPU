@@ -80,7 +80,7 @@
     <Compile Include="Operations\NoOp.cs" />
     <Compile Include="Operations\OpLoadConst.cs" />
     <Compile Include="Operations\OpLoad.cs" />
-    <Compile Include="Operations\OpLoadIfZero.cs" />
+    <Compile Include="Operations\OpLoadConstIfZero.cs" />
     <Compile Include="Operations\OpSub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\MemoryBankService.cs" />
