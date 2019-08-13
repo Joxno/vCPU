@@ -38,7 +38,7 @@ namespace CoreTests
                 0, 0, 0, 0
             }));
 
-            t_Operation.Should().BeOfType<OpLoad<int>>();
+            t_Operation.Should().BeOfType<OpLoadConst<int>>();
         }
 
         [Test]
@@ -52,7 +52,7 @@ namespace CoreTests
                 0, 0, 0, 0
             }));
 
-            t_Operation.Should().BeOfType<OpLoadAddress<int>>();
+            t_Operation.Should().BeOfType<OpLoad<int>>();
         }
 
         [Test]
@@ -90,7 +90,7 @@ namespace CoreTests
             _WriteOpLoadToBank(t_Bank);
             var t_Operation = m_Reader.ReadOperationFromMemory(new MemoryAddress(0), t_Bank);
 
-            t_Operation.Should().BeOfType<OpLoad<int>>();
+            t_Operation.Should().BeOfType<OpLoadConst<int>>();
         }
 
         [Test]

@@ -44,7 +44,7 @@ namespace CoreTests
         [Test]
         public void ExecuteLoadValueOperation()
         {
-            m_CPU.ExecuteOperation(new OpLoad<int>(5, new MemoryLocation(new MemoryAddress(0), m_Bank)));
+            m_CPU.ExecuteOperation(new OpLoadConst<int>(5, new MemoryLocation(new MemoryAddress(0), m_Bank)));
             var t_Value = m_Bank.Load<int>(new MemoryAddress(0));
 
             t_Value.Should().Be(5, "We executed a Load operation that should load the value 5 into memory.");

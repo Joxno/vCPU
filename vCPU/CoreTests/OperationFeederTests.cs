@@ -47,7 +47,7 @@ namespace CoreTests
 
         private IOperationFetcher _CreateFetcher(IMemoryBankService BankService)
         {
-            return new OperationFetcher(_CreateReader(), BankService);
+            return new OperationFetcher(_CreateReader(), BankService, new MemoryLocationAddressReader());
         }
 
         private IOperationReader _CreateReader()

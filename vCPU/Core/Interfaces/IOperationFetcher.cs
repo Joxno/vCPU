@@ -9,8 +9,10 @@ namespace Core.Interfaces
 {
     public interface IOperationFetcher
     {
-        void SetFetchAddress(MemoryAddress MemoryAddress, MemoryBankAddress BankAddress);
-        MemoryAddress CurrentAddress { get; }
+        void SetFetchFromAddress(MemoryAddress MemoryAddress, MemoryBankAddress BankAddress);
+        MemoryAddress FetchFromAddress { get; }
+        MemoryAddress NextReadAddress { get; }
+        MemoryAddress CurrentReadAddress { get; }
         IOperation FetchOperation();
     }
 }

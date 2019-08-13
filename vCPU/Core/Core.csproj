@@ -78,8 +78,8 @@
     <Compile Include="Operations\Converters\OpLoadAddressConverter.cs" />
     <Compile Include="Operations\Converters\OpLoadConverter.cs" />
     <Compile Include="Operations\NoOp.cs" />
+    <Compile Include="Operations\OpLoadConst.cs" />
     <Compile Include="Operations\OpLoad.cs" />
-    <Compile Include="Operations\OpLoadAddress.cs" />
     <Compile Include="Operations\OpLoadIfZero.cs" />
     <Compile Include="Operations\OpSub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

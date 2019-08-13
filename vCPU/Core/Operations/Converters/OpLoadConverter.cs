@@ -31,9 +31,9 @@ namespace Core.Operations.Converters
                 .ConvertBytesToValueType<OpLoadData>(DTO.Data);
         }
 
-        private OpLoad<int> _CreateOperation(OpLoadData Data)
+        private OpLoadConst<int> _CreateOperation(OpLoadData Data)
         {
-            return new OpLoad<int>(
+            return new OpLoadConst<int>(
                 Data.Value,
                 new MemoryLocation
                 (

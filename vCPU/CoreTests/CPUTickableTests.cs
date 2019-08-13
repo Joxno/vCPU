@@ -86,7 +86,7 @@ namespace CoreTests
         [Test]
         public void QueueLoadValueOperationAndTick()
         {
-            m_CPU.QueueOperation(new OpLoad<int>(10, new MemoryLocation(new MemoryAddress(0), m_Bank)));
+            m_CPU.QueueOperation(new OpLoadConst<int>(10, new MemoryLocation(new MemoryAddress(0), m_Bank)));
             m_CPU.Tick();
             var t_Value = m_Bank.Load<int>(new MemoryAddress(0));
 

@@ -10,18 +10,19 @@ namespace Core.Operations
 {
     public class OpLoad<T> : IOperation where T : struct
     {
-        private T m_Value = default;
-        private MemoryLocation m_Destination = null;
+        private MemoryLocation m_From = null;
+        private MemoryLocation m_To = null;
 
-        public OpLoad(T Value, MemoryLocation Destination)
+        public OpLoad(
+            MemoryLocation From,
+            MemoryLocation To)
         {
-            m_Value = Value;
-            m_Destination = Destination;
+            m_From = From;
+            m_To = To;
         }
-
         public void Execute()
         {
-            m_Destination.Store(m_Value);
+            m_To.Store(m_From.Load<T>());
         }
     }
 }

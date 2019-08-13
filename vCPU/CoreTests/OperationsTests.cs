@@ -15,10 +15,10 @@ namespace CoreTests
         [Test]
         public void ExecuteLoadAddressOperation()
         {
-            new OpLoad<int>(5, new MemoryLocation(new MemoryAddress(0), m_Bank))
+            new OpLoadConst<int>(5, new MemoryLocation(new MemoryAddress(0), m_Bank))
                 .Execute();
 
-            new OpLoadAddress<int>(new MemoryLocation(new MemoryAddress(0), m_Bank),
+            new OpLoad<int>(new MemoryLocation(new MemoryAddress(0), m_Bank),
                 new MemoryLocation(new MemoryAddress(4), m_Bank))
                 .Execute();
 

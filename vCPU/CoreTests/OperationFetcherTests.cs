@@ -21,15 +21,15 @@ namespace CoreTests
         [Test]
         public void SetCurrentAddress()
         {
-            m_Fetcher.SetFetchAddress(new MemoryAddress(1), new MemoryBankAddress(0));
-            m_Fetcher.CurrentAddress
+            m_Fetcher.SetFetchFromAddress(new MemoryAddress(1), new MemoryBankAddress(0));
+            m_Fetcher.FetchFromAddress
                 .Should().Be(new MemoryAddress(1));
         }
 
         [Test]
         public void FetchOperationFromMemory()
         {
-            m_Fetcher.SetFetchAddress(new MemoryAddress(0), new MemoryBankAddress(0));
+            m_Fetcher.SetFetchFromAddress(new MemoryAddress(0), new MemoryBankAddress(0));
             var t_Operation = m_Fetcher.FetchOperation();
 
             t_Operation.Should().BeOfType<NoOp>();
@@ -38,7 +38,7 @@ namespace CoreTests
         [Test]
         public void FetchOperationFromInvalidMemory()
         {
-            m_Fetcher.SetFetchAddress(new MemoryAddress(200), new MemoryBankAddress(0));
+            m_Fetcher.SetFetchFromAddress(new MemoryAddress(200), new MemoryBankAddress(0));
             var t_Operation = m_Fetcher.FetchOperation();
 
             t_Operation.Should().BeOfType<NoOp>();
@@ -52,20 +52,24 @@ namespace CoreTests
         }
 
         [Test]
-        public void FetchOperationShouldIncrementFetchAddress()
+        public void FetchOperationShouldIncrementAddressInFetchAddress()
         {
-            m_Fetcher.SetFetchAddress(new MemoryAddress(0), new MemoryBankAddress(0));
+            m_Fetcher.SetFetchFromAddress(new MemoryAddress(0), new MemoryBankAddress(0));
             m_Fetcher.FetchOperation();
 
-            m_Fetcher.CurrentAddress
+            m_Fetcher.FetchFromAddress
+                .Should().Be(new MemoryAddress(0));
+            m_Fetcher.NextReadAddress
                 .Should().Be(new MemoryAddress(1));
+            m_Fetcher.CurrentReadAddress
+                .Should().Be(new MemoryAddress(0));
         }
 
         [SetUp]
         public void Initialize()
         {
             m_BankService = new MemoryBankService(new List<IMemoryBank>() { _CreateMemoryBank() });
-            m_Fetcher = new OperationFetcher(_CreateReader(), m_BankService);
+            m_Fetcher = new OperationFetcher(_CreateReader(), m_BankService, new MemoryLocationAddressReader());
         }
 
         private IOperationReader _CreateReader()

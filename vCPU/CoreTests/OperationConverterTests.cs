@@ -36,7 +36,7 @@ namespace CoreTests
                 0, 0, 0, 0
             }));
 
-            t_LoadOp.Should().BeOfType<OpLoad<int>>();
+            t_LoadOp.Should().BeOfType<OpLoadConst<int>>();
         }
 
         [Test]
@@ -51,7 +51,7 @@ namespace CoreTests
                 0, 0, 0, 0,
             }));
 
-            t_LoadAddressOp.Should().BeOfType<OpLoadAddress<int>>();
+            t_LoadAddressOp.Should().BeOfType<OpLoad<int>>();
         }
 
         [SetUp]

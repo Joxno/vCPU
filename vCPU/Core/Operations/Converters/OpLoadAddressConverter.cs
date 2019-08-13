@@ -28,7 +28,7 @@ namespace Core.Operations.Converters
 
         private IOperation _CreateLoadAddressOperation(OpLoadAddressData Data)
         {
-            return new OpLoadAddress<int>
+            return new OpLoad<int>
             (
                 new MemoryLocation(new MemoryAddress(Data.FromAddress),
                     _LookupMemoryBank(new MemoryBankAddress(Data.FromBankAddress))), 
