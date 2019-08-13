@@ -28,7 +28,7 @@ namespace CoreTests
         [Test]
         public void ConvertLoadValueOp()
         {
-            var t_Converter = new OpLoadConverter(m_BankService);
+            var t_Converter = new OpLoadConstConverter(m_BankService);
             var t_LoadOp = t_Converter.Convert(new OperationDTO(1, new byte[] 
             {
                 10, 0, 0, 0,
@@ -42,7 +42,7 @@ namespace CoreTests
         [Test]
         public void ConvertLoadAddressOp()
         {
-            var t_Converter = new OpLoadAddressConverter(m_BankService);
+            var t_Converter = new OpLoadConverter(m_BankService);
             var t_LoadAddressOp = t_Converter.Convert(new OperationDTO(2, new byte[]
             {
                 0, 0, 0, 0,

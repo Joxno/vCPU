@@ -89,6 +89,7 @@
     <Compile Include="OperationFeederTests.cs" />
     <Compile Include="MemoryLocationAddressTests.cs" />
     <Compile Include="MemoryLocationAddressReaderTests.cs" />
+    <Compile Include="ArchitectureTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

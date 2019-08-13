@@ -55,6 +55,7 @@
     <Compile Include="Exceptions\AddressOutOfRange.cs" />
     <Compile Include="Exceptions\UnknownOperation.cs" />
     <Compile Include="Interfaces\IMemoryLocationAddressReader.cs" />
+    <Compile Include="Interfaces\IArchitecture.cs" />
     <Compile Include="Interfaces\IOperationConsumer.cs" />
     <Compile Include="Interfaces\ICPU.cs" />
     <Compile Include="Interfaces\IMemoryBank.cs" />
@@ -69,14 +70,15 @@
     <Compile Include="Interfaces\IOperationFetcher.cs" />
     <Compile Include="Interfaces\IOperationReader.cs" />
     <Compile Include="Interfaces\ITickable.cs" />
+    <Compile Include="Models\Architecture.cs" />
     <Compile Include="Models\MemoryLocationAddress.cs" />
     <Compile Include="Models\MemoryAddress.cs" />
     <Compile Include="Models\MemoryBankAddress.cs" />
     <Compile Include="Models\MemoryLocation.cs" />
     <Compile Include="Operations\OpAdd.cs" />
     <Compile Include="Operations\Converters\NoOpConverter.cs" />
-    <Compile Include="Operations\Converters\OpLoadAddressConverter.cs" />
     <Compile Include="Operations\Converters\OpLoadConverter.cs" />
+    <Compile Include="Operations\Converters\OpLoadConstConverter.cs" />
     <Compile Include="Operations\NoOp.cs" />
     <Compile Include="Operations\OpLoadConst.cs" />
     <Compile Include="Operations\OpLoad.cs" />

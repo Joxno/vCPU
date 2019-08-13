@@ -1,12 +1,12 @@
-﻿using Core.DTO;
-using Core.Interfaces;
-using Core.Models;
-using Core.Utility;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Core.DTO;
+using Core.Interfaces;
+using Core.Models;
+using Core.Utility;
 
 namespace Core.Operations.Converters
 {
@@ -15,32 +15,32 @@ namespace Core.Operations.Converters
         private AnyConverter m_Converter = new AnyConverter();
         private IMemoryBankService m_BankService = null;
 
-        public OpLoadConverter(IMemoryBankService Service)
+        public OpLoadConverter(IMemoryBankService BankService)
         {
-            m_BankService = Service;
+            m_BankService = BankService;
         }
 
         public IOperation Convert(OperationDTO DTO)
         {
-            return _CreateOperation(_ConvertDTOData(DTO));
+            return _CreateLoadAddressOperation(
+                _ConvertDTOData(DTO));
         }
 
-        private OpLoadData _ConvertDTOData(OperationDTO DTO)
+        private IOperation _CreateLoadAddressOperation(OpLoadAddressData Data)
+        {
+            return new OpLoad<int>
+            (
+                new MemoryLocation(new MemoryAddress(Data.FromAddress),
+                    _LookupMemoryBank(new MemoryBankAddress(Data.FromBankAddress))), 
+                new MemoryLocation(new MemoryAddress(Data.ToAddress),
+                    _LookupMemoryBank(new MemoryBankAddress(Data.ToBankAddress)))
+            );
+        }
+
+        private OpLoadAddressData _ConvertDTOData(OperationDTO DTO)
         {
             return m_Converter
-                .ConvertBytesToValueType<OpLoadData>(DTO.Data);
-        }
-
-        private OpLoadConst<int> _CreateOperation(OpLoadData Data)
-        {
-            return new OpLoadConst<int>(
-                Data.Value,
-                new MemoryLocation
-                (
-                    new MemoryAddress(Data.MemoryAddress),
-                    _LookupMemoryBank(new MemoryBankAddress(Data.BankAddress))
-                )
-            );
+                .ConvertBytesToValueType<OpLoadAddressData>(DTO.Data);
         }
 
         private IMemoryBank _LookupMemoryBank(MemoryBankAddress Address)
@@ -48,11 +48,12 @@ namespace Core.Operations.Converters
             return m_BankService.ResolveAddress(Address);
         }
 
-        internal struct OpLoadData
+        internal struct OpLoadAddressData
         {
-            public int Value;
-            public int MemoryAddress;
-            public int BankAddress;
+            public int FromAddress;
+            public int FromBankAddress;
+            public int ToAddress;
+            public int ToBankAddress;
         }
     }
 }

@@ -113,7 +113,7 @@ namespace CoreTests
             return new OperationReader(new Dictionary<int, IOperationConverter>
             {
                 { 0, new NoOpConverter() },
-                { 1, new OpLoadConverter(m_BankService) }
+                { 1, new OpLoadConstConverter(m_BankService) }
             }, 
             new OperationDTOReader(new List<OperationDefinition>
             {
