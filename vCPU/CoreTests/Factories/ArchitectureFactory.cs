@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Architecture.vCPU.Converters;
 using Core.DTO;
 using Core.Interfaces;
 using Core.Models;

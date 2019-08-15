@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Core.Interfaces;
 using Core.Models;
 
-namespace Core.Operations
+namespace Core.Architecture.vCPU.Operations
 {
     public class OpAdd : IOperation
     {

@@ -12,6 +12,7 @@ using Core.Models;
 using Core.Operations.Converters;
 using Core.Services;
 using CoreTests.Factories;
+using Core.Architecture.vCPU.Operations;
 
 namespace CoreTests
 {

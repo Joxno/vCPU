@@ -75,17 +75,8 @@
     <Compile Include="Models\MemoryAddress.cs" />
     <Compile Include="Models\MemoryBankAddress.cs" />
     <Compile Include="Models\MemoryLocation.cs" />
-    <Compile Include="Operations\Converters\OpAddConverter.cs" />
-    <Compile Include="Operations\Converters\OpSubConverter.cs" />
-    <Compile Include="Operations\OpAdd.cs" />
     <Compile Include="Operations\Converters\NoOpConverter.cs" />
-    <Compile Include="Operations\Converters\OpLoadConverter.cs" />
-    <Compile Include="Operations\Converters\OpLoadConstConverter.cs" />
     <Compile Include="Operations\NoOp.cs" />
-    <Compile Include="Operations\OpLoadConst.cs" />
-    <Compile Include="Operations\OpLoad.cs" />
-    <Compile Include="Operations\OpLoadConstIfZero.cs" />
-    <Compile Include="Operations\OpSub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\MemoryBankService.cs" />
     <Compile Include="Utility\ValueTypeConverter.cs" />

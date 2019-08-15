@@ -1,14 +1,14 @@
 ﻿using System;
+using Core.Architecture.vCPU.Operations;
 using Core.Components;
 using Core.Models;
-using Core.Operations;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace CoreTests
+namespace vCPUTests
 {
     [TestFixture]
-    public class OperationsTests
+    public class OperationTests
     {
         private MemoryBank m_Bank = null;
 

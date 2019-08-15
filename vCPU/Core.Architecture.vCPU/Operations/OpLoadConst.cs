@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Operations
+namespace Core.Architecture.vCPU.Operations
 {
     public class OpLoadConst<T> : IOperation where T : struct
     {

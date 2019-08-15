@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Core.Architecture.vCPU.Operations;
 using Core.DTO;
 using Core.Interfaces;
 using Core.Models;
 using Core.Utility;
 
-namespace Core.Operations.Converters
+namespace Core.Architecture.vCPU.Converters
 {
     public class OpAddConverter : IOperationConverter
     {
