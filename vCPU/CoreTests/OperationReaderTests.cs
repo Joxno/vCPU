@@ -110,17 +110,7 @@ namespace CoreTests
         public void Initialize()
         {
             m_BankService = new MemoryBankService(new List<IMemoryBank>() { new MemoryBank(32) });
-            m_Reader = new OperationReader(_CreateConverters(), _CreateReader());
-        }
-
-        private Dictionary<int, IOperationConverter> _CreateConverters()
-        {
-            return new Dictionary<int, IOperationConverter>
-            {
-                { 0, new NoOpConverter() },
-                { 1, new OpLoadConstConverter(m_BankService) },
-                { 2, new OpLoadConverter(m_BankService) }
-            };
+            m_Reader = new OperationReader(ArchitectureFactory.CreateArchitecture(m_BankService), _CreateReader());
         }
 
         private IOperationDTOReader _CreateReader()

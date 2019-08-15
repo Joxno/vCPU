@@ -53,10 +53,8 @@ namespace CoreTests
 
         private IOperationReader _CreateReader()
         {
-            return new OperationReader(new Dictionary<int, IOperationConverter>
-            {
-                { 0, new NoOpConverter() }
-            }, new OperationDTOReader(ArchitectureFactory.CreateArchitecture(m_BankService)) );
+            return new OperationReader(ArchitectureFactory.CreateArchitecture(m_BankService),
+                new OperationDTOReader(ArchitectureFactory.CreateArchitecture(m_BankService)));
         }
     }
 }
