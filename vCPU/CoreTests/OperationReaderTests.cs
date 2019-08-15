@@ -11,6 +11,7 @@ using Core.Exceptions;
 using Core.Models;
 using Core.Operations.Converters;
 using Core.Services;
+using CoreTests.Factories;
 
 namespace CoreTests
 {
@@ -124,11 +125,7 @@ namespace CoreTests
 
         private IOperationDTOReader _CreateReader()
         {
-            return new OperationDTOReader(new List<OperationDefinition>
-            {
-                new OperationDefinition(0, 0),
-                new OperationDefinition(1, 4*3)
-            });
+            return new OperationDTOReader(ArchitectureFactory.CreateArchitecture(m_BankService));
         }
 
         private void _WriteOpLoadToBank(IMemoryBank Bank)

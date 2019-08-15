@@ -11,11 +11,11 @@ namespace Core.Components
 {
     public class OperationDTOReader : IOperationDTOReader
     {
-        private Dictionary<byte, OperationDefinition> m_Definitions = new Dictionary<byte, OperationDefinition>();
+        private IArchitecture m_Arch = null;
 
-        public OperationDTOReader(List<OperationDefinition> Definitions)
+        public OperationDTOReader(IArchitecture Architecture)
         {
-            _InitializeDefinitions(Definitions);
+            m_Arch = Architecture;
         }
 
         public OperationDTO ReadMemory(MemoryAddress Address, IMemoryBank Bank)
@@ -26,18 +26,12 @@ namespace Core.Components
 
         public bool CanRead(byte OpCode)
         {
-            return m_Definitions.ContainsKey(OpCode);
-        }
-
-        private void _InitializeDefinitions(List<OperationDefinition> Definitions)
-        {
-            foreach (var t_Def in Definitions)
-                m_Definitions[t_Def.OpCode] = t_Def;
+            return m_Arch.HasDefinitionForCode(OpCode);
         }
 
         private OperationDefinition _LookupDefinition(byte OpCode)
         {
-            return m_Definitions[OpCode];
+            return m_Arch.GetDefinitionForCode(OpCode);
         }
 
         private byte _ReadOpCode(MemoryAddress Address, IMemoryBank Bank)

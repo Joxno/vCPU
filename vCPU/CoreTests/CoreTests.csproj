@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CPUTests.cs" />
+    <Compile Include="Factories\ArchitectureFactory.cs" />
     <Compile Include="MemoryLocationTests.cs" />
     <Compile Include="Mocks\MockOperationConsumer.cs" />
     <Compile Include="Mocks\MockTickable.cs" />

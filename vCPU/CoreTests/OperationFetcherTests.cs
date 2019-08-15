@@ -8,6 +8,7 @@ using Core.Models;
 using Core.Operations;
 using Core.Operations.Converters;
 using Core.Services;
+using CoreTests.Factories;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -115,11 +116,7 @@ namespace CoreTests
                 { 0, new NoOpConverter() },
                 { 1, new OpLoadConstConverter(m_BankService) }
             }, 
-            new OperationDTOReader(new List<OperationDefinition>
-            {
-                new OperationDefinition(0, 0),
-                new OperationDefinition(1, 3*4)
-            }) );
+            new OperationDTOReader(ArchitectureFactory.CreateArchitecture(m_BankService)) );
         }
 
         private IMemoryBank _CreateMemoryBank()

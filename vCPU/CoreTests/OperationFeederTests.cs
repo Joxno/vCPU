@@ -7,6 +7,7 @@ using Core.Interfaces;
 using Core.Operations;
 using Core.Operations.Converters;
 using Core.Services;
+using CoreTests.Factories;
 using CoreTests.Mocks;
 using FluentAssertions;
 using NUnit.Framework;
@@ -55,10 +56,7 @@ namespace CoreTests
             return new OperationReader(new Dictionary<int, IOperationConverter>
             {
                 { 0, new NoOpConverter() }
-            }, new OperationDTOReader(new List<OperationDefinition>
-            {
-                new OperationDefinition(0, 0)
-            }) );
+            }, new OperationDTOReader(ArchitectureFactory.CreateArchitecture(m_BankService)) );
         }
     }
 }
