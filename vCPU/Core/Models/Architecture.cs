@@ -13,10 +13,15 @@ namespace Core.Models
         private Dictionary<int, Tuple<IOperationConverter, OperationDefinition>> m_Operations =
             new Dictionary<int, Tuple<IOperationConverter, OperationDefinition>>();
 
+        public string Name { get; private set; }
+
         public Architecture(
+            string ArchitectureName,
             Dictionary<int, IOperationConverter> Converters, 
             List<OperationDefinition> Definitions)
         {
+            Name = ArchitectureName;
+
             _ExtractCodes(Definitions)
                 .ForEach(C =>
                     m_Operations[C] =

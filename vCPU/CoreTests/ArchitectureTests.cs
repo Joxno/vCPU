@@ -53,10 +53,17 @@ namespace CoreTests
                 .Should().BeTrue();
         }
 
+        [Test]
+        public void GetNameOfArchitecture()
+        {
+            m_Arch.Name
+                .Should().Be("Default");
+        }
+
         [SetUp]
         public void Initialize()
         {
-            m_Arch = new Architecture(new Dictionary<int, IOperationConverter>
+            m_Arch = new Architecture("Default", new Dictionary<int, IOperationConverter>
             {
                 { 0, new NoOpConverter() }
             },

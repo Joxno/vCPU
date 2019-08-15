@@ -16,6 +16,7 @@ namespace CoreTests.Factories
         {
             return new Architecture
             (
+                "TestArchitecture",
                 new Dictionary<int, IOperationConverter>
                 {
                     { 0, new NoOpConverter() },

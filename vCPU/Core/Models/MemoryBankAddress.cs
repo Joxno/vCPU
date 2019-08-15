@@ -17,9 +17,6 @@ namespace Core.Models
 
         public override bool Equals(object Obj)
         {
-            if (Obj == null)
-                return false;
-
             MemoryBankAddress Adr = Obj as MemoryBankAddress;
             if (Adr == null)
                 return false;
