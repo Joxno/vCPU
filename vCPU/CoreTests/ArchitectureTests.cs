@@ -39,6 +39,20 @@ namespace CoreTests
             t_Definition.Size.Should().Be(0);
         }
 
+        [Test]
+        public void HasConverterForCode()
+        {
+            m_Arch.HasConverterForCode(0)
+                .Should().BeTrue();
+        }
+
+        [Test]
+        public void HasDefinitionForCode()
+        {
+            m_Arch.HasDefinitionForCode(0)
+                .Should().BeTrue();
+        }
+
         [SetUp]
         public void Initialize()
         {

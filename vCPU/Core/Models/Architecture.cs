@@ -39,6 +39,16 @@ namespace Core.Models
             return m_Operations[Code].Item2;
         }
 
+        public bool HasConverterForCode(int Code)
+        {
+            return m_Operations.ContainsKey(Code);
+        }
+
+        public bool HasDefinitionForCode(int Code)
+        {
+            return m_Operations.ContainsKey(Code);
+        }
+
         private List<int> _ExtractCodes(List<OperationDefinition> Definitions)
         {
             return Definitions.Select(D => (int)D.OpCode).ToList();
