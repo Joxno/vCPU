@@ -58,7 +58,7 @@ namespace CoreTests
         public void ConvertAddOp()
         {
             var t_Converter = new OpAddConverter(m_BankService);
-            var t_LoadAddressOp = t_Converter.Convert(new OperationDTO(3, new byte[]
+            var t_AddOp = t_Converter.Convert(new OperationDTO(3, new byte[]
             {
                 0, 0, 0, 0,
                 0, 0, 0, 0,
@@ -68,7 +68,24 @@ namespace CoreTests
                 0, 0, 0, 0
             }));
 
-            t_LoadAddressOp.Should().BeOfType<OpAdd>();
+            t_AddOp.Should().BeOfType<OpAdd>();
+        }
+
+        [Test]
+        public void ConvertSubOp()
+        {
+            var t_Converter = new OpSubConverter(m_BankService);
+            var t_SubOp = t_Converter.Convert(new OperationDTO(4, new byte[]
+            {
+                0, 0, 0, 0,
+                0, 0, 0, 0,
+                0, 0, 0, 0,
+                0, 0, 0, 0,
+                0, 0, 0, 0,
+                0, 0, 0, 0
+            }));
+
+            t_SubOp.Should().BeOfType<OpSub>();
         }
 
         [SetUp]

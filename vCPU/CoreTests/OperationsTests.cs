@@ -13,10 +13,20 @@ namespace CoreTests
         private MemoryBank m_Bank = null;
 
         [Test]
-        public void ExecuteLoadAddressOperation()
+        public void ExecuteLoadConstOperation()
         {
             new OpLoadConst<int>(5, new MemoryLocation(new MemoryAddress(0), m_Bank))
                 .Execute();
+
+            var t_Value = m_Bank.Load<int>(new MemoryAddress(0));
+
+            t_Value.Should().Be(5, "We loaded the constant value of 5 into memory.");
+        }
+
+        [Test]
+        public void ExecuteLoadAddressOperation()
+        {
+            m_Bank.Store(5, new MemoryAddress(0));
 
             new OpLoad<int>(new MemoryLocation(new MemoryAddress(0), m_Bank),
                 new MemoryLocation(new MemoryAddress(4), m_Bank))
