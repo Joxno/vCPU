@@ -6,3 +6,4 @@ install:
 script:
     - msbuild /p:Configuration=Debug "./vCPU/vCPU.sln"
     - mono ./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./vCPU/CoreTests/bin/Debug/CoreTests.dll
+    - mono ./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./vCPU/CoreTests/bin/Debug/vCPUTests.dll
