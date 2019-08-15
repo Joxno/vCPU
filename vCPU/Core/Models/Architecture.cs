@@ -49,7 +49,7 @@ namespace Core.Models
             return m_Operations.ContainsKey(Code);
         }
 
-        private List<int> _ExtractCodes(List<OperationDefinition> Definitions)
+        private List<int> _ExtractCodes(IEnumerable<OperationDefinition> Definitions)
         {
             return Definitions.Select(D => (int)D.OpCode).ToList();
         }
