@@ -13,7 +13,7 @@ namespace Core.Components
 {
     public class MemoryBank : IMemoryBank
     {
-        private AnyConverter m_Converter = new AnyConverter();
+        private ValueTypeConverter m_Converter = new ValueTypeConverter();
         private List<MemoryUnit> m_Storage = new List<MemoryUnit>();
         private int m_Size;
 

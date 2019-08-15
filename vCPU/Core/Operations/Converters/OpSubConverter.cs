@@ -12,7 +12,7 @@ namespace Core.Operations.Converters
 {
     public class OpSubConverter : IOperationConverter
     {
-        private AnyConverter m_TypeConverter = new AnyConverter();
+        private ValueTypeConverter m_TypeConverter = new ValueTypeConverter();
         private IMemoryBankService m_BankService = null;
 
         public OpSubConverter(IMemoryBankService BankService)

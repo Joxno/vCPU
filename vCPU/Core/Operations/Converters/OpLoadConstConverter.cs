@@ -12,7 +12,7 @@ namespace Core.Operations.Converters
 {
     public class OpLoadConstConverter : IOperationConverter
     {
-        private AnyConverter m_Converter = new AnyConverter();
+        private ValueTypeConverter m_Converter = new ValueTypeConverter();
         private IMemoryBankService m_BankService = null;
 
         public OpLoadConstConverter(IMemoryBankService Service)

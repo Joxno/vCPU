@@ -12,7 +12,7 @@ namespace Core.Components
 {
     public class MemoryUnit : IMemoryUnit
     {
-        private AnyConverter m_Converter = new AnyConverter();
+        private ValueTypeConverter m_Converter = new ValueTypeConverter();
         private List<Byte> m_Storage = new List<byte>();
         private int m_Size = 0;
 

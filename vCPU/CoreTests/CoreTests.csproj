@@ -78,7 +78,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MemoryUnitTests.cs" />
     <Compile Include="MemoryBankTests.cs" />
-    <Compile Include="AnyConverterTests.cs" />
+    <Compile Include="ValueTypeConverterTests.cs" />
     <Compile Include="OperationFetcherTests.cs" />
     <Compile Include="MemoryBankServiceTests.cs" />
     <Compile Include="MemoryAddressTests.cs" />

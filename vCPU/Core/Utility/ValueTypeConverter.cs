@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Core.Utility
 {
-    public class AnyConverter
+    public class ValueTypeConverter
     {
         /* https://stackoverflow.com/a/3278956 */
         public Byte[] ConvertValueTypeToBytes<T>(T Value) where T : struct
@@ -23,7 +23,7 @@ namespace Core.Utility
             return t_Buffer;
         }
 
-        public T ConvertBytesToValueType<T>(Byte[] Bytes)
+        public T ConvertBytesToValueType<T>(Byte[] Bytes) where T : struct
         {
             int t_Size = Marshal.SizeOf(typeof(T));
             IntPtr t_Pointer = Marshal.AllocHGlobal(t_Size);
