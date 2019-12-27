@@ -5,8 +5,8 @@ namespace Core.Architecture.vCPU.Operations
 {
     public class OpLoadConst<T> : IOperation where T : struct
     {
-        private T m_Value = default;
-        private MemoryLocation m_Destination = null;
+        private readonly T m_Value = default;
+        private readonly MemoryLocation m_Destination = null;
 
         public OpLoadConst(T Value, MemoryLocation Destination)
         {

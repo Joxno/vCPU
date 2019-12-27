@@ -4,8 +4,8 @@ namespace Core.Models
 {
     public class MemoryLocation
     {
-        private MemoryAddress m_Address = null;
-        private IMemoryBank m_Bank = null;
+        private readonly MemoryAddress m_Address = null;
+        private readonly IMemoryBank m_Bank = null;
 
         public MemoryLocation(MemoryAddress Address, IMemoryBank Bank)
         {

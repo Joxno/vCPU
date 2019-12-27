@@ -8,7 +8,7 @@ namespace Core.Services
 {
     public class MemoryBankService : IMemoryBankService
     {
-        private Dictionary<MemoryBankAddress, IMemoryBank> m_Banks = new Dictionary<MemoryBankAddress, IMemoryBank>();
+        private readonly Dictionary<MemoryBankAddress, IMemoryBank> m_Banks = new Dictionary<MemoryBankAddress, IMemoryBank>();
 
         public MemoryBankService(List<IMemoryBank> Banks)
         {

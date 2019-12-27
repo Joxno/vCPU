@@ -6,7 +6,7 @@ namespace Core.Machine.Models
 {
     public class Machine : IMachine
     {
-        private IMemoryBankService m_BankService = null;
+        private readonly IMemoryBankService m_BankService = null;
         public bool IsRunning { get; private set; } = false;
         public bool IsSuspended { get; private set; } = false;
 

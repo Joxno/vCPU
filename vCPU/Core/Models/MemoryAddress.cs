@@ -2,7 +2,7 @@
 {
     public class MemoryAddress
     {
-        public int Value { get; private set; } = 0;
+        public int Value { get; } = 0;
         public MemoryAddress(int Address)
         {
             Value = Address;

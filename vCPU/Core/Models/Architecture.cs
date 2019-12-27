@@ -8,10 +8,10 @@ namespace Core.Models
 {
     public class Architecture : IArchitecture
     {
-        private Dictionary<int, Tuple<IOperationConverter, OperationDefinition>> m_Operations =
+        private readonly Dictionary<int, Tuple<IOperationConverter, OperationDefinition>> m_Operations =
             new Dictionary<int, Tuple<IOperationConverter, OperationDefinition>>();
 
-        public string Name { get; private set; }
+        public string Name { get; }
 
         public Architecture(
             string ArchitectureName,

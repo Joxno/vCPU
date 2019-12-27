@@ -8,8 +8,8 @@ namespace Core.Architecture.vCPU.Converters
 {
     public class OpAddConverter : IOperationConverter
     {
-        private ValueTypeConverter m_TypeConverter = new ValueTypeConverter();
-        private IMemoryBankService m_BankService = null;
+        private readonly ValueTypeConverter m_TypeConverter = new ValueTypeConverter();
+        private readonly IMemoryBankService m_BankService = null;
 
         public OpAddConverter(IMemoryBankService BankService)
         {

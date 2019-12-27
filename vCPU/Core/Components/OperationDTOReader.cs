@@ -7,7 +7,7 @@ namespace Core.Components
 {
     public class OperationDTOReader : IOperationDTOReader
     {
-        private IArchitecture m_Arch = null;
+        private readonly IArchitecture m_Arch = null;
 
         public OperationDTOReader(IArchitecture Architecture)
         {
@@ -50,7 +50,7 @@ namespace Core.Components
         {
             var t_CurrentAddress = Address;
             var t_Data = new List<byte>();
-            for (int i = 0; i < Count; i++, t_CurrentAddress = _IncrementAddress(t_CurrentAddress))
+            for (int t_I = 0; t_I < Count; t_I++, t_CurrentAddress = _IncrementAddress(t_CurrentAddress))
                 t_Data.Add(Bank.Load<byte>(t_CurrentAddress));
 
             return t_Data.ToArray();

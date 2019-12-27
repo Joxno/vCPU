@@ -5,8 +5,8 @@ namespace Core.Components
 {
     public class OperationFeeder : IOperationFeeder
     {
-        private List<IOperationConsumer> m_Consumers = new List<IOperationConsumer>();
-        private IOperationFetcher m_Fetcher = null;
+        private readonly List<IOperationConsumer> m_Consumers = new List<IOperationConsumer>();
+        private readonly IOperationFetcher m_Fetcher = null;
 
         public OperationFeeder(IOperationFetcher Fetcher)
         {

@@ -6,10 +6,10 @@ namespace Core.Components
 {
     public class OperationFetcher : IOperationFetcher
     {
-        private IOperationReader m_Reader = null;
-        private IMemoryBankService m_BankService = null;
+        private readonly IOperationReader m_Reader = null;
+        private readonly IMemoryBankService m_BankService = null;
         private IMemoryBank m_CurrentBank = null;
-        private IMemoryLocationAddressReader m_LocationReader = null;
+        private readonly IMemoryLocationAddressReader m_LocationReader = null;
 
         private MemoryLocationAddress m_NextLocationAddress =
             new MemoryLocationAddress(new MemoryAddress(0), new MemoryBankAddress(0));

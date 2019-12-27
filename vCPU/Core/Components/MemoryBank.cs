@@ -9,9 +9,9 @@ namespace Core.Components
 {
     public class MemoryBank : IMemoryBank
     {
-        private ValueTypeConverter m_Converter = new ValueTypeConverter();
-        private List<MemoryUnit> m_Storage = new List<MemoryUnit>();
-        private int m_Size;
+        private readonly ValueTypeConverter m_Converter = new ValueTypeConverter();
+        private readonly List<MemoryUnit> m_Storage = new List<MemoryUnit>();
+        private readonly int m_Size = 0;
 
         public int Size => m_Size;
         public MemoryBank(int Size)

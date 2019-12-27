@@ -5,7 +5,7 @@ namespace Core.Components
 {
     public class CPU : ICPU, ITickable
     {
-        private Queue<IOperation> m_OperationQueue = new Queue<IOperation>();
+        private readonly Queue<IOperation> m_OperationQueue = new Queue<IOperation>();
 
         public int Ticks { get; private set; } = 0;
         public bool IsSuspended { get; private set; } = false;

@@ -7,8 +7,8 @@ namespace Core.Components
 {
     public class OperationReader : IOperationReader
     {
-        private IArchitecture m_Arch = null;
-        private IOperationDTOReader m_DTOReader = null;
+        private readonly IArchitecture m_Arch = null;
+        private readonly IOperationDTOReader m_DTOReader = null;
         
         public OperationReader(IArchitecture Architecture,
             IOperationDTOReader OperationDTOReader)

@@ -5,9 +5,9 @@ namespace Core.Architecture.vCPU.Operations
 {
     public class OpLoadConstIfZero<T> : IOperation where T : struct
     {
-        private T m_Value = default;
-        private MemoryLocation m_Destination = null;
-        private MemoryLocation m_CompareLocation = null;
+        private readonly T m_Value = default;
+        private readonly MemoryLocation m_Destination = null;
+        private readonly MemoryLocation m_CompareLocation = null;
 
         public OpLoadConstIfZero(T Value, MemoryLocation Destination, MemoryLocation CompareLocation)
         {

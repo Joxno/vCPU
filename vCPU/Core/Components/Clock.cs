@@ -7,9 +7,9 @@ namespace Core.Components
 {
     public class Clock : IOscillator
     {
-        private List<ITickable> m_Tickables = new List<ITickable>();
+        private readonly List<ITickable> m_Tickables = new List<ITickable>();
         private TimeSpan m_Frequency = new TimeSpan(0);
-        private Stopwatch m_Stopwatch = new Stopwatch();
+        private readonly Stopwatch m_Stopwatch = new Stopwatch();
 
         public void Add(ITickable Tickable)
         {

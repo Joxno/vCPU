@@ -1,6 +1,5 @@
 ﻿using Core.Interfaces;
 using Core.Utility;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,8 +7,8 @@ namespace Core.Components
 {
     public class MemoryUnit : IMemoryUnit
     {
-        private ValueTypeConverter m_Converter = new ValueTypeConverter();
-        private List<Byte> m_Storage = new List<byte>();
+        private readonly ValueTypeConverter m_Converter = new ValueTypeConverter();
+        private List<byte> m_Storage = new List<byte>();
         private int m_Size = 0;
 
         public int Size => m_Size;
@@ -36,7 +35,7 @@ namespace Core.Components
         private void _InitializeStorage(int Size)
         {
             m_Size = Size;
-            for(int i = 0; i < m_Size; i++)
+            for(int t_I = 0; t_I < m_Size; t_I++)
                 m_Storage.Add(0);
         }
     }

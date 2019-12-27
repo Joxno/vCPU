@@ -5,9 +5,9 @@ namespace Core.Architecture.vCPU.Operations
 {
     public class OpSub : IOperation
     {
-        private MemoryLocation m_First = null;
-        private MemoryLocation m_Second = null;
-        private MemoryLocation m_Destination = null;
+        private readonly MemoryLocation m_First = null;
+        private readonly MemoryLocation m_Second = null;
+        private readonly MemoryLocation m_Destination = null;
 
         public OpSub(MemoryLocation FirstLocation, MemoryLocation SecondLocation, MemoryLocation DestinationLocation)
         {

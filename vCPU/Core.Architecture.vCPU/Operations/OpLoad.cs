@@ -5,8 +5,8 @@ namespace Core.Architecture.vCPU.Operations
 {
     public class OpLoad<T> : IOperation where T : struct
     {
-        private MemoryLocation m_From = null;
-        private MemoryLocation m_To = null;
+        private readonly MemoryLocation m_From = null;
+        private readonly MemoryLocation m_To = null;
 
         public OpLoad(
             MemoryLocation From,

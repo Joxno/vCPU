@@ -4,8 +4,8 @@ namespace Core.DTO
 {
     public class OperationDTO
     {
-        public byte OpCode { get; private set; } = 0;
-        public byte[] Data { get; private set; } = { };
+        public byte OpCode { get; } = 0;
+        public byte[] Data { get; } = { };
 
         public int Size => Marshal.SizeOf(OpCode) + 
                            ((Data == null || Data.Length == 0) ? 
