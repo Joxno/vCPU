@@ -1,87 +1,11 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A53F6BCD-C27B-4081-93B2-0BD5B308CF4A}</ProjectGuid>
+    <TargetFramework>net472</TargetFramework>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Core</RootNamespace>
-    <AssemblyName>Core</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <Deterministic>true</Deterministic>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Components\MemoryLocationAddressReader.cs" />
-    <Compile Include="Components\Clock.cs" />
-    <Compile Include="Components\MemoryBank.cs" />
-    <Compile Include="Components\MemoryUnit.cs" />
-    <Compile Include="Components\OperationDTOReader.cs" />
-    <Compile Include="Components\OperationFeeder.cs" />
-    <Compile Include="Components\OperationFetcher.cs" />
-    <Compile Include="Components\OperationReader.cs" />
-    <Compile Include="DTO\OperationDefinition.cs" />
-    <Compile Include="DTO\OperationDTO.cs" />
-    <Compile Include="Exceptions\AddressOccupied.cs" />
-    <Compile Include="Exceptions\AddressOutOfRange.cs" />
-    <Compile Include="Exceptions\UnknownOperation.cs" />
-    <Compile Include="Interfaces\IMemoryLocationAddressReader.cs" />
-    <Compile Include="Interfaces\IArchitecture.cs" />
-    <Compile Include="Interfaces\IOperationConsumer.cs" />
-    <Compile Include="Interfaces\ICPU.cs" />
-    <Compile Include="Interfaces\IMemoryBank.cs" />
-    <Compile Include="Interfaces\IMemoryBankService.cs" />
-    <Compile Include="Interfaces\IMemoryUnit.cs" />
-    <Compile Include="Interfaces\IOperationFeeder.cs" />
-    <Compile Include="Interfaces\IOscillator.cs" />
-    <Compile Include="Interfaces\IOperation.cs" />
-    <Compile Include="Components\CPU.cs" />
-    <Compile Include="Interfaces\IOperationConverter.cs" />
-    <Compile Include="Interfaces\IOperationDTOReader.cs" />
-    <Compile Include="Interfaces\IOperationFetcher.cs" />
-    <Compile Include="Interfaces\IOperationReader.cs" />
-    <Compile Include="Interfaces\ITickable.cs" />
-    <Compile Include="Models\Architecture.cs" />
-    <Compile Include="Models\MemoryLocationAddress.cs" />
-    <Compile Include="Models\MemoryAddress.cs" />
-    <Compile Include="Models\MemoryBankAddress.cs" />
-    <Compile Include="Models\MemoryLocation.cs" />
-    <Compile Include="Operations\Converters\NoOpConverter.cs" />
-    <Compile Include="Operations\NoOp.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\MemoryBankService.cs" />
-    <Compile Include="Utility\ValueTypeConverter.cs" />
-    <Compile Include="Utility\Extensions\TimeSpanExtensions.cs" />
-  </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
