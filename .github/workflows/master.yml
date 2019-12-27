@@ -24,8 +24,8 @@ jobs:
     - name: Sonarscanner for dotnet
       uses: Secbyte/dotnet-sonarscanner@v1.2
       with:
-        buildCommand: dotnet build .
-        testCommand: dotnet test .
+        buildCommand: dotnet build ./vCPU
+        testCommand: dotnet test ./vCPU
         projectKey: ${{ secrets.SONAR_PROJECT_KEY }}
         projectName: vCPU
         sonarOrganisation: ${{ secrets.SONAR_ORGANISATION }}
