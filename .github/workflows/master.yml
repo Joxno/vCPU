@@ -1,0 +1,36 @@
+name: OnPush
+
+on:
+  push:
+    branches: 
+      - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 3.1.100
+    - name: Build with dotnet
+      run: dotnet build ./vCPU --configuration Release
+    - name: Test with dotnet
+      run: dotnet test ./vCPU --configuration Release
+      
+    - name: Sonarscanner for dotnet
+      uses: Secbyte/dotnet-sonarscanner@v1.2
+      with:
+        buildCommand: dotnet build .
+        testCommand: dotnet test .
+        projectKey: ${{ secrets.SONAR_PROJECT_KEY }}
+        projectName: vCPU
+        sonarOrganisation: ${{ secrets.SONAR_ORGANISATION }}
+        beginArguments: /d:sonar.verbose="true" /d:sonar.cs.opencover.reportsPaths="/coverage.xml" /d:sonar.coverage.exclusions="**/*.cs"
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
