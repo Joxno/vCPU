@@ -2,8 +2,6 @@ language: csharp
 solution: "./vCPU/vCPU.sln"
 mono: none
 dotnet: 3.1.100
-install:
-    - nuget restore "./vCPU/vCPU.sln"
 script:
     - dotnet build ./vCPU
     - dotnet test ./vCPU
