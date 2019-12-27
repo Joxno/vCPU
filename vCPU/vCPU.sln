@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{A53F6BCD-C27B-4081-93B2-0BD5B308CF4A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{A53F6BCD-C27B-4081-93B2-0BD5B308CF4A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreTests", "CoreTests\CoreTests.csproj", "{38A492E7-EE2C-4265-BDBF-647B11AF9CDE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreTests", "CoreTests\CoreTests.csproj", "{38A492E7-EE2C-4265-BDBF-647B11AF9CDE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Architecture.vCPU", "Core.Architecture.vCPU\Core.Architecture.vCPU.csproj", "{6E50CB5C-C734-4FBC-BAD7-FF80CE5829F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Architecture.vCPU", "Core.Architecture.vCPU\Core.Architecture.vCPU.csproj", "{6E50CB5C-C734-4FBC-BAD7-FF80CE5829F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vCPUTests", "vCPUTests\vCPUTests.csproj", "{70D1499B-2FB7-41D2-AD74-5643FBFF7257}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "vCPUTests", "vCPUTests\vCPUTests.csproj", "{70D1499B-2FB7-41D2-AD74-5643FBFF7257}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Machine", "Core.Machine\Core.Machine.csproj", "{56E283F2-DC8E-4037-A139-E6751504F518}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Machine", "Core.Machine\Core.Machine.csproj", "{56E283F2-DC8E-4037-A139-E6751504F518}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MachineTests", "MachineTests\MachineTests.csproj", "{33262D79-5F31-48FC-B812-F89F4E7AD125}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MachineTests", "MachineTests\MachineTests.csproj", "{33262D79-5F31-48FC-B812-F89F4E7AD125}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
