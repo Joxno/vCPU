@@ -1,5 +1,4 @@
-﻿using System;
-using Core.DTO;
+﻿using Core.DTO;
 using FluentAssertions;
 using NUnit.Framework;
 

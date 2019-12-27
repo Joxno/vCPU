@@ -1,11 +1,9 @@
 ﻿using System;
 using Core.Components;
-using Core.Interfaces;
 using Core.Utility.Extensions;
 using CoreTests.Mocks;
 using FluentAssertions;
 using NUnit.Framework;
-using Moq;
 
 namespace CoreTests
 {

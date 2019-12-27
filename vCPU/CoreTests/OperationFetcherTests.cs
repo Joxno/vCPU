@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using Core.Components;
-using Core.DTO;
 using Core.Exceptions;
 using Core.Interfaces;
 using Core.Models;
 using Core.Operations;
-using Core.Operations.Converters;
 using Core.Services;
 using CoreTests.Factories;
 using FluentAssertions;

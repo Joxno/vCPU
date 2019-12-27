@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Core.Architecture.vCPU.Architecture;
 using Core.Interfaces;
 using Core.Services;

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Core.Components;
-using Core.DTO;
 using Core.Interfaces;
 using Core.Operations;
-using Core.Operations.Converters;
 using Core.Services;
 using CoreTests.Factories;
 using CoreTests.Mocks;

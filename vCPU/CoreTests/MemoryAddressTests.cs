@@ -1,5 +1,4 @@
-﻿using System;
-using Core.Models;
+﻿using Core.Models;
 using FluentAssertions;
 using NUnit.Framework;
 

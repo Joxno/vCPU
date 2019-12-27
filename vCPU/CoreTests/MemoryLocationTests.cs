@@ -1,5 +1,4 @@
-﻿using System;
-using Core.Components;
+﻿using Core.Components;
 using Core.Interfaces;
 using Core.Models;
 using FluentAssertions;

@@ -1,9 +1,4 @@
 ﻿using Core.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Core.Models;
 using Core.Operations;
 
@@ -101,7 +96,7 @@ namespace Core.Components
 
         private void _WriteNextAddress(MemoryAddress Address)
         {
-            m_CurrentBank.Store<int>(Address.Value, FetchFromAddress);
+            m_CurrentBank.Store(Address.Value, FetchFromAddress);
         }
     }
 }

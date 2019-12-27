@@ -64,7 +64,7 @@ namespace CoreTests
         public void StoreValueOutOfRangeAddress()
         {
             var t_Bank = new MemoryBank(100);
-            Action t_StoreAction = () => t_Bank.Store<int>(10, new MemoryAddress(200));
+            Action t_StoreAction = () => t_Bank.Store(10, new MemoryAddress(200));
             t_StoreAction.Should().Throw<AddressOutOfRange>();
         }
     }

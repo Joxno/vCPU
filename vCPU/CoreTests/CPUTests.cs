@@ -1,5 +1,4 @@
-﻿using System;
-using Core.Architecture.vCPU.Operations;
+﻿using Core.Architecture.vCPU.Operations;
 using Core.Components;
 using Core.Interfaces;
 using NUnit.Framework;

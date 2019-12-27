@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Text;
 using System.Collections.Generic;
 using NUnit.Framework;
 using Core.Interfaces;
@@ -9,7 +8,6 @@ using Core.Operations;
 using Core.DTO;
 using Core.Exceptions;
 using Core.Models;
-using Core.Operations.Converters;
 using Core.Services;
 using CoreTests.Factories;
 using Core.Architecture.vCPU.Operations;

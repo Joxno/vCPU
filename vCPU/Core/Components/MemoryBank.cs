@@ -2,12 +2,8 @@
 using Core.Interfaces;
 using Core.Models;
 using Core.Utility;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.Components
 {
@@ -28,7 +24,7 @@ namespace Core.Components
         {
             _HandleOutOfRange(Address);
             var t_Index = _TranslateAddressToIndex(Address);
-            var t_BytesToStore = m_Converter.ConvertValueTypeToBytes<T>(Value);
+            var t_BytesToStore = m_Converter.ConvertValueTypeToBytes(Value);
             _MapAndStoreBytes(t_BytesToStore, t_Index);
         }
 
@@ -60,7 +56,7 @@ namespace Core.Components
         {
             var t_EndIndex = Index + Data.Length;
             for (int i = Index, j = 0; i < t_EndIndex; i++, j++)
-                m_Storage[i].Store<byte>(Data[j]);
+                m_Storage[i].Store(Data[j]);
         }
 
         private byte[] _MapAndLoadBytes(int Index, int Size)
