@@ -25,7 +25,7 @@ jobs:
       uses: Secbyte/dotnet-sonarscanner@v1.2
       with:
         buildCommand: dotnet build ./vCPU
-        testCommand: dotnet test ./vCPU
+        testCommand: dotnet test ./vCPU --collect:"Code Coverage"
         projectKey: ${{ secrets.SONAR_PROJECT_KEY }}
         projectName: vCPU
         sonarOrganisation: ${{ secrets.SONAR_ORGANISATION }}
