@@ -123,6 +123,53 @@ namespace CoreTests
             .BeTrue();
         }
 
+        [Test]
+        public void CompareToSameLocation()
+        {
+            var t_Location = new MemoryLocation(new MemoryAddress(0), m_Bank);
+
+            t_Location
+                .CompareTo(t_Location)
+                .Should()
+                .Be(0);
+        }
+
+        [Test]
+        public void CompareToSameBankLowerAddress()
+        {
+            var t_Lower = new MemoryLocation(new MemoryAddress(0), m_Bank);
+            var t_Higher = new MemoryLocation(new MemoryAddress(10), m_Bank);
+
+            t_Higher
+                .CompareTo(t_Lower)
+                .Should()
+                .Be(1);
+        }
+
+        [Test]
+        public void CompareToSameBankHigherAddress()
+        {
+            var t_Lower = new MemoryLocation(new MemoryAddress(0), m_Bank);
+            var t_Higher = new MemoryLocation(new MemoryAddress(10), m_Bank);
+
+            t_Lower
+                .CompareTo(t_Higher)
+                .Should()
+                .Be(-1);
+        }
+
+        [Test]
+        public void CompareToOutsideBank()
+        {
+            var t_OtherBank = new MemoryLocation(new MemoryAddress(0), null);
+            var t_DefaultBank = new MemoryLocation(new MemoryAddress(10), m_Bank);
+
+            t_OtherBank
+                .CompareTo(t_DefaultBank)
+                .Should()
+                .Be(-1);
+        }
+
         [SetUp]
         public void Initialize()
         {

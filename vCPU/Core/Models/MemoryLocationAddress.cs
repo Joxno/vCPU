@@ -1,6 +1,8 @@
-﻿namespace Core.Models
+﻿using System;
+
+namespace Core.Models
 {
-    public class MemoryLocationAddress
+    public class MemoryLocationAddress : IComparable<MemoryLocationAddress>
     {
         public MemoryAddress Address { get; set; }
         public MemoryBankAddress BankAddress { get; set; }
@@ -56,5 +58,16 @@
             return !(A == B);
         }
 
+        public int CompareTo(MemoryLocationAddress Other)
+        {
+            if (this == Other)
+                return 0;
+
+            if (this.BankAddress == Other.BankAddress &&
+                this.Address.Value > Other.Address.Value)
+                return 1;
+
+            return -1;
+        }
     }
 }

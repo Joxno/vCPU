@@ -121,5 +121,38 @@ namespace CoreTests
             t_Address.Value.Should().Be(3);
             t_Address.Equals(t_CompareAddress).Should().BeTrue();
         }
+
+        [Test]
+        public void CompareToSameAddress()
+        {
+            var t_Address = new MemoryAddress(0);
+
+            t_Address
+                .CompareTo(t_Address)
+                .Should()
+                .Be(0);
+        }
+
+        [Test]
+        public void CompareToHigherAddress()
+        {
+            var t_Address = new MemoryAddress(0);
+
+            t_Address
+                .CompareTo(new MemoryAddress(10))
+                .Should()
+                .Be(-1);
+        }
+
+        [Test]
+        public void CompareToLowerAddress()
+        {
+            var t_Address = new MemoryAddress(10);
+
+            t_Address
+                .CompareTo(new MemoryAddress(0))
+                .Should()
+                .Be(1);
+        }
     }
 }

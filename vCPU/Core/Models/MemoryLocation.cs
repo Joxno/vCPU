@@ -1,8 +1,9 @@
-﻿using Core.Interfaces;
+﻿using System;
+using Core.Interfaces;
 
 namespace Core.Models
 {
-    public class MemoryLocation
+    public class MemoryLocation : IComparable<MemoryLocation>
     {
         private readonly MemoryAddress m_Address = null;
         private readonly IMemoryBank m_Bank = null;
@@ -69,5 +70,16 @@ namespace Core.Models
         }
 
 
+        public int CompareTo(MemoryLocation Other)
+        {
+            if (this == Other)
+                return 0;
+
+            if (this.m_Bank == Other.m_Bank &&
+                this.m_Address.Value > Other.m_Address.Value)
+                return 1;
+
+            return -1;
+        }
     }
 }

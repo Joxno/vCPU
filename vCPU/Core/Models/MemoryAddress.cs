@@ -1,6 +1,8 @@
-﻿namespace Core.Models
+﻿using System;
+
+namespace Core.Models
 {
-    public class MemoryAddress
+    public class MemoryAddress : IComparable<MemoryAddress>
     {
         public int Value { get; } = 0;
         public MemoryAddress(int Address)
@@ -52,6 +54,17 @@
         public static MemoryAddress operator +(MemoryAddress A, MemoryAddress B)
         {
             return new MemoryAddress(A.Value + B.Value);
+        }
+
+        public int CompareTo(MemoryAddress Other)
+        {
+            if (this == Other)
+                return 0;
+
+            if (this.Value > Other.Value)
+                return 1;
+
+            return -1;
         }
     }
 }
