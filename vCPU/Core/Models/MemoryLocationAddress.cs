@@ -4,8 +4,8 @@ namespace Core.Models
 {
     public class MemoryLocationAddress : IComparable<MemoryLocationAddress>
     {
-        public MemoryAddress Address { get; set; }
-        public MemoryBankAddress BankAddress { get; set; }
+        public MemoryAddress Address { get; }
+        public MemoryBankAddress BankAddress { get; }
         
         public MemoryLocationAddress(MemoryAddress Address, MemoryBankAddress BankAddress)
         {

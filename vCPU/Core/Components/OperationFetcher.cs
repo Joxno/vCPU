@@ -72,8 +72,9 @@ namespace Core.Components
         private MemoryLocationAddress _ReadNextLocation()
         {
             var t_Next = _ReadLocation();
-            t_Next.Address = _ReadNextOperationAddress(t_Next);
-            return t_Next;
+            return new MemoryLocationAddress(
+                _ReadNextOperationAddress(t_Next), 
+                t_Next.BankAddress);
         }
 
         private IOperation _ReadOperationFromMemory(MemoryLocationAddress LocationAddress)
@@ -84,7 +85,10 @@ namespace Core.Components
 
         private void _IncrementAddress()
         {
-            m_NextLocationAddress.Address = _ReadNextOperationAddress(m_CurrentLocationAddress);
+            m_NextLocationAddress = new MemoryLocationAddress(
+                _ReadNextOperationAddress(m_CurrentLocationAddress), 
+                m_NextLocationAddress.BankAddress
+            );
             _WriteNextAddress(NextReadAddress);
         }
 
