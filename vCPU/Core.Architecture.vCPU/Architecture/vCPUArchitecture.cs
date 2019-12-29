@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Core.Architecture.vCPU.Converters;
 using Core.DTO;
 using Core.Interfaces;
 using Core.Operations.Converters;
@@ -16,7 +17,11 @@ namespace Core.Architecture.vCPU.Architecture
         {
             return new Dictionary<int, IOperationConverter>
             {
-                { 0, new NoOpConverter() }
+                { 0, new NoOpConverter() },
+                { 1, new OpAddConverter(BankService) },
+                { 5, new OpSubConverter(BankService) },
+                { 10, new OpLoadConstConverter(BankService) },
+                { 11, new OpLoadConverter(BankService) }
             };
         }
 

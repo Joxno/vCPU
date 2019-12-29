@@ -1,4 +1,5 @@
-﻿using Core.Architecture.vCPU.Operations;
+﻿using Core.Architecture.vCPU.DTO;
+using Core.Architecture.vCPU.Operations;
 using Core.DTO;
 using Core.Interfaces;
 using Core.Models;
@@ -42,14 +43,6 @@ namespace Core.Architecture.vCPU.Converters
         private IMemoryBank _LookupMemoryBank(MemoryBankAddress Address)
         {
             return m_BankService.ResolveAddress(Address);
-        }
-
-        internal struct OpLoadAddressData
-        {
-            public int FromAddress;
-            public int FromBankAddress;
-            public int ToAddress;
-            public int ToBankAddress;
         }
     }
 }
