@@ -12,7 +12,8 @@ namespace CoreTests
         {
             var t_DTO = new OperationDTO(0, new byte[] { });
 
-            t_DTO.Size.Should().Be(1);
+            t_DTO.TotalSize.Should().Be(1);
+            t_DTO.DataSize.Should().Be(0);
         }
 
         [Test]
@@ -25,7 +26,8 @@ namespace CoreTests
                 0, 0, 0, 0
             });
 
-            t_DTO.Size.Should().Be(1 + 4 * 3);
+            t_DTO.TotalSize.Should().Be(1 + 4 * 3);
+            t_DTO.DataSize.Should().Be(4 * 3);
         }
     }
 }

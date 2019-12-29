@@ -40,9 +40,9 @@ namespace Core.Components
             return new OperationDTO
             (
                 Definition.OpCode,
-                Definition.Size == 0 ? 
+                Definition.DataSize == 0 ? 
                 new byte[] {} :
-                _ReadData(Definition.Size, Address + new MemoryAddress(1), Bank)
+                _ReadData(Definition.DataSize, Address + new MemoryAddress(1), Bank)
             );
         }
 

@@ -35,7 +35,7 @@ namespace Core.Components
         public MemoryAddress ReadNextOperationAddress(MemoryAddress Address, IMemoryBank Bank)
         {
             var t_DTO = _ReadOperationDTOFromMemory(Address, Bank);
-            return Address + new MemoryAddress(t_DTO.Size);
+            return Address + new MemoryAddress(t_DTO.TotalSize);
         }
 
         private IOperationConverter _RetrieveConverter(int Code)

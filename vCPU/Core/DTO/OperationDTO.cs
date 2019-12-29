@@ -7,10 +7,11 @@ namespace Core.DTO
         public byte OpCode { get; } = 0;
         public byte[] Data { get; } = { };
 
-        public int Size => Marshal.SizeOf(OpCode) + 
+        public int TotalSize => Marshal.SizeOf(OpCode) + 
                            ((Data == null || Data.Length == 0) ? 
                            0 : 
                            Data.Length);
+        public int DataSize => (Data == null || Data.Length == 0) ? 0 : Data.Length;
 
         public OperationDTO(byte Code, byte[] OperationData)
         {
