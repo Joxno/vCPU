@@ -11,5 +11,6 @@ namespace Core.Machine.Interfaces
         void Suspend();
         void Resume();
         byte InspectMemory(MemoryLocationAddress AddressLocation);
+        T InspectMemory<T>(MemoryLocationAddress AddressLocation) where T : struct;
     }
 }

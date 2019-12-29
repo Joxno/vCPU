@@ -35,7 +35,7 @@ namespace CoreTests
             var t_Definition = m_Arch.GetDefinitionForCode(0);
 
             t_Definition.OpCode.Should().Be(0);
-            t_Definition.Size.Should().Be(0);
+            t_Definition.DataSize.Should().Be(0);
         }
 
         [Test]

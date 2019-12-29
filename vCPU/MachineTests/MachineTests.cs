@@ -16,6 +16,8 @@ namespace MachineTests
         private IMachine m_Machine = null;
         private IMemoryBankService m_BankService = null;
         private IMemoryBank m_Bank = null;
+        private ICPU m_CPU = null;
+        private IOscillator m_Oscillator = null;
 
         [Test]
         public void CheckIfMachineIsRunning()
@@ -80,16 +82,29 @@ namespace MachineTests
             t_Value.Should().Be(5);
         }
 
+        [Test]
+        public void InspectMemoryInt()
+        {
+            m_Bank.Store<int>(10, new MemoryAddress(0));
+
+            var t_Value =
+                m_Machine.InspectMemory<int>(new MemoryLocationAddress(new MemoryAddress(0), new MemoryBankAddress(0)));
+
+            t_Value.Should().Be(10);
+        }
+
 
         [SetUp]
         public void Initialize()
         {
+            m_Oscillator = new Clock();
+            m_CPU = new CPU();
             m_Bank = new MemoryBank(512);
             m_BankService = new MemoryBankService(new List<IMemoryBank>
             {
                 m_Bank
             });
-            m_Machine = new Machine(m_BankService);
+            m_Machine = new Machine(m_CPU, m_Oscillator, m_BankService);
         }
 
     }
