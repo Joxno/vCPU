@@ -55,6 +55,16 @@ namespace CoreTests
                 .Should().Be(0);
         }
 
+        [Test]
+        public void OscillateOnDefaultValuesWhenNotStarted()
+        {
+            m_Clock.Add(m_Tickable);
+            m_Clock.Oscillate();
+
+            m_Tickable.Ticks
+                .Should().Be(1);
+        }
+
 
 
         [SetUp]

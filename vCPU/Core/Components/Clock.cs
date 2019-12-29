@@ -55,7 +55,7 @@ namespace Core.Components
 
         private bool _CheckElapsedTimeAndReset()
         {
-            if (m_Stopwatch.ElapsedTicks > m_Frequency.Ticks)
+            if (m_Stopwatch.ElapsedTicks >= m_Frequency.Ticks)
             {
                 m_Stopwatch.Restart();
                 return true;
