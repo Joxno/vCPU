@@ -1,5 +1,5 @@
 # vCPU
-![Github Build Status](https://github.com/Joxno/vCPU/workflows/OnPush/badge.svg)
+![Github Build Status](https://github.com/Joxno/vCPU/workflows/master/badge.svg)
 ![Travis Build Status](https://travis-ci.org/Joxno/vCPU.svg?branch=master)
 ![Coverity Scan](https://scan.coverity.com/projects/18940/badge.svg)
 ## Description
