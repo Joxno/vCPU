@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Runtime.Serialization;
 using Core.DTO;
 
 namespace Core.Exceptions
 {
+    [Serializable]
     public class UnknownOperation : Exception
     {
         public UnknownOperation(OperationDTO DTO) 
@@ -15,6 +17,10 @@ namespace Core.Exceptions
             : base($"Unknown Operation with Code: {OpCode}")
         {
 
+        }
+
+        protected UnknownOperation(SerializationInfo Info, StreamingContext Context) : base(Info, Context)
+        {
         }
     }
 }
