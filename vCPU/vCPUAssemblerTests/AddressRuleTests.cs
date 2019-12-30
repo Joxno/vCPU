@@ -35,5 +35,23 @@ namespace vCPUAssemblerTests
                 .Should()
                 .Be("RAM");
         }
+
+        [Test]
+        public void ParseInvalidBankAddress()
+        {
+            var t_Rule = new BankAddressRule();
+            var t_Expression = t_Rule.Match(new Stack<Token>
+            (
+                new List<Token>()
+                {
+                    new Token(TokenType.Operator, "+")
+                }
+            ));
+
+            t_Expression
+                .HasError()
+                .Should()
+                .BeTrue();
+        }
     }
 }

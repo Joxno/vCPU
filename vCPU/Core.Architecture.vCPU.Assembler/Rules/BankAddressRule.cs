@@ -9,51 +9,17 @@ using Core.Utility;
 
 namespace Core.Architecture.vCPU.Assembler.Rules
 {
-    public class BankAddressRule : IParseRule
+    public class BankAddressRule : BaseRule
     {
-        private static readonly List<Token> Pattern = new List<Token>()
+        protected override List<Token> _GetPattern()
         {
-            new Token(TokenType.Identifier, null)
-        };
-
-        public Either<IExpression> Match(Stack<Token> Tokens)
-        {
-            var t_Tokens = _PopAndMatch(new Stack<Token>(Pattern), new Stack<Token>(Tokens.ToArray()));
-
-            if (t_Tokens.HasError())
-                return new Exception("Unable to find Match", t_Tokens.Error);
-
-            return _CreateExpression(t_Tokens.Value);
-        }
-
-        private Either<IEnumerable<Token>> _PopAndMatch(Stack<Token> PatternTokens, Stack<Token> Tokens)
-        {
-            var t_Tokens = new List<Token>();
-            while (PatternTokens.Count != 0)
+            return new List<Token>()
             {
-                var t_PatternToken = PatternTokens.Pop();
-                var t_Token = Tokens.Pop();
-
-                if (!_CompareTokens(t_PatternToken, t_Token))
-                    return new Exception("Pattern Tokens do not match input Tokens.", 
-                        new Exception($"Expected: {t_PatternToken.Type} {t_PatternToken.Text} Found: {t_Token.Type} {t_Token.Text}"));
-
-                t_Tokens.Add(t_Token);
-            }
-
-            return t_Tokens;
+                new Token(TokenType.Identifier, null)
+            };
         }
 
-        private bool _CompareTokens(Token PatternToken, Token InputToken)
-        {
-            if (PatternToken.Type == InputToken.Type &&
-                (PatternToken.Text == null || 
-                 PatternToken.Text == InputToken.Text))
-                return true;
-            return false;
-        }
-
-        private Either<IExpression> _CreateExpression(IEnumerable<Token> Tokens)
+        protected override Either<IExpression> _CreateExpression(IEnumerable<Token> Tokens)
         {
             return new BankAddressExpression
             {
