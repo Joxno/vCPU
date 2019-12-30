@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Core.Utility
 {
@@ -12,7 +10,6 @@ namespace Core.Utility
             throw new Exception("Either does not contain an Error");
 
         private readonly T m_Value = default;
-
         public T Value => !HasError() ? 
             m_Value : 
             throw new Exception("Unable to access value due to Either containing an Error");
