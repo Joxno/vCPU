@@ -10,7 +10,7 @@ namespace Core.Architecture.vCPU.Assembler.Services
 {
     public class RegexTokenizer : ITokenizer
     {
-        private IEnumerable<TokenPattern> m_Patterns = null;
+        private readonly IEnumerable<TokenPattern> m_Patterns = null;
 
         public RegexTokenizer(IEnumerable<TokenPattern> Patterns)
         {
@@ -77,7 +77,7 @@ namespace Core.Architecture.vCPU.Assembler.Services
         {
             return Patterns
                 .Select(P => Regex.IsMatch(Text, P.Pattern))
-                .Count(R => R == true);
+                .Count(R => R);
         }
 
         private TokenPattern _GetMatch(string Text, IEnumerable<TokenPattern> Patterns)
