@@ -8,6 +8,7 @@ namespace Core.Architecture.vCPU.Assembler.Rules
 {
     public class BaseRule : IParseRule
     {
+        public bool Repeat { get; } = false;
 
         public virtual Either<IExpression> Match(Stack<Token> Tokens)
         {

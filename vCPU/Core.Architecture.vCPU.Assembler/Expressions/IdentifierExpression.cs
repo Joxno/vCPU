@@ -3,8 +3,8 @@ using Core.Architecture.vCPU.Assembler.Models;
 
 namespace Core.Architecture.vCPU.Assembler.Expressions
 {
-    public class BankAddressExpression : IExpression
+    public class IdentifierExpression : IExpression
     {
-        public Token BankAddress { get; set; } = null;
+        public Token Identifier { get; set; } = null;
     }
 }

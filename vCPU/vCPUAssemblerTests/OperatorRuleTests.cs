@@ -8,17 +8,17 @@ using NUnit.Framework;
 namespace vCPUAssemblerTests
 {
     [TestFixture]
-    public class AddressRuleTests
+    public class OperatorRuleTests
     {
         [Test]
-        public void ParseBankAddress()
+        public void ParseMinusOperator()
         {
-            var t_Rule = new BankAddressRule();
+            var t_Rule = new OperatorRule();
             var t_Expression = t_Rule.Match(new Stack<Token>
             (
                 new List<Token>()
                 {
-                    new Token(TokenType.Identifier, "RAM")
+                    new Token(TokenType.Operator, "-")
                 }
             ));
 
@@ -26,32 +26,44 @@ namespace vCPUAssemblerTests
                 .HasError()
                 .Should()
                 .BeFalse();
+
             t_Expression.Value
                 .Should()
-                .BeOfType<BankAddressExpression>();
-            ((BankAddressExpression) t_Expression.Value)
-                .BankAddress
+                .BeOfType<OperatorExpression>();
+
+            ((OperatorExpression)t_Expression.Value)
+                .Operator
                 .Text
                 .Should()
-                .Be("RAM");
+                .Be("-");
         }
 
         [Test]
-        public void ParseInvalidBankAddress()
+        public void ParseSpecificOperator()
         {
-            var t_Rule = new BankAddressRule();
+            var t_Rule = new OperatorRule("::");
             var t_Expression = t_Rule.Match(new Stack<Token>
             (
                 new List<Token>()
                 {
-                    new Token(TokenType.Operator, "+")
+                    new Token(TokenType.Operator, "::")
                 }
             ));
 
             t_Expression
                 .HasError()
                 .Should()
-                .BeTrue();
+                .BeFalse();
+
+            t_Expression.Value
+                .Should()
+                .BeOfType<OperatorExpression>();
+
+            ((OperatorExpression)t_Expression.Value)
+                .Operator
+                .Text
+                .Should()
+                .Be("::");
         }
     }
 }
