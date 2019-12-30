@@ -42,7 +42,7 @@ namespace Core.Components
         {
             FetchFromAddress = MemoryAddress;
             m_CurrentBank = _ResolveMemoryBank(BankAddress);
-            _SetReadAndNextLocations(MemoryAddress, BankAddress);
+            _SetReadAndNextLocations();
         }
 
         private IOperation _ReadOperation()
@@ -58,7 +58,7 @@ namespace Core.Components
             return m_BankService.ResolveAddress(Address);
         }
 
-        private void _SetReadAndNextLocations(MemoryAddress Address, MemoryBankAddress BankAddress)
+        private void _SetReadAndNextLocations()
         {
             m_CurrentLocationAddress = _ReadLocation();
             m_NextLocationAddress = _ReadNextLocation();
