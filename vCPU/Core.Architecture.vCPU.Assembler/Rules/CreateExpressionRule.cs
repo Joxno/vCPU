@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using Core.Architecture.vCPU.Assembler.Interface;
 using Core.Architecture.vCPU.Assembler.Models;
+using Core.Architecture.vCPU.Assembler.Utility;
 using Core.Utility;
 
 namespace Core.Architecture.vCPU.Assembler.Rules
@@ -60,25 +61,9 @@ namespace Core.Architecture.vCPU.Assembler.Rules
             IParseState OldState, IParseState NewState)
         {
             return Try.Call(() => CreateFunc(
-                _DiffTokens(OldState, NewState),
-                _DiffExpressions(OldState, NewState))
+                OldState.DiffTokens(NewState),
+                NewState.DiffExpressions(OldState))
             );
-        }
-
-        private IEnumerable<Token> _DiffTokens(IParseState OldState, IParseState NewState)
-        {
-            return NewState.Tokens.Count == 0 ?
-                OldState.Tokens :
-                OldState.Tokens.ToList().Except(
-                NewState.Tokens.ToList());
-        }
-
-        private IEnumerable<IExpression> _DiffExpressions(IParseState OldState, IParseState NewState)
-        {
-            return OldState.Expressions.Count() == 0 ?
-                NewState.Expressions :
-                NewState.Expressions.Except(
-                OldState.Expressions);
         }
     }
 }
