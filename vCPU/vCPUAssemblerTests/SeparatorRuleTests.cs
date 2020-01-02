@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using Core.Architecture.vCPU.Assembler.Expressions;
 using Core.Architecture.vCPU.Assembler.Models;
 using Core.Architecture.vCPU.Assembler.Rules;

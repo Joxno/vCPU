@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using Core.Architecture.vCPU.Assembler.Interface;
-using Core.Architecture.vCPU.Assembler.Models;
 using Core.Utility;
-using Core.Utility.Extensions;
 
 namespace Core.Architecture.vCPU.Assembler.Rules
 {
     public class MultiAttemptRule : IParseRule
     {
-        private IEnumerable<IParseRule> m_Rules = null;
+        private readonly IEnumerable<IParseRule> m_Rules = null;
 
         public MultiAttemptRule(IEnumerable<IParseRule> Rules)
         {

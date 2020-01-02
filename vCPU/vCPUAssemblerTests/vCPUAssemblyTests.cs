@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Core.Architecture.vCPU.Assembler.Expressions;
 using Core.Architecture.vCPU.Assembler.Interface;
 using Core.Architecture.vCPU.Assembler.Models;
 using Core.Architecture.vCPU.Assembler.Rules;
-using Core.Architecture.vCPU.Assembler.Utility;
-using Core.Utility.Extensions;
 using FluentAssertions;
 using NUnit.Framework;
 using static vCPUAssemblerTests.Factories.StateFactory;

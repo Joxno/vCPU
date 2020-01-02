@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using Core.Architecture.vCPU.Assembler.Models;
-using Core.Utility;
+﻿using Core.Utility;
 
 namespace Core.Architecture.vCPU.Assembler.Interface
 {

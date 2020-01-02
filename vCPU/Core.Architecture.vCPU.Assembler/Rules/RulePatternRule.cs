@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using Core.Architecture.vCPU.Assembler.Expressions;
 using Core.Architecture.vCPU.Assembler.Interface;
-using Core.Architecture.vCPU.Assembler.Models;
 using Core.Utility;
-using Core.Utility.Extensions;
 
 namespace Core.Architecture.vCPU.Assembler.Rules
 {
@@ -20,7 +16,6 @@ namespace Core.Architecture.vCPU.Assembler.Rules
 
         public virtual Either<IParseState> Match(IParseState State)
         {
-            var t_CurrentExpressions = new List<IExpression>();
             var t_CurrentState = State;
             foreach (var t_Rule in m_Rules)
             {

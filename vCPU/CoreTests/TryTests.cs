@@ -11,10 +11,7 @@ namespace CoreTests
         [Test]
         public void TestCallThrow()
         {
-            var t_Result = Try.Call(() =>
-            {
-                throw new Exception("Test");
-            });
+            var t_Result = Try.Call(() => throw new Exception("Test"));
 
             t_Result.HasError().Should().BeTrue();
         }

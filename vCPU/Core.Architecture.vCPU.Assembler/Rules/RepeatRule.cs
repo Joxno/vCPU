@@ -1,11 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using Core.Architecture.vCPU.Assembler.Interface;
-using Core.Architecture.vCPU.Assembler.Models;
 using Core.Utility;
-using Core.Utility.Extensions;
 
 namespace Core.Architecture.vCPU.Assembler.Rules
 {
@@ -40,7 +37,6 @@ namespace Core.Architecture.vCPU.Assembler.Rules
 
         protected virtual Either<IParseState> _MatchRules(IParseState State)
         {
-            var t_CurrentExpressions = new List<IExpression>();
             var t_CurrentState = State;
             foreach (var t_Rule in m_Rules)
             {

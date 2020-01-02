@@ -7,8 +7,8 @@ namespace Core.Architecture.vCPU.Assembler.Models
 {
     public class ParseState : IParseState
     {
-        private Stack<Token> m_Tokens = new Stack<Token>();
-        private IEnumerable<IExpression> m_Expressions = new List<IExpression>();
+        private readonly Stack<Token> m_Tokens = new Stack<Token>();
+        private readonly IEnumerable<IExpression> m_Expressions = new List<IExpression>();
 
         public ParseState()
         {

@@ -13,7 +13,7 @@ namespace vCPUAssemblerTests
         [Test]
         public void CreateCopyOfState()
         {
-            var t_State = new ParseState(
+            IParseState t_State = new ParseState(
                 new List<Token> { new Token(TokenType.Keyword, "*") }.ToStack(),
                 new List<IExpression>{});
 
@@ -28,7 +28,7 @@ namespace vCPUAssemblerTests
         [Test]
         public void CreateEmptyState()
         {
-            var t_State = new ParseState();
+            IParseState t_State = new ParseState();
 
             t_State.Expressions.Should().NotBeNull();
             t_State.Tokens.Should().NotBeNull();

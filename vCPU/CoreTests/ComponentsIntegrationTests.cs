@@ -4,7 +4,6 @@ using Core.Components;
 using Core.DTO;
 using Core.Interfaces;
 using Core.Models;
-using Core.Operations;
 using Core.Services;
 using FluentAssertions;
 using NUnit.Framework;

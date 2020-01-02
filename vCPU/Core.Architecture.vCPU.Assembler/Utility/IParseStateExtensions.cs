@@ -19,7 +19,7 @@ namespace Core.Architecture.vCPU.Assembler.Utility
         public static IEnumerable<IExpression> DiffExpressions(this IParseState State, IParseState OtherState)
         {
             return
-                OtherState.Expressions.Count() == 0 ?
+                !OtherState.Expressions.Any() ?
                 State.Expressions :
                 State.Expressions.Except(
                 OtherState.Expressions);
