@@ -13,13 +13,10 @@ namespace Core.Architecture.vCPU.Assembler.Rules
     {
         protected IEnumerable<IParseRule> m_Rules = null;
 
-        public RulePatternRule(IEnumerable<IParseRule> Rules, bool Repeat = false)
+        public RulePatternRule(IEnumerable<IParseRule> Rules)
         {
             m_Rules = Rules;
-            this.Repeat = Repeat;
         }
-
-        public bool Repeat { get; } = false;
 
         public virtual Either<IParseState> Match(IParseState State)
         {
@@ -27,16 +24,11 @@ namespace Core.Architecture.vCPU.Assembler.Rules
             var t_CurrentState = State;
             foreach (var t_Rule in m_Rules)
             {
-                do
-                {
-                    var t_MatchData = _MatchRule(t_Rule, t_CurrentState);
-                    if (t_MatchData.HasError() && t_Rule.Repeat)
-                        break;
-                    if (t_MatchData.HasError())
-                        return new Exception("Rule Match Error", t_MatchData.Error);
+                var t_MatchData = _MatchRule(t_Rule, t_CurrentState);
+                if (t_MatchData.HasError())
+                    return new Exception("Rule Match Error", t_MatchData.Error);
 
-                    t_CurrentState = t_MatchData.Value;
-                } while (t_Rule.Repeat);
+                t_CurrentState = t_MatchData.Value;
             }
 
             return new Either<IParseState>(t_CurrentState);

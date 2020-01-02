@@ -6,7 +6,6 @@ namespace Core.Architecture.vCPU.Assembler.Interface
 {
     public interface IParseRule
     {
-        public bool Repeat { get; }
         Either<IParseState> Match(IParseState State);
     }
 }

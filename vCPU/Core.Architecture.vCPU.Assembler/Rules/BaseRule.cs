@@ -12,7 +12,6 @@ namespace Core.Architecture.vCPU.Assembler.Rules
     {
         protected readonly List<Token> m_Pattern = new List<Token>();
         protected readonly Func<IEnumerable<Token>, IExpression> m_CreateExpression = null;
-        public bool Repeat { get; } = false;
 
         public BaseRule()
         {

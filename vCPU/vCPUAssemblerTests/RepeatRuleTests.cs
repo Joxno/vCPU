@@ -55,7 +55,7 @@ namespace vCPUAssemblerTests
                     new OperatorRule("^")
                 }),
                 new NumericalLiteralRule()
-            }, true);
+            });
 
             var t_PatternRule = new RulePatternRule(new List<IParseRule>
             {

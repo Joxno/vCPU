@@ -11,7 +11,12 @@ namespace Core.Architecture.vCPU.Assembler.Rules
 {
     public class RepeatRule : RulePatternRule
     {
-        public RepeatRule(IEnumerable<IParseRule> Rules, bool Repeat = false) : base(Rules, Repeat)
+        public RepeatRule(IParseRule Rule) 
+            : base(new List<IParseRule> { Rule })
+        {
+        }
+
+        public RepeatRule(IEnumerable<IParseRule> Rules) : base(Rules)
         {
         }
 

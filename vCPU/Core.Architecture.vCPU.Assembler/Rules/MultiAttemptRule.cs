@@ -17,8 +17,6 @@ namespace Core.Architecture.vCPU.Assembler.Rules
             m_Rules = Rules;
         }
 
-        public bool Repeat { get; }
-
         public Either<IParseState> Match(IParseState State)
         {
             return m_Rules

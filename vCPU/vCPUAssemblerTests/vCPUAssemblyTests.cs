@@ -53,6 +53,50 @@ namespace vCPUAssemblerTests
         }
 
         [Test]
+        public void ParseInstructionWithRelativeAddressParameter()
+        {
+            var t_InstructionRule = _CreateInstructionParseRule();
+            var t_Assembly = new List<Token>
+            {
+                new Token(TokenType.Keyword, "jmp"),
+                new Token(TokenType.Identifier, "RAM"),
+                new Token(TokenType.Operator, "+"),
+                new Token(TokenType.Literal, "4")
+            };
+
+            var t_Expression = t_InstructionRule.Match(CreateState(t_Assembly.ToArray()));
+            t_Expression.HasError().Should().BeFalse();
+            
+            var t_Expressions = t_Expression.Value.Expressions.ToList();
+            t_Expressions[0].Should().BeOfType<KeywordExpression>();
+            t_Expressions[1].Should().BeOfType<IdentifierExpression>();
+            t_Expressions[2].Should().BeOfType<OperatorExpression>();
+            t_Expressions[3].Should().BeOfType<NumericalLiteralExpression>();
+        }
+
+        [Test]
+        public void ParseInstructionWithMultipleParameters()
+        {
+            var t_InstructionRule = _CreateInstructionParseRule();
+            var t_Assembly = new List<Token>
+            {
+                new Token(TokenType.Keyword, "Add"),
+                new Token(TokenType.Literal, "4"),
+                new Token(TokenType.Separator, ","),
+                new Token(TokenType.Literal, "4")
+            };
+
+            var t_Expression = t_InstructionRule.Match(CreateState(t_Assembly.ToArray()));
+            t_Expression.HasError().Should().BeFalse();
+
+            var t_Expressions = t_Expression.Value.Expressions.ToList();
+            t_Expressions[0].Should().BeOfType<KeywordExpression>();
+            t_Expressions[1].Should().BeOfType<NumericalLiteralExpression>();
+            t_Expressions[2].Should().BeOfType<SeparatorExpression>();
+            t_Expressions[3].Should().BeOfType<NumericalLiteralExpression>();
+        }
+
+        [Test]
         public void ParseConstAddress()
         {
             var t_AddressRule = _CreateAddressParseRule();
@@ -124,35 +168,33 @@ namespace vCPUAssemblerTests
 
         private IParseRule _CreateInstructionParseRule()
         {
-            return 
-            new RulePatternRule(new List<IParseRule>
+            return new MultiAttemptRule(new List<IParseRule>
             {
-                new MultiAttemptRule(new List<IParseRule>
+                new RulePatternRule(new List<IParseRule>
                 {
-                    new RulePatternRule(new List<IParseRule>
-                    {
-                        new KeywordRule(),
-                        _CreateParameterParseRule()
-                    }),
-                    new KeywordRule()
-                })
+                    new KeywordRule(),
+                    _CreateParameterParseRule()
+                }),
+                new KeywordRule()
             });
         }
 
         private IParseRule _CreateParameterParseRule()
         {
-            return new RulePatternRule(new List<IParseRule>
-            {
-                new MultiAttemptRule(new List<IParseRule>
+            return new RepeatRule(
+                new RulePatternRule(new List<IParseRule>
                 {
-                    _CreateAddressParseRule(),
-                    new RulePatternRule(new List<IParseRule>
+                    new MultiAttemptRule(new List<IParseRule>
                     {
                         _CreateAddressParseRule(),
-                        new SeparatorRule(",")
+                        new RulePatternRule(new List<IParseRule>
+                        {
+                            _CreateAddressParseRule(),
+                            new SeparatorRule(",")
+                        })
                     })
                 })
-            }, true);
+            );
         }
 
         private IParseRule _CreateAddressParseRule()
