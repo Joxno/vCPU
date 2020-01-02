@@ -11,20 +11,12 @@ namespace Core.Architecture.vCPU.Assembler.Rules
 {
     public class PlusOperatorRule : BaseRule
     {
-        protected override List<Token> _GetPattern()
+        public PlusOperatorRule() : base(new List<Token>
         {
-            return new List<Token>()
-            {
-                new Token(TokenType.Operator, "+")
-            };
-        }
-
-        protected override Either<IExpression> _CreateExpression(IEnumerable<Token> Tokens)
+            new Token(TokenType.Operator, "+")
+        },
+        (Tokens) => new PlusOperatorExpression { Operator = Tokens.First() })
         {
-            return new PlusOperatorExpression
-            {
-                Operator = Tokens.First()
-            };
         }
     }
 }

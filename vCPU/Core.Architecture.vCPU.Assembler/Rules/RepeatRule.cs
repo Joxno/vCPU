@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Core.Architecture.vCPU.Assembler.Interface;
 using Core.Architecture.vCPU.Assembler.Models;
 using Core.Utility;
+using Core.Utility.Extensions;
 
 namespace Core.Architecture.vCPU.Assembler.Rules
 {
@@ -13,39 +15,42 @@ namespace Core.Architecture.vCPU.Assembler.Rules
         {
         }
 
-        public override Either<IExpression> Match(Stack<Token> Tokens)
+        public override Either<IParseState> Match(IParseState State)
         {
-            var t_CurrentExpressions = new List<IExpression>();
-            var t_Tokens = new Stack<Token>(Tokens.ToArray());
-            while (t_Tokens.Count != 0)
+            var t_CurrentState = State;
+            while (true)
             {
-                var t_Expression = _MatchRules(t_Tokens);
-                if (t_Expression.HasError())
+                var t_NewState = _MatchRules(t_CurrentState);
+                if (t_NewState.HasError())
                     break;
 
-                t_CurrentExpressions.Add(t_Expression.Value);
+                t_CurrentState = t_NewState.Value;
             }
 
-            return t_CurrentExpressions.Count != 0 ?
-                _CreateExpression(t_CurrentExpressions) :
-                new Exception("No Rules Matched");
+            return 
+                State.Expressions.Count() == t_CurrentState.Expressions.Count() ?
+                new Exception("No Rules Matched") :
+                new Either<IParseState>(t_CurrentState);
         }
 
-        protected virtual Either<IExpression> _MatchRules(Stack<Token> Tokens)
+        protected virtual Either<IParseState> _MatchRules(IParseState State)
         {
             var t_CurrentExpressions = new List<IExpression>();
-            var t_CurrentTokens = Tokens;//new Stack<Token>(Tokens.ToArray().Reverse());
+            var t_CurrentState = State;
             foreach (var t_Rule in m_Rules)
             {
-                var t_MatchData = _PopUntilMatchOrFail(t_Rule, t_CurrentTokens);
-                if (t_MatchData.HasError())
-                    return new Exception("Rule Match Error", t_MatchData.Error);
+                var t_TryCall = Try.Call(() => _MatchRule(t_Rule, t_CurrentState));
+                if (t_TryCall.HasError())
+                    return t_TryCall.Error;
 
-                t_CurrentTokens = t_MatchData.Value.TokensRemaining;
-                t_CurrentExpressions.Add(t_MatchData.Value.Expression);
+                var t_NewState = t_TryCall.Value;
+                if (t_NewState.HasError())
+                    return new Exception("Rule Match Error", t_NewState.Error);
+
+                t_CurrentState = t_NewState.Value;
             }
 
-            return base._CreateExpression(t_CurrentExpressions);
+            return new Either<IParseState>(t_CurrentState);
         }
     }
 }

@@ -9,31 +9,12 @@ namespace Core.Architecture.vCPU.Assembler.Rules
 {
     public class KeywordRule : BaseRule
     {
-        private readonly string m_TokenText = null;
-
-        public KeywordRule()
-        {
-        }
-
-        public KeywordRule(string TokenText)
-        {
-            m_TokenText = TokenText;
-        }
-
-        protected override List<Token> _GetPattern()
-        {
-            return new List<Token>
+        public KeywordRule(string TokenText = null) : base(new List<Token>
             {
-                new Token(TokenType.Keyword, m_TokenText)
-            };
-        }
-
-        protected override Either<IExpression> _CreateExpression(IEnumerable<Token> Tokens)
+                new Token(TokenType.Keyword, TokenText)
+            },
+            (Tokens) => new KeywordExpression { Keyword = Tokens.First() })
         {
-            return new KeywordExpression
-            {
-                Keyword = Tokens.First()
-            };
         }
     }
 }

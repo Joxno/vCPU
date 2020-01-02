@@ -5,8 +5,10 @@ using Core.Architecture.vCPU.Assembler.Interface;
 using Core.Architecture.vCPU.Assembler.Models;
 using Core.Architecture.vCPU.Assembler.Rules;
 using Core.Architecture.vCPU.Assembler.Utility;
+using Core.Utility.Extensions;
 using FluentAssertions;
 using NUnit.Framework;
+using static vCPUAssemblerTests.Factories.StateFactory;
 
 namespace vCPUAssemblerTests
 {
@@ -22,29 +24,21 @@ namespace vCPUAssemblerTests
                 new OperatorRule("-")
             });
 
-            var t_Expression = t_Rule.Match(new Stack<Token>(new List<Token>
-            {
+            var t_Expression = t_Rule.Match(CreateState(
                 new Token(TokenType.Operator, "+"),
                 new Token(TokenType.Operator, "-"),
                 new Token(TokenType.Operator, "+"),
                 new Token(TokenType.Operator, "-"),
                 new Token(TokenType.Operator, "+"),
-                new Token(TokenType.Operator, "-")
-            }));
+                new Token(TokenType.Operator, "-")));
 
             t_Expression
                 .HasError()
                 .Should()
                 .BeFalse();
 
-            t_Expression.Value
-                .Should()
-                .BeOfType<CombinedExpression>();
-
-            var t_Combined = ((CombinedExpression) t_Expression.Value);
-            t_Combined.Expressions
-                .Should()
-                .HaveCount(3);
+            var t_Expressions = t_Expression.Value.Expressions;
+            t_Expressions.Should().HaveCount(6);
         }
 
         [Test]
@@ -69,8 +63,7 @@ namespace vCPUAssemblerTests
                 t_RepeatRule
             });
 
-            var t_Expression = t_PatternRule.Match(new Stack<Token>(new List<Token>
-            {
+            var t_Expression = t_PatternRule.Match(CreateState(
                 new Token(TokenType.Literal, "2"),
                 new Token(TokenType.Operator, "+"),
                 new Token(TokenType.Literal, "3"),
@@ -79,16 +72,13 @@ namespace vCPUAssemblerTests
                 new Token(TokenType.Operator, "*"),
                 new Token(TokenType.Literal, "5"),
                 new Token(TokenType.Operator, "/"),
-                new Token(TokenType.Literal, "6")
-            }));
+                new Token(TokenType.Literal, "6")));
 
             t_Expression.HasError().Should().BeFalse();
-            t_Expression.Value.Should().BeOfType<CombinedExpression>();
 
-            var t_Combined = t_Expression.Value.ToType<CombinedExpression>();
-            t_Combined.Expressions.Should().HaveCount(5);
-            t_Combined.Expressions.ToList()[0].ToType<NumericalLiteralExpression>()
-                .Literal.Text.Should().Be("2");
+            var t_Expressions = t_Expression.Value.Expressions;
+            t_Expressions.Should().HaveCount(9);
+
         }
     }
 }

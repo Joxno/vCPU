@@ -9,32 +9,12 @@ namespace Core.Architecture.vCPU.Assembler.Rules
 {
     public class SeparatorRule : BaseRule
     {
-        private string m_TokenText = null;
-
-        public SeparatorRule()
+        public SeparatorRule(string TokenText = null) : base(new List<Token>
         {
-
-        }
-
-        public SeparatorRule(string TokenText)
+            new Token(TokenType.Separator, TokenText)
+        },
+        (Tokens) => new SeparatorExpression { Separator = Tokens.First() })
         {
-            m_TokenText = TokenText;
-        }
-
-        protected override List<Token> _GetPattern()
-        {
-            return new List<Token>
-            {
-                new Token(TokenType.Separator, m_TokenText)
-            };
-        }
-
-        protected override Either<IExpression> _CreateExpression(IEnumerable<Token> Tokens)
-        {
-            return new SeparatorExpression
-            {
-                Separator = Tokens.First()
-            };
         }
     }
 }

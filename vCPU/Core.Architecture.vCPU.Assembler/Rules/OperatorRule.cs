@@ -9,31 +9,12 @@ namespace Core.Architecture.vCPU.Assembler.Rules
 {
     public class OperatorRule : BaseRule
     {
-        private readonly string m_TokenText = null;
-
-        public OperatorRule()
+        public OperatorRule(string TokenText = null) : base(new List<Token>
         {
-        }
-
-        public OperatorRule(string TokenText)
+            new Token(TokenType.Operator, TokenText)
+        },
+        (Tokens) => new OperatorExpression { Operator = Tokens.First() })
         {
-            m_TokenText = TokenText;
-        }
-
-        protected override List<Token> _GetPattern()
-        {
-            return new List<Token>()
-            {
-                new Token(TokenType.Operator, m_TokenText)
-            };
-        }
-
-        protected override Either<IExpression> _CreateExpression(IEnumerable<Token> Tokens)
-        {
-            return new OperatorExpression
-            {
-                Operator = Tokens.First()
-            };
         }
     }
 }

@@ -4,8 +4,10 @@ using Core.Architecture.vCPU.Assembler.Expressions;
 using Core.Architecture.vCPU.Assembler.Interface;
 using Core.Architecture.vCPU.Assembler.Models;
 using Core.Architecture.vCPU.Assembler.Rules;
+using Core.Utility.Extensions;
 using FluentAssertions;
 using NUnit.Framework;
+using static vCPUAssemblerTests.Factories.StateFactory;
 
 namespace vCPUAssemblerTests
 {
@@ -22,34 +24,27 @@ namespace vCPUAssemblerTests
                 new NumericalLiteralRule()
             });
 
-            var t_Expression = t_Rule.Match(new Stack<Token>(new List<Token>
-            {
+            var t_Expression = t_Rule.Match(CreateState(
                 new Token(TokenType.Identifier, "RAM"),
                 new Token(TokenType.Operator, "+"),
-                new Token(TokenType.Literal, "4")
-            }));
+                new Token(TokenType.Literal, "4")));
 
             t_Expression
                 .HasError()
                 .Should()
                 .BeFalse();
 
-            t_Expression.Value
-                .Should()
-                .BeOfType<CombinedExpression>();
+            var t_Expressions = t_Expression.Value.Expressions;
 
-            var t_Combined = (CombinedExpression) t_Expression.Value;
-
-            t_Combined
-                .Expressions
+            t_Expressions
                 .Should()
                 .HaveCount(3);
 
-            t_Combined.Expressions.ToList()[0].Should()
+            t_Expressions.ToList()[0].Should()
                 .BeOfType<IdentifierExpression>();
-            t_Combined.Expressions.ToList()[1].Should()
+            t_Expressions.ToList()[1].Should()
                 .BeOfType<PlusOperatorExpression>();
-            t_Combined.Expressions.ToList()[2].Should()
+            t_Expressions.ToList()[2].Should()
                 .BeOfType<NumericalLiteralExpression>();
         }
 
@@ -63,12 +58,10 @@ namespace vCPUAssemblerTests
                 new NumericalLiteralRule()
             });
 
-            var t_Expression = t_Rule.Match(new Stack<Token>(new List<Token>
-            {
+            var t_Expression = t_Rule.Match(CreateState(
                 new Token(TokenType.Identifier, "RAM"),
                 new Token(TokenType.Operator, ","),
-                new Token(TokenType.Literal, "4")
-            }));
+                new Token(TokenType.Literal, "4")));
 
             t_Expression
                 .HasError()
@@ -81,24 +74,20 @@ namespace vCPUAssemblerTests
         {
             var t_Rule = _CreateJumpParser();
 
-            var t_Expression = t_Rule.Match(new Stack<Token>(new List<Token>
-            {
+            var t_Expression = t_Rule.Match(CreateState(
                 new Token(TokenType.Keyword, "Jmp"),
                 new Token(TokenType.Identifier, "RAM"),
                 new Token(TokenType.Operator, "+"),
-                new Token(TokenType.Literal, "4")
-            }));
+                new Token(TokenType.Literal, "4")));
 
             t_Expression
                 .HasError()
                 .Should()
                 .BeFalse();
 
-            t_Expression = t_Rule.Match(new Stack<Token>(new List<Token>
-            {
+            t_Expression = t_Rule.Match(CreateState(
                 new Token(TokenType.Keyword, "Jmp"),
-                new Token(TokenType.Literal, "4")
-            }));
+                new Token(TokenType.Literal, "4")));
 
             t_Expression
                 .HasError()

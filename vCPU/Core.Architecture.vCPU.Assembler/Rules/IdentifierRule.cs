@@ -9,20 +9,12 @@ namespace Core.Architecture.vCPU.Assembler.Rules
 {
     public class IdentifierRule : BaseRule
     {
-        protected override List<Token> _GetPattern()
+        public IdentifierRule() : base(new List<Token>
         {
-            return new List<Token>()
-            {
-                new Token(TokenType.Identifier, null)
-            };
-        }
-
-        protected override Either<IExpression> _CreateExpression(IEnumerable<Token> Tokens)
+            new Token(TokenType.Identifier, null)
+        }, 
+        (Tokens) => new IdentifierExpression { Identifier = Tokens.First()})
         {
-            return new IdentifierExpression
-            {
-                Identifier = Tokens.ToList()[0]
-            };
         }
     }
 }

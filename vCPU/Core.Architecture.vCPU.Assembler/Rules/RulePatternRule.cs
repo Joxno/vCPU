@@ -5,6 +5,7 @@ using Core.Architecture.vCPU.Assembler.Expressions;
 using Core.Architecture.vCPU.Assembler.Interface;
 using Core.Architecture.vCPU.Assembler.Models;
 using Core.Utility;
+using Core.Utility.Extensions;
 
 namespace Core.Architecture.vCPU.Assembler.Rules
 {
@@ -20,58 +21,35 @@ namespace Core.Architecture.vCPU.Assembler.Rules
 
         public bool Repeat { get; } = false;
 
-        public virtual Either<IExpression> Match(Stack<Token> Tokens)
+        public virtual Either<IParseState> Match(IParseState State)
         {
             var t_CurrentExpressions = new List<IExpression>();
-            var t_CurrentTokens = new Stack<Token>(Tokens.ToArray());
+            var t_CurrentState = State;
             foreach (var t_Rule in m_Rules)
             {
                 do
                 {
-                    var t_MatchData = _PopUntilMatchOrFail(t_Rule, t_CurrentTokens);
+                    var t_MatchData = _MatchRule(t_Rule, t_CurrentState);
                     if (t_MatchData.HasError() && t_Rule.Repeat)
                         break;
                     if (t_MatchData.HasError())
                         return new Exception("Rule Match Error", t_MatchData.Error);
 
-                    t_CurrentTokens = t_MatchData.Value.TokensRemaining;
-                    t_CurrentExpressions.Add(t_MatchData.Value.Expression);
+                    t_CurrentState = t_MatchData.Value;
                 } while (t_Rule.Repeat);
             }
 
-            return _CreateExpression(t_CurrentExpressions);
+            return new Either<IParseState>(t_CurrentState);
         }
 
-        protected virtual Either<MatchData> _PopUntilMatchOrFail(IParseRule Rule, Stack<Token> Tokens)
+        protected virtual Either<IParseState> _MatchRule(IParseRule Rule, IParseState State)
         {
-            var t_CurrentTokens = new List<Token>();
-            while (Tokens.Count != 0)
-            {
-                t_CurrentTokens.Add(Tokens.Pop());
-                var t_Expression = Rule
-                    .Match(new Stack<Token>(t_CurrentTokens));
+            var t_NewState = Rule
+                .Match(State);
 
-                if (!t_Expression.HasError())
-                    return new MatchData
-                    {
-                        Expression = t_Expression.Value, 
-                        TokensRemaining = Tokens
-                    };
-
-            }
-
-            return new Exception($"Match not found for rule: {Rule}");
-        }
-
-        protected virtual Either<IExpression> _CreateExpression(IEnumerable<IExpression> Expressions)
-        {
-            return new CombinedExpression { Expressions = Expressions};
-        }
-
-        protected struct MatchData
-        {
-            public Stack<Token> TokensRemaining;
-            public IExpression Expression;
+            return !t_NewState.HasError() ? 
+                t_NewState : 
+                new Exception($"Match not found for rule: {Rule}");
         }
     }
 }

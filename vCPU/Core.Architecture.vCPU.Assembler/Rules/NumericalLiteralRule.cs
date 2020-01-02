@@ -10,26 +10,22 @@ namespace Core.Architecture.vCPU.Assembler.Rules
 {
     public class NumericalLiteralRule : BaseRule
     {
-        protected override List<Token> _GetPattern()
+
+        public NumericalLiteralRule() : base(new List<Token>
         {
-            return new List<Token>()
-            {
-                new Token(TokenType.Literal, null)
-            };
+            new Token(TokenType.Literal, null)
+        },
+        (Tokens) => new NumericalLiteralExpression
+        {
+            Literal = Tokens.First()
+        })
+        {
         }
 
         protected override bool _CompareTokens(Token PatternToken, Token InputToken)
         {
             return base._CompareTokens(PatternToken, InputToken) &&
                 Regex.IsMatch(InputToken.Text, "[0-9]{1,}");
-        }
-
-        protected override Either<IExpression> _CreateExpression(IEnumerable<Token> Tokens)
-        {
-            return new NumericalLiteralExpression
-            {
-                Literal = Tokens.First()
-            };
         }
     }
 }

@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Core.Architecture.vCPU.Assembler.Expressions;
 using Core.Architecture.vCPU.Assembler.Models;
 using Core.Architecture.vCPU.Assembler.Rules;
 using FluentAssertions;
 using NUnit.Framework;
+using static vCPUAssemblerTests.Factories.StateFactory;
 
 namespace vCPUAssemblerTests
 {
@@ -15,21 +17,18 @@ namespace vCPUAssemblerTests
         {
             var t_Rule = new SeparatorRule();
 
-            var t_Expression = t_Rule.Match(new Stack<Token>(new List<Token>
-            {
-                new Token(TokenType.Separator, ",")
-            }));
+            var t_Expression = t_Rule.Match(CreateState(new Token(TokenType.Separator, ",")));
 
             t_Expression
                 .HasError()
                 .Should()
                 .BeFalse();
 
-            t_Expression.Value
+            t_Expression.Value.Expressions.First()
                 .Should()
                 .BeOfType<SeparatorExpression>();
 
-            ((SeparatorExpression) t_Expression.Value)
+            ((SeparatorExpression) t_Expression.Value.Expressions.First())
                 .Separator
                 .Text
                 .Should()
@@ -41,10 +40,7 @@ namespace vCPUAssemblerTests
         {
             var t_Rule = new SeparatorRule();
 
-            var t_Expression = t_Rule.Match(new Stack<Token>(new List<Token>
-            {
-                new Token(TokenType.Literal, "foo")
-            }));
+            var t_Expression = t_Rule.Match(CreateState(new Token(TokenType.Literal, "foo")));
 
             t_Expression
                 .HasError()
@@ -57,21 +53,18 @@ namespace vCPUAssemblerTests
         {
             var t_Rule = new SeparatorRule(".");
 
-            var t_Expression = t_Rule.Match(new Stack<Token>(new List<Token>
-            {
-                new Token(TokenType.Separator, ".")
-            }));
+            var t_Expression = t_Rule.Match(CreateState(new Token(TokenType.Separator, ".")));
 
             t_Expression
                 .HasError()
                 .Should()
                 .BeFalse();
 
-            t_Expression.Value
+            t_Expression.Value.Expressions.First()
                 .Should()
                 .BeOfType<SeparatorExpression>();
 
-            ((SeparatorExpression)t_Expression.Value)
+            ((SeparatorExpression)t_Expression.Value.Expressions.First())
                 .Separator
                 .Text
                 .Should()
