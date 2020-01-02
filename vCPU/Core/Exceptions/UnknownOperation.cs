@@ -19,7 +19,15 @@ namespace Core.Exceptions
 
         }
 
-        protected UnknownOperation(SerializationInfo Info, StreamingContext Context) : base(Info, Context)
+        public UnknownOperation(string Message) : base(Message)
+        {
+        }
+
+        public UnknownOperation(string Message, Exception InnerException) : base(Message, InnerException)
+        {
+        }
+
+        public UnknownOperation(SerializationInfo Info, StreamingContext Context) : base(Info, Context)
         {
         }
     }

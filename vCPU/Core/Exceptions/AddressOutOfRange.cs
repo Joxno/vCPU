@@ -12,7 +12,15 @@ namespace Core.Exceptions
         {
         }
 
-        protected AddressOutOfRange(SerializationInfo Info, StreamingContext Context) : base(Info, Context)
+        public AddressOutOfRange(string Message) : base(Message)
+        {
+        }
+
+        public AddressOutOfRange(string Message, Exception InnerException) : base(Message, InnerException)
+        {
+        }
+
+        public AddressOutOfRange(SerializationInfo Info, StreamingContext Context) : base(Info, Context)
         {
         }
     }

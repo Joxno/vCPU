@@ -10,7 +10,15 @@ namespace Core.Exceptions
         {
         }
 
-        protected AddressOccupied(SerializationInfo Info, StreamingContext Context) : base(Info, Context)
+        public AddressOccupied(string Message) : base(Message)
+        {
+        }
+
+        public AddressOccupied(string Message, Exception InnerException) : base(Message, InnerException)
+        {
+        }
+
+        public AddressOccupied(SerializationInfo Info, StreamingContext Context) : base(Info, Context)
         {
         }
     }
