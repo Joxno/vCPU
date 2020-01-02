@@ -68,6 +68,17 @@ namespace vCPUAssemblerTests
             t_State.HasError().Should().BeTrue();
         }
 
+        [Test]
+        public void InvalidInput()
+        {
+            var t_Rule = new CreateExpressionRule(
+                _CreateAddressParseRule(),
+                _ConstAddressCreator());
+
+            var t_Expression = t_Rule.Match(CreateState(new Token(TokenType.Keyword, "Foo")));
+            t_Expression.HasError().Should().BeTrue();
+        }
+
         private IParseState _CreateConstAddressState()
         {
             return CreateState(new Token(TokenType.Literal, "200"));
